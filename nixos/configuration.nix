@@ -1,99 +1,233 @@
-# This is your system's configuration file.
-# Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
+{ config, lib, pkgs, inputs, user, ... }:
 
-{ inputs, outputs, lib, config, pkgs, ... }: {
-  # You can import other NixOS modules here
+{
   imports = [
-    # If you want to use modules your own flake exports (from modules/nixos):
-    # outputs.nixosModules.example
-
-    # Or modules from other flakes (such as nixos-hardware):
-    # inputs.hardware.nixosModules.common-cpu-amd
-    # inputs.hardware.nixosModules.common-ssd
-
-    # You can also split up your configuration and import pieces of it here:
-    # ./users.nix
-
-    # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
+    ../modules/kmonad.nix
   ];
 
   nixpkgs = {
-    # You can add overlays here
-    overlays = [
-      # Add overlays your own flake exports (from overlays and pkgs dir):
-      outputs.overlays.modifications
-      outputs.overlays.additions
-
-      # You can also add overlays exported from other flakes:
-      # neovim-nightly-overlay.overlays.default
-
-      # Or define it inline, for example:
-      # (final: prev: {
-      #   hi = final.hello.overrideAttrs (oldAttrs: {
-      #     patches = [ ./change-hello-to-hi.patch ];
-      #   });
-      # })
-    ];
-    # Configure your nixpkgs instance
     config = {
-      # Disable if you don't want unfree packages
+      allowBroken = true;
       allowUnfree = true;
     };
   };
 
-  nix = {
-    # This will add each flake input as a registry
-    # To make nix3 commands consistent with your flake
-    registry = lib.mapAttrs (_: value: { flake = value; }) inputs;
+  boot.loader = {
+    systemd-boot = {
+      enable = true;
+      configurationLimit = 5;
+    };
+    efi.canTouchEfiVariables = true;
+    timeout = 1;
+  };
 
-    # This will additionally add your inputs to the system's legacy channels
-    # Making legacy nix commands consistent as well, awesome!
-    nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
+  networking = {
+    hostName = "t14_jdsee";
+    networkmanager.enable = true;
+  };
 
-    settings = {
-      # Enable flakes and new 'nix' command
-      experimental-features = "nix-command flakes";
-      # Deduplicate and optimize nix store
-      auto-optimise-store = true;
+  time.timeZone = "Europe/Amsterdam";
+
+  i18n.defaultLocale = "en_US.UTF-8";
+  console = {
+    font = "Lat2-Terminus16";
+    useXkbConfig = true;
+  };
+
+  security = {
+    polkit.enable = true; # required to setup sway with HomeManager
+    pam.services.swaylock = {
+      text = "auth include login";
     };
   };
 
-  # FIXME: Add the rest of your current configuration
+  services = {
+    blueman.enable = true;
+    openssh.enable = true;
+    pcscd.enable = true;
 
-  # TODO: Set your hostname
-  networking.hostName = "your-hostname";
+    logind.lidSwitch = "suspend";
 
-  # TODO: This is just an example, be sure to use whatever bootloader you prefer
-  boot.loader.systemd-boot.enable = true;
-
-  # TODO: Configure your system-wide user settings (groups, etc), add more users as needed.
-  users.users = {
-    # FIXME: Replace with your username
-    your-username = {
-      # TODO: You can set an initial password for your user.
-      # If you do, you can skip setting a root password by passing '--no-root-passwd' to nixos-install.
-      # Be sure to change it (using passwd) after rebooting!
-      initialPassword = "correcthorsebatterystaple";
-      isNormalUser = true;
-      openssh.authorizedKeys.keys = [
-        # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
+    xserver = {
+      enable = true;
+      libinput = {
+        enable = true; # enable touchpad
+        touchpad = {
+          disableWhileTyping = true;
+          naturalScrolling = true;
+        };
+      };
+      desktopManager = {
+        xterm.enable = false;
+        xfce.enable = true;
+      };
+      videoDrivers = [
+        "displaylink"
+        "modsetting"
       ];
-      # TODO: Be sure to add any other groups you need (such as networkmanager, audio, docker, etc)
-      extraGroups = [ "wheel" ];
+      displayManager = {
+        sessionCommands = ''
+          ${lib.getBin pkgs.xorg.xrandr}/bin/xrandr --setprovideroutputsource 2 0
+        '';
+      };
+      layout = "us,de";
+      xkbOptions = "grp:alt_space_toggle,altwin:swap_alt_win";
+    };
+
+    # TODO
+    # jack = {
+    #   jackd.enable = true;
+    #   alsa.enable = false;
+    #   loopback = {
+    #     enable = true;
+    #   };
+    # };
+
+    # TODO
+    # kmonad = {
+    #   enable = false;
+      # configfiles = [ ../home/kmonad/config.kbd ];
+    # };
+  };
+
+  systemd.services = {
+    keyd = {
+      description = "key remapping daemon";
+      requires = [ "local-fs.target" ];
+      after = [ "local-fs.target" ];
+      wantedBy = [ "sysinit.target" ];
+      unitConfig = {
+        Type = "simple";
+      };
+      serviceConfig = {
+        ExecStart = "/usr/bin/keyd";
+      };
     };
   };
 
-  # This setups a SSH server. Very important if you're setting up a headless system.
-  # Feel free to remove if you don't need it.
-  services.openssh = {
-    enable = true;
-    # Forbid root login through SSH.
-    permitRootLogin = "no";
-    # Use keys only. Remove if you want to SSH using password (not recommended)
-    passwordAuthentication = false;
+  environment.etc = {
+    "keyd/default.conf".source = ../home/keyd/config/keyd/default.conf;
   };
 
-  # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  system.stateVersion = "22.11";
+  fonts.fonts = with pkgs; [
+    font-awesome
+    (nerdfonts.override {
+      fonts = [
+        "Hack"
+      ];
+    })
+  ];
+
+  nix = {
+    settings.auto-optimise-store = true;
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
+    };
+    package = pkgs.nixFlakes;
+    registry.nixpkgs.flake = inputs.nixpkgs;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+      warn-dirty = false
+    '';
+  };
+
+  sound = {
+    enable = true;
+    mediaKeys = {
+      enable = true;
+    };
+  };
+
+  hardware = {
+    pulseaudio.enable = true;
+    bluetooth.enable = true;
+
+    opengl = {
+      enable = true;
+      driSupport = true;
+    };
+  };
+
+  xdg = {
+    portal = {
+      enable = true;
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-wlr
+        xdg-desktop-portal-gtk
+      ];
+    };
+  };
+
+  users.users.${user} = {
+    isNormalUser = true;
+    extraGroups = [
+      "wheel"
+      "video"
+      "audio"
+      "jackaudio"
+      "camera"
+      "networkManager"
+      "input"
+      "uinput"
+    ];
+    shell = pkgs.zsh;
+    packages = with pkgs; [
+    ];
+  };
+
+  environment = {
+    variables = {
+      TERMINAL = "alacritty";
+      EDITOR = "nvim";
+      VISUAL = "nvim";
+    };
+    systemPackages = with pkgs; [
+      tmux
+      git
+      curl
+      wget
+
+      ((vim_configurable.override { }).customize {
+        name = "vim";
+        vimrcConfig = {
+          packages.myplugins = with pkgs.vimPlugins; {
+            start = [ vim-nix vim-lastplace ];
+            opt = [ ];
+          };
+          customRC = ''
+            set nu
+            set relativenu
+            set incsearch
+            set nocompatible
+            backspace=indent,eol,start
+            syntax on
+          '';
+        };
+      })
+    ];
+  };
+
+  # Some programs need SUID wrappers, can be configured further or are
+  # started in user sessions.
+  # programs.mtr.enable = true;
+  # programs.gnupg.agent = {
+  #   enable = true;
+  #   enableSSHSupport = true;
+  # };
+
+  programs = {
+    light.enable = true;
+    sway.enable = true;
+  };
+
+  programs.gnupg.agent = {
+    enable = true;
+    pinentryFlavor = "gtk2";
+    enableSSHSupport = true;
+  };
+
+  system.stateVersion = "22.05";
 }
