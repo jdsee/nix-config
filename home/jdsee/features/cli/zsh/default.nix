@@ -34,13 +34,10 @@
 
     initExtra = ''
       eval "$(ssh-agent)" >/dev/null
-      # eval "$( pyenv init - --no-rehash )"
-      # eval "$( pyenv virtualenv-init - )"
-      # eval "$( pip completion --zsh )"
 
+      # Script to open man-page in tmux popup
       source ~/.config/zsh/popman.sh
       zle -N popman
-
       bindkey  popman
       bindkey '^O' autosuggest-accept
 
