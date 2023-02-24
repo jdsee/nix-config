@@ -2,12 +2,13 @@
 
 {
   imports = [
-    ./zsh
     ./bat.nix
-    ./tmux.nix
     ./git.nix
+    ./lazygit.nix
     ./ranger.nix
+    ./tmux.nix
     ./vim.nix
+    ./zsh
   ];
 
   home.packages = with pkgs; [
@@ -17,9 +18,11 @@
 
     fd # Better find
     httpie # Better curl
+    wget # File download
     jq # JSON pretty printer and manipulator
     ncdu # TUI disk usage
     ripgrep # Better grep
+    colordiff
 
     # compression
     p7zip
