@@ -78,16 +78,15 @@
   bind=SUPER,m,exec,$TERMINAL $SHELL -ic neomutt
   bind=SUPER,b,exec,$BROWSER
 
-  bind=SUPER,x,exec,wofi -S drun -x 10 -y 10 -W 25% -H 60%
-  bind=SUPER,space,exec,wofi -S run
+  bind=SUPER,x,exec,rofi -show drun
+  bind=SUPER,space,exec,rofi -show run
 
   # Toggle waybar
   # bind=,XF86Tools,exec,pkill -USR1 waybar # profile button
   bind=SUPER,a,exec,pkill -USR1 waybar # profile button
 
   # Lock screen
-  bind=,XF86Launch5,exec,swaylock -S
-  bind=,XF86Launch4,exec,swaylock -S
+  bind=SUPERCONTROL,q,exec,swaylock -S
 
   # Screenshots
   bind=,Print,exec,grimblast --notify copy output

@@ -7,7 +7,7 @@
     ./swayidle.nix
     ./swaylock.nix
     ./waybar
-    ./wofi.nix
+    ./rofi.nix
     ./zathura.nix
   ];
 
