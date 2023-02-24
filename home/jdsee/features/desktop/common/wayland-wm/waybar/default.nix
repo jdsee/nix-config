@@ -178,9 +178,8 @@ in
           spacing = 10;
         };
       };
-
-      # style = (builtins.readFile ./style.css);
     };
+    style = ./style.css;
   };
 }
 
