@@ -1,0 +1,77 @@
+; (include "./modules/workspaces0.yuck")
+
+; Listeners
+(deflisten workspaces
+  :initial "(box (label :text \"        \" ))"
+  `python ./modules/workspaces.py`)
+
+; Polls
+(defpoll time_poll :interval "1s" "date +%H:%M")
+(defpoll date_poll :interval "1m" "date +%d/%m/%Y")
+
+(defwidget left []
+  (box :class "bar"
+       :valign "start"
+       :halign "start"
+       :space-evenly false
+       (workspaces)))
+
+(defwidget center []
+  (box :class "bar"
+       :valign "start"
+       :halign "start"
+       :space-evenly false
+       (date)
+       (time)))
+
+(defwidget right []
+  (box :class "bar"
+       :valign "start"
+       :halign "start"
+       :space-evenly false))
+
+; Windows
+(defwindow bar
+  :monitor 0
+  :hexpand false
+  :vexpand false
+  :exclusive true
+  :stacking "fg"
+  :focusable false
+  :geometry (geometry :anchor "top center"
+                      :x 0
+                      :y 0
+                      :width "100%"
+                      :height "20px")
+  (bar))
+
+; Widgets
+(defwidget icon-module [icon ?class ?visible]
+  (box :class "${class} icon-module"
+       :orientation "h"
+       :halign "end"
+       :space-evenly false
+       :visible {visible ?: true} ; because the argument is optional
+    (label :class "icon-module__icon" :text "${icon}")
+    (children)))
+
+(defwidget bar []
+  (centerbox :class "bar"
+             (left)
+             (center)
+             (right)))
+
+(defwidget workspaces []
+  (box :class "workspaces"
+       :halign "center"
+       (literal :content workspaces)))
+
+(defwidget date []
+  (icon-module :class "date"
+               :icon ""
+               (label :text date_poll)))
+
+(defwidget time []
+  (icon-module :class "time"
+               :icon ""
+               (label :text time_poll)))
