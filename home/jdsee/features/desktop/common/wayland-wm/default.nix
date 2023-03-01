@@ -19,6 +19,7 @@
     pulseaudio
     slurp
     waypipe
+    wtype
     wf-recorder
     wl-clipboard
     wl-mirror
