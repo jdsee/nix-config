@@ -12,10 +12,6 @@ let
   btm = "${pkgs.bottom}/bin/btm";
   wofi = "${pkgs.wofi}/bin/wofi";
 
-  terminal = "${pkgs.kitty}/bin/kitty";
-  terminal-spawn = cmd: "${terminal} $SHELL -i -c ${cmd}";
-  systemMonitor = terminal-spawn btm;
-
   # Function to simplify making waybar outputs
   jsonOutput = name: { pre ? "", text ? "", tooltip ? "", alt ? "", class ? "", percentage ? "" }: "${pkgs.writeShellScriptBin "waybar-${name}" ''
     set -euo pipefail
@@ -36,146 +32,137 @@ in
       primary = {
         layer = "top";
         position = "top";
-        height = 30;
-
+        mod = "dock";
+        exclusive = true;
+        passthrough = false;
+        gtk-layer-shell = true;
+        height = 0;
         modules-left = [
-          "sway/workspaces"
-          "sway/mode"
+          "wlr/workspaces"
+          # "hyprland/window"
         ];
-
-        modules-center = [
-          "sway/window"
-        ];
-
+        modules-center = [ "clock" ];
         modules-right = [
-          "network"
-          "memory"
-          "cpu"
-          "temperature"
-          "custom/keyboard-layout"
+          "custom/updates"
+          "custom/language"
           "battery"
+          "backlight"
+          "pulseaudio"
+          "network"
+          "pulseaudio#microphone"
           "tray"
-          "clock#date"
-          "clock#time"
         ];
 
-
-        # -------------------------------------------------------------------------
-        # Modules
-        # -------------------------------------------------------------------------
-
-        battery = {
-          interval = 10;
-          states = {
-            warning = 30;
-            critical = 15;
-          };
-          format = "  { icon }  {capacity}%";
-          format-discharging = "{icon}  {capacity}%";
-          format-icons = [ "" "" "" "" "" ];
-          tooltip = true;
-        };
-
-        "clock#time" = {
-          interval = 1;
-          format = "{:%H:%M:%S}";
-          tooltip = false;
-        };
-
-        "clock#date" = {
-          interval = 10;
-          format = "  {:%e %b %Y}";
-          tooltip-format = "{:%e %B %Y}";
-        };
-
-        cpu = {
-          interval = 5;
-          format = "  {usage}% ({load})";
-          states = {
-            warning = 70;
-            critical = 90;
-          };
-        };
-
-        "custom/keyboard-layout" = {
-          exec = "swaymsg -t get_inputs | grep -m1 'xkb_active_layout_name' | cut -d '\"' -f4";
-          interval = 30;
-          format = "  {}";
-          signal = 1;
-          tooltip = false;
-        };
-
-        memory = {
-          interval = 5;
-          format = "  {}%";
-          states = {
-            warning = 70;
-            critical = 90;
-          };
-        };
-
-        network = {
-          interval = 5;
-          format-wifi = "  {essid} ({signalStrength}%)";
-          format-ethernet = "  {ifname}: {ipaddr}/{cidr}";
-          format-disconnected = "⚠  Disconnected";
-          tooltip-format = "{ifname}: {ipaddr}";
-        };
-
-        "sway/mode" = {
-          format = "<span style=\"italic\">  {}</span>";
-          tooltip = false;
-        };
-
-        "sway/window" = {
+        "hyprland/window" = {
           format = "{}";
-          max-length = 120;
         };
-
-        "sway/workspaces" = {
-          all-outputs = false;
+        "wlr/workspaces" = {
           disable-scroll = true;
-          format = "{icon} {name}";
-          format-icons = {
-            "1:www" = "龜";
-            "2:mail" = "";
-            "3:editor" = "";
-            "4:terminals" = "";
-            "5:portal" = "";
-            urgent = "";
-            focused = "";
-            default = "";
+          all-outputs = true;
+          on-click = "activate";
+          format = "{icon}";
+          active-only = false;
+          "format-icons" = {
+            "1" = "";
+            "2" = "";
+            "3" = "";
+            "4" = "";
+            "5" = "";
+            "default" = "";
+            "focused" = "";
+          };
+          persistent_workspaces = {
+            "1" = [ ];
+            "2" = [ ];
+            "3" = [ ];
+            "4" = [ ];
+            "5" = [ ];
+            "6" = [ ];
+            "7" = [ ];
+            "8" = [ ];
+            "9" = [ ];
+            "10" = [ ];
           };
         };
-
+        "custom/updates" = {
+          exec = "(pacman -Qu ; yay -Qua) | wc -l";
+          interval = 7200;
+          format = " {}";
+        };
+        "custom/language" = {
+          exec = "(pacman -Qu ; yay -Qua) | wc -l";
+          interval = 7200;
+          format = " {}";
+        };
+        "custom/weather" = {
+          tooltip = true;
+          format = "{}";
+          interval = 30;
+          exec = "~/.config/waybar/scripts/waybar-wttr.py";
+          return-type = "json";
+        };
+        "keyboard-state" = {
+          "capslock" = true;
+          "format" = "{icon}";
+          "format-icons" = {
+            "locked" = "";
+            "unlocked" = "";
+          };
+        };
+        tray = {
+          icon-size = 13;
+          spacing = 10;
+        };
+        clock = {
+          format = "{: %R   %d/%m}";
+          tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
+        };
+        backlight = {
+          device = "intel_backlight";
+          format = "{icon} {percent}%";
+          format-icons = [ "" "" "" ];
+          on-scroll-up = "brightnessctl set 1%+";
+          on-scroll-down = "brightnessctl set 1%-";
+          min-length = 6;
+        };
+        battery = {
+          states = {
+            good = 95;
+            warning = 30;
+            critical = 20;
+          };
+          format = "{icon} {capacity}%";
+          format-charging = " {capacity}%";
+          format-plugged = " {capacity}%";
+          format-alt = "{time} {icon}";
+          format-icons = [ "" "" "" "" "" "" "" "" "" "" "" ];
+        };
         pulseaudio = {
-          scroll-step = 1;
-          format = "{icon}  {volume}%";
-          format-bluetooth = "{icon}  {volume}%";
-          format-muted = "";
+          format = "{icon} {volume}%";
+          tooltip = false;
+          format-muted = " Muted";
+          on-click = "pamixer -t";
+          on-scroll-up = "pamixer -i 5";
+          on-scroll-down = "pamixer -d 5";
+          scroll-step = 5;
           format-icons = {
-            headphones = "";
-            handsfree = "";
-            headset = "";
+            headphone = "";
+            hands-free = "";
+            headset = "";
             phone = "";
             portable = "";
             car = "";
-            default = [ "" "" ];
+            default = [ "" "" "" ];
           };
-          on-click = "pavucontrol";
         };
-
-        temperature = {
-          critical-threshold = 80;
-          interval = 5;
-          format = "{icon}  {temperatureC}°C";
-          format-icons = [ "" "" "" "" "" ];
-          tooltip = true;
-        };
-
-        tray = {
-          icon-size = 21;
-          spacing = 10;
+        "pulseaudio#microphone" = {
+          format = "{format_source}";
+          format-source = " {volume}%";
+          format-source-muted = " Muted";
+          on-click = "pamixer --default-source -t";
+          on-scroll-up = "pamixer --default-source -i 5";
+          on-scroll-down = "pamixer --default-source -d 5";
+          scroll-step = 5;
         };
       };
     };
