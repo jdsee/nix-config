@@ -1,10 +1,12 @@
-{ inputs, outputs, lib, config, pkgs, ... }: {
+{ inputs, outputs, lib, config, pkgs, ... }:
+{
   imports = [
     ./hardware-configuration.nix
 
     ../common/global
     ../common/users/jdsee
 
+    ../common/opt/pipewire.nix
     ../common/opt/systemd_boot.nix
     ../common/opt/udisks.nix
   ];
@@ -58,6 +60,7 @@
   };
 
   hardware = {
+    bluetooth.enable = true;
     opengl = {
       enable = true;
       extraPackages = with pkgs; [ amdvlk ];
