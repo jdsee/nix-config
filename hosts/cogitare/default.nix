@@ -29,12 +29,13 @@
   };
 
   services.logind = {
-    lidSwitch = "suspend";
+    lidSwitch = "lock";
     lidSwitchExternalPower = "lock";
   };
 
   systemd.services = {
     keyd = {
+      enable = false;
       description = "key remapping daemon";
       requires = [ "local-fs.target" ];
       after = [ "local-fs.target" ];
