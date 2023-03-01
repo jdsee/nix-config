@@ -58,20 +58,15 @@ in
         };
         "wlr/workspaces" = {
           disable-scroll = true;
-          all-outputs = true;
           on-click = "activate";
           format = "{icon}";
+          all-outputs = true;
           active-only = false;
-          "format-icons" = {
-            "1" = "";
-            "2" = "";
-            "3" = "";
-            "4" = "";
-            "5" = "";
-            "default" = "";
-            "focused" = "";
+          format-icons = {
+            default = "";
+            active = "";
           };
-          persistent_workspaces = {
+          persistent-workspaces = {
             "1" = [ ];
             "2" = [ ];
             "3" = [ ];
@@ -90,9 +85,6 @@ in
           format = " {}";
         };
         "custom/language" = {
-          exec = "(pacman -Qu ; yay -Qua) | wc -l";
-          interval = 7200;
-          format = " {}";
         };
         "custom/weather" = {
           tooltip = true;
