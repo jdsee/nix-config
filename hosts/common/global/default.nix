@@ -3,7 +3,6 @@
 {
   imports = [
     inputs.home-manager.nixosModules.home-manager
-    ./zsh.nix
     ./locale.nix
     ./nix.nix
   ] ++ (builtins.attrValues outputs.nixosModules);
