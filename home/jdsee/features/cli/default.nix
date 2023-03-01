@@ -3,8 +3,7 @@
 {
   imports = [
     ./bat.nix
-    ./git.nix
-    ./lazygit.nix
+    ./git
     ./ranger.nix
     ./tmux.nix
     ./vim.nix

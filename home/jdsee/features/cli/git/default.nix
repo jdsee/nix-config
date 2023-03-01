@@ -28,4 +28,9 @@
       };
     };
   };
+
+  programs.gitui = {
+    enable = true;
+    keyConfig = builtins.readFile ./gitui_vim_keys.ron;
+  };
 }
