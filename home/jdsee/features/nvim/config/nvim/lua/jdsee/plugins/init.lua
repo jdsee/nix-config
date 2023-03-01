@@ -190,37 +190,28 @@ return packer.startup(
       config = function() require 'jdsee.plugins.neoclip' end,
     }
 
-    --- LSP ---
     use {
-      'neovim/nvim-lspconfig',
+      'VonHeikemen/lsp-zero.nvim',
+      branch = 'v1.x',
       requires = {
-        'williamboman/mason.nvim',
-        'williamboman/mason-lspconfig.nvim',
+        -- LSP Support
+        {'neovim/nvim-lspconfig'},
+        {'williamboman/mason.nvim'},
+        {'williamboman/mason-lspconfig.nvim'},
+
+        -- Autocompletion
+        {'hrsh7th/nvim-cmp'},
+        {'hrsh7th/cmp-nvim-lsp'},
+        {'hrsh7th/cmp-buffer'},
+        {'hrsh7th/cmp-path'},
+        {'saadparwaiz1/cmp_luasnip'},
+        {'hrsh7th/cmp-nvim-lua'},
+
+        -- Snippets
+        {'L3MON4D3/LuaSnip'},
+        {'rafamadriz/friendly-snippets'},
       },
-      config = function() require 'jdsee.lsp' end,
-    }
-
-    --- LSP Completion ---
-    use {
-      'hrsh7th/nvim-cmp',
-      config = function() require 'jdsee.plugins.nvim-cmp' end,
-      requires = {
-        { 'hrsh7th/cmp-buffer' },
-        { 'hrsh7th/cmp-path' },
-        { 'hrsh7th/cmp-cmdline' },
-        { 'hrsh7th/cmp-nvim-lua' },
-        { 'hrsh7th/cmp-nvim-lsp' },
-        { 'saadparwaiz1/cmp_luasnip' },
-        { 'PaterJason/cmp-conjure' },
-        { 'rafamadriz/friendly-snippets' },
-        { 'onsails/lspkind-nvim' }, -- LSP pictograms
-      }
-    }
-
-    --- Snippets ---
-    use {
-      { 'L3MON4D3/LuaSnip' },
-      { 'rafamadriz/friendly-snippets' },
+      config = function() require 'jdsee.lsp.zero' end,
     }
 
     --- Java LSP ---
