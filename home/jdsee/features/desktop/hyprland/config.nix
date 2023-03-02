@@ -22,6 +22,7 @@
     shadow_offset=3 3
     col.shadow=0x44000000
     col.shadow_inactive=0x66000000
+    dim_special=0.4
   }
 
   animations {
@@ -47,6 +48,7 @@
 
   dwindle {
     split_width_multiplier=1.35
+    no_gaps_when_only = true
   }
 
   misc {
@@ -58,8 +60,19 @@
     natural_scroll=true
     kb_options=ctrl:nocaps,grp:alt_space_toggle,altwin:swap_alt_win
     touchpad {
-      disable_while_typing=false
+      natural_scroll=true
+      disable_while_typing=true
+      tap-to-click=true
+      clickfinger_behavior=true
     }
+  }
+
+  device:keyboard {
+    kb_layout=us,de
+  }
+
+  gestures {
+    workspace_swipe=true
   }
 
   # Startup
@@ -73,20 +86,18 @@
 
   # Program bindings
   bind=SUPER,Return,exec,$TERMINAL
-  bind=SUPER,w,exec,makoctl dismiss
+  bind=SUPER,m,exec,makoctl dismiss
   bind=SUPER,v,exec,$TERMINAL $SHELL -ic nvim
-  bind=SUPER,m,exec,$TERMINAL $SHELL -ic neomutt
   bind=SUPER,b,exec,$BROWSER
 
   bind=SUPER,x,exec,rofi -show drun
   bind=SUPER,space,exec,rofi -show run
 
   # Toggle waybar
-  # bind=,XF86Tools,exec,pkill -USR1 waybar # profile button
-  bind=SUPER,a,exec,pkill -USR1 waybar # profile button
+  bind=SUPER,a,exec,pkill -USR1 waybar
 
-  # Lock screen
-  bind=SUPERCONTROL,q,exec,swaylock -S
+  # Lock screen (TODO: move this to config file)
+  bind=SUPERCONTROL,q,exec,swaylock -Fk --clock --grace --indicator-idle-visible -i ~/Wallpapers/reunion-mountain.jpg
 
   # Screenshots
   bind=,Print,exec,grimblast --notify copy output
@@ -153,14 +164,14 @@
   bind=SUPERSHIFT,k,movewindow,u
   bind=SUPERSHIFT,j,movewindow,d
 
-  bind=SUPERCONTROL,left,focusmonitor,l
-  bind=SUPERCONTROL,right,focusmonitor,r
-  bind=SUPERCONTROL,up,focusmonitor,u
-  bind=SUPERCONTROL,down,focusmonitor,d
-  bind=SUPERCONTROL,h,focusmonitor,l
-  bind=SUPERCONTROL,l,focusmonitor,r
-  bind=SUPERCONTROL,k,focusmonitor,u
-  bind=SUPERCONTROL,j,focusmonitor,d
+  # bind=SUPERCONTROL,left,focusmonitor,l
+  # bind=SUPERCONTROL,right,focusmonitor,r
+  # bind=SUPERCONTROL,up,focusmonitor,u
+  # bind=SUPERCONTROL,down,focusmonitor,d
+  # bind=SUPERCONTROL,h,focusmonitor,l
+  # bind=SUPERCONTROL,l,focusmonitor,r
+  # bind=SUPERCONTROL,k,focusmonitor,u
+  # bind=SUPERCONTROL,j,focusmonitor,d
 
   bind=SUPERCONTROL,1,focusmonitor,DP-1
   bind=SUPERCONTROL,2,focusmonitor,DP-2
@@ -190,6 +201,18 @@
 
   bind=SUPER,u,togglespecialworkspace
   bind=SUPERSHIFT,u,movetoworkspace,special
+  bind=SUPERCONTROL,u,movetoworkspace,previous
+
+  bind=SUPERSHIFTCONTROL,l,movetoworkspace,+1
+  bind=SUPERSHIFTCONTROL,h,movetoworkspace,-1
+
+  bind=SUPERCONTROL,l,workspace,+1
+  bind=SUPERCONTROL,h,workspace,-1
+  bind=SUPERCONTROL,m,focusurgentorlast
+
+  # TODO
+  # bind=SUPERCONTROL,m,swapactiveworkspaces,Montior1 Montior2
+  # bind=SUPERCONTROL,m,swapactiveworkspaces,Montior1 Montior2
 
   bind=SUPER,1,workspace,01
   bind=SUPER,2,workspace,02
