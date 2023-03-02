@@ -43,7 +43,6 @@ in
         ];
         modules-center = [ "clock" ];
         modules-right = [
-          "custom/updates"
           "custom/language"
           "battery"
           "backlight"
@@ -78,11 +77,6 @@ in
             "9" = [ ];
             "10" = [ ];
           };
-        };
-        "custom/updates" = {
-          exec = "(pacman -Qu ; yay -Qua) | wc -l";
-          interval = 7200;
-          format = " {}";
         };
         "custom/language" = {
         };
