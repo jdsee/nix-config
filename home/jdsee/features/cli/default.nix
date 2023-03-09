@@ -4,6 +4,7 @@
   imports = [
     ./bat.nix
     ./direnv.nix
+    ./exa.nix
     ./git
     ./ranger.nix
     ./tmux.nix
@@ -28,9 +29,6 @@
     p7zip
     unzip
     zip
-
-    # theme
-    exa # Better ls
 
     # tui
     lazydocker
