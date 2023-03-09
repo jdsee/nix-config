@@ -9,6 +9,9 @@ opt.hidden = true -- hide buffers without saving
 opt.spell = true
 opt.spelllang = 'en_us,de_de'
 opt.linebreak = true -- wrap whole lines if line wrap active
+opt.swapfile = false
+
+
 -- Windows
 opt.equalalways = false -- no window resize
 
