@@ -50,6 +50,13 @@
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [ ./home/jdsee/cogitare.nix ];
         };
+
+        # msg Laptop
+        "seelij@nuntius" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          extraSpecialArgs = { inherit inputs outputs; };
+          modules = [ ./home/jdsee/nuntius.nix ];
+        };
       };
     };
 }
