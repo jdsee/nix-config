@@ -3,6 +3,7 @@
 {
   imports = [
     ./bat.nix
+    ./direnv.nix
     ./git
     ./ranger.nix
     ./tmux.nix
@@ -21,7 +22,7 @@
     jq # JSON pretty printer and manipulator
     ncdu # TUI disk usage
     ripgrep # Better grep
-    colordiff
+    colordiff # Colored diff
 
     # compression
     p7zip
@@ -30,6 +31,9 @@
 
     # theme
     exa # Better ls
+
+    # tui
+    lazydocker
   ];
 
   home.sessionVariables = {
