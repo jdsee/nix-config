@@ -8,6 +8,19 @@
     enableSyntaxHighlighting = true;
     defaultKeymap = "emacs";
 
+    plugins = [
+      {
+        name = "zsh-nix-shell";
+        file = "nix-shell.plugin.zsh";
+        src = pkgs.fetchFromGitHub {
+          owner = "chisui";
+          repo = "zsh-nix-shell";
+          rev = "v0.5.0";
+          sha256 = "0za4aiwwrlawnia4f29msk822rj9bgcygw6a8a6iikiwzjjz0g91";
+        };
+      }
+    ];
+
     zplug = {
       enable = true;
       plugins = [
@@ -31,6 +44,12 @@
       PURE_NODE_ENABLED = 0;
       PURE_CMD_MAX_EXEC_TIME = 1;
     };
+
+    profileExtra = ''
+      if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then
+        . $HOME/.nix-profile/etc/profile.d/nix.sh
+      fi
+    '';
 
     initExtra = ''
       eval "$(ssh-agent)" >/dev/null
