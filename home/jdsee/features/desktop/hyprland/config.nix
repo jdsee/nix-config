@@ -75,10 +75,14 @@
     workspace_swipe=true
   }
 
+  # Wallpapers
+  $w1 = hyprctl hyprpaper wallpaper "DP-1,../../../resources/Wallpapers/wp2150020-anime-city-wallpapers.jpg" 
+
   # Startup
   exec-once=waybar
   exec-once=mako
   exec-once=swayidle -w
+  exec-once=$w1
 
   # Mouse binding
   bindm=SUPER,mouse:272,movewindow

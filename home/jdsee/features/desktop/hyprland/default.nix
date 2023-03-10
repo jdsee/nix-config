@@ -20,6 +20,7 @@
 
   home.packages = with pkgs; [
     inputs.hyprwm-contrib.packages.${system}.grimblast
+    hyprpaper
     swaybg
     swayidle
   ];
@@ -32,12 +33,21 @@
     enable = true;
     package = inputs.hyprland.packages.${pkgs.system}.default;
     extraConfig = (import ./config.nix);
-      # (import ./monitors.nix {
-      #   inherit lib;
-      #   inherit (config) monitors;
-      # }) +
-      # (import ./config.nix {
-      #   inherit (config) colorscheme wallpaper;
-      # });
+  };
+
+  xdg.configFile = {
+    wallpapers = {
+      source = ../../../resources/Wallpapers;
+      recursive = true;
+    };
+  };
+
+  xdg.configFile = {
+    "hypr/hyprpaper.conf" = {
+      text = ''
+        preload = ~/.config/wallpapers/wp2150043-anime-city-wallpapers.jpg
+        wallpaper = eDP-1,~/.config/wallpapers/wp2150043-anime-city-wallpapers.jpg
+      '';
+    };
   };
 }
