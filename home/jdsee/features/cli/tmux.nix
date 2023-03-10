@@ -19,6 +19,9 @@
       set -g status-fg white
       set-window-option -g window-status-current-style fg=black,bg=white
 
+      set-option -g base-index 1
+      set-window-option -g pane-base-index 1
+
       setw -g mouse on
 
       # Reload tmux.conf
