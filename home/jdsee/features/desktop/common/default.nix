@@ -5,8 +5,9 @@
     ./font.nix
     ./gtk.nix
     ./pavucontrol.nix
-    ./rbw.nix
+    ./pulsemixer.nix
     ./qt.nix
+    ./rbw.nix
   ];
 
   xdg.mimeApps.enable = true;
@@ -17,5 +18,8 @@
 
     # editing
     texlive.combined.scheme-full
+
+    # other
+    sonic-pi
   ];
 }
