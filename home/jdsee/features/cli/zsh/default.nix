@@ -6,6 +6,7 @@
     enableCompletion = true;
     enableAutosuggestions = true;
     enableSyntaxHighlighting = true;
+
     defaultKeymap = "emacs";
 
     plugins = [
@@ -95,7 +96,6 @@
       clip = "xclip -sel clip";
 
       tx = "tmuxinator";
-      mux = "tx me";
 
       update = "sudo nixos-rebuild switch --flake .#jdsee";
     };
