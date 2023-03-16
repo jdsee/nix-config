@@ -95,9 +95,7 @@
       diff = "colordiff";
       clip = "xclip -sel clip";
 
-      tx = "tmuxinator";
-
-      update = "sudo nixos-rebuild switch --flake .#jdsee";
+      mux = "tmuxinator";
     };
   };
 
