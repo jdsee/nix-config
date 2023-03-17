@@ -10,8 +10,9 @@
     clock24 = true;
     escapeTime = 1;
     historyLimit = 50000;
-    plugins = with pkgs; [
-      tmuxPlugins.urlview
+    plugins = with pkgs.tmuxPlugins; [
+      urlview
+      extrakto
     ];
     extraConfig = ''
       # Status bar colors
@@ -26,7 +27,7 @@
 
       # Reload tmux.conf
       unbind r
-      bind r source-file ~/.tmux.conf
+      # bind r source-file ~/.config/tmux/.tmux.conf
 
       # Jump to last pane and maximize it
       bind O "last-pane ; resize-pane -Z"
@@ -48,6 +49,14 @@
       bind -r C-j resizep -D
       bind -r C-k resizep -U
       bind -r C-l resizep -R
+
+      # VI copy/paste controls
+      bind -T copy-mode-vi 'v' send -X begin-selection
+      bind -T copy-mode-vi 'y' send -X copy-selection-and-cancel
+
+      ## Plugin configuration
+      set -g @extrakto_popup_size "50%,30%"
+      set -g @extrakto_popup_position "R,S"
 
       # Open from current directory
       bind C-c new-window -c '#{pane_current_path}'
