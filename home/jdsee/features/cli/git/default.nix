@@ -19,7 +19,7 @@
       dc = "diff --cached";
       lg = "log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all";
       res = "!git fetch && git reset origin/`git rev-parse --abbrev-ref HEAD` --hard";
-      lh = "!git log --oneline | head";
+      lh = "!git log --oneline -n 15";
       graph = ''log --graph --color --pretty=format:"%C (yellow)%H%C (green)%d%C (reset)%n%x20%cd%n%x20%cn%x20 (%ce)%n%x20%s%n "'';
       tags = "tag - l"; # Show verbose output about tags, branches or remotes;
       branches = "branch - a";
