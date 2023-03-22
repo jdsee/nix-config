@@ -4,6 +4,7 @@
     ./firefox.nix
     ./font.nix
     ./gtk.nix
+    ./intellij.nix
     ./pavucontrol.nix
     ./pulsemixer.nix
     ./qt.nix
