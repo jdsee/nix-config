@@ -236,6 +236,13 @@ return packer.startup(
         config = function() require 'jdsee.plugins.conjure' end
       },
       {
+        'clojure-vim/vim-jack-in',
+        requires = {
+          'tpope/vim-dispatch',
+          'radenling/vim-dispatch-neovim',
+        }
+      },
+      {
         'tpope/vim-sexp-mappings-for-regular-people',
         requires = 'guns/vim-sexp'
       }
