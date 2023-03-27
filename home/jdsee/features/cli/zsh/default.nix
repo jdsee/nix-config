@@ -3,7 +3,7 @@
 {
   programs.zsh = {
     enable = true;
-    enableCompletion = true;
+    enableCompletion = false; # leads to bugs when enabled - zplug already calls compinit
     enableAutosuggestions = true;
     enableSyntaxHighlighting = true;
 
