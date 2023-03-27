@@ -1,6 +1,9 @@
 { config, lib, pkgs, user, ... }:
 
 {
+  programs.tmate = {
+    enable = true;
+  };
   programs.tmux = {
     enable = true;
     tmuxinator.enable = true;
@@ -27,7 +30,7 @@
 
       # Reload tmux.conf
       unbind r
-      # bind r source-file ~/.config/tmux/.tmux.conf
+      bind r source-file ~/.config/tmux/.tmux.conf
 
       # Jump to last pane and maximize it
       bind O "last-pane ; resize-pane -Z"
