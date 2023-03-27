@@ -39,31 +39,40 @@
     };
 
     sessionVariables = {
-      PATH = "$PATH:$HOME/bin";
+      PATH = "$PATH:$HOME/bin:$HOME/.config/rofi/scripts";
       GPG_TTY = "$(tty)";
       MANPAGER = "sh -c 'col -bx | bat -l man -p'";
       PURE_NODE_ENABLED = 0;
       PURE_CMD_MAX_EXEC_TIME = 1;
+      LAUNCHER = "launcher_t4";
     };
 
     profileExtra = ''
       if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then
         . $HOME/.nix-profile/etc/profile.d/nix.sh
       fi
+
+      export LAUNCHER=launcher_t4
     '';
 
     initExtra = ''
       eval "$(ssh-agent)" >/dev/null
+
+      # helper to make modifiable copy of immutable link to nix store
+      function tinker() {
+        FILE=$1
+        mv $1 $1.bak
+        cp $1.bak $1
+        chmod +w $1
+      }
+
+      export PATH="$PATH:$HOME/bin:$HOME/.config/rofi/scripts";
 
       # Script to open man-page in tmux popup
       source ~/.config/zsh/popman.sh
       zle -N popman
       bindkey  popman
       bindkey '^O' autosuggest-accept
-
-      #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-      export SDKMAN_DIR="$HOME/.sdkman"
-      [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
     '';
 
     shellAliases = {
