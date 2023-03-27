@@ -6,7 +6,7 @@
     settings = {
       env.TERM = "alacritty";
       font = {
-        size = 10.0;
+        size = 12.0;
         normal = {
           famile = "Hack Nerd Font Mono";
           style = "Regular";
