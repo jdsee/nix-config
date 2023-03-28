@@ -214,6 +214,16 @@ return packer.startup(
       config = function() require 'jdsee.lsp.zero' end,
     }
 
+    -- use {
+    --     "SmiteshP/nvim-navbuddy",
+    --     requires = {
+    --         "neovim/nvim-lspconfig",
+    --         "SmiteshP/nvim-navic",
+    --         "MunifTanjim/nui.nvim"
+    --     },
+    --     config = function() require 'jdsee.plugins.nvim-navbuddy' end,
+    -- }
+
     --- Java LSP ---
     use { 'mfussenegger/nvim-jdtls' }
 
@@ -227,6 +237,11 @@ return packer.startup(
     use {
       'lervag/vimtex',
       config = function() require 'jdsee.plugins.vimtex' end
+    }
+
+    --- Typst language support ---
+    use {
+      'SeniorMars/typst.nvim',
     }
 
     --- Clojure Integration ---
