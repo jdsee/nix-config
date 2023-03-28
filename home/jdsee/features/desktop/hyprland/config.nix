@@ -1,10 +1,34 @@
-# { wallpaper }: ''
+{ ... }: 
+let
+  launcher = "$HOME/.config/rofi/scripts/launcher_t4";
+  powermenu = "$HOME/.config/rofi/scripts/powermenu_t1";
+in
 ''
+  monitor=eDP-1, preferred, auto, 1
+  monitor=DP-2, preferred, auto, 1, # mirror, eDP-1
+  monitor=,preferred,auto,1
+
+  # Disable/Enable builtin screen when lid closed/opened
+  bindl = , switch:off:Lid Switch, exec, hyprctl keyword monitor "eDP-1, preferred, auto, 1"
+  bindl = , switch:on:Lid Switch, exec, hyprctl keyword monitor "eDP-1, disable"
+
+  wsbind=1,DP-2
+  wsbind=2,DP-2
+  wsbind=3,DP-2
+  wsbind=4,DP-2
+  wsbind=5,DP-2
+
+  wsbind=6,eDP-1
+  wsbind=7,eDP-1
+  wsbind=8,eDP-1
+  wsbind=9,eDP-1
+  wsbind=0,eDP-1
+
   general {
     gaps_in=2
     gaps_out=4
     border_size=1
-    cursor_inactive_timeout=4
+    cursor_inactive_timeout=0
   }
 
   decoration {
@@ -101,7 +125,7 @@
   bind=SUPER,b,exec,$BROWSER
 
   bind=SUPER,space,exec,${launcher}
-  bind=SUPER,q,exec,${launcher}
+  bind=SUPER,escape,exec,${powermenu}
   bind=SUPERCONTROL,space,exec,rofi-rbw
   bind=SUPERCONTROL,b,exec,rofi-bluetooth
 
