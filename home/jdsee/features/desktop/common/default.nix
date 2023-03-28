@@ -1,10 +1,12 @@
 { pkgs, lib, outputs, ... }:
 {
   imports = [
+    ./discord.nix
     ./firefox.nix
     ./font.nix
     ./gtk.nix
     ./intellij.nix
+    ./obs.nix
     ./pavucontrol.nix
     ./pulsemixer.nix
     ./qt.nix
@@ -19,8 +21,5 @@
 
     # editing
     texlive.combined.scheme-full
-
-    # other
-    sonic-pi
   ];
 }

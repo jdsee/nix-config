@@ -57,11 +57,18 @@
     blueman.enable = true;
     openssh.enable = true;
     pcscd.enable = true;
+    # kubernetes = {
+    #   roles = [ "master" "node" ];
+    #   masterAddress = "master.jdsee.de";
+    # };
   };
 
   xdg.portal = {
     enable = true;
     wlr.enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-hyprland
+    ];
   };
 
   hardware = {

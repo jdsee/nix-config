@@ -5,12 +5,15 @@
 
 {
   imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
+    [
+      (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
   boot = {
     kernelModules = [ "kvm-amd" ];
-    extraModulePackages = [ ];
+    extraModulePackages = with config.boot.kernelPackages; [
+      v4l2loopback # This is needed for obs virtual cam to work
+    ];
     initrd = {
       availableKernelModules = [ "nvme" "ehci_pci" "xhci_pci" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
       kernelModules = [ ];
@@ -25,12 +28,14 @@
   };
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/6aba0e61-5a5d-4909-b4cb-f5ed58f2a6f0";
+    {
+      device = "/dev/disk/by-uuid/6aba0e61-5a5d-4909-b4cb-f5ed58f2a6f0";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/BE56-E24A";
+    {
+      device = "/dev/disk/by-uuid/BE56-E24A";
       fsType = "vfat";
     };
 
