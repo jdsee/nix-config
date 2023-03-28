@@ -84,6 +84,12 @@
   exec-once=swayidle -w
   exec-once=$w1
 
+  # Window rules
+  windowrule=float,^(Rofi)$
+  windowrule=dimaround,^(Rofi)$
+  windowrule=center,^(Rofi)$
+  # windowrule=size 50% 70%,^(Rofi)$
+
   # Mouse binding
   bindm=SUPER,mouse:272,movewindow
   bindm=SUPER,mouse:273,resizewindow
@@ -94,8 +100,10 @@
   bind=SUPER,v,exec,$TERMINAL $SHELL -ic nvim
   bind=SUPER,b,exec,$BROWSER
 
-  bind=SUPER,x,exec,rofi -show drun
-  bind=SUPER,space,exec,rofi -show run
+  bind=SUPER,space,exec,${launcher}
+  bind=SUPER,q,exec,${launcher}
+  bind=SUPERCONTROL,space,exec,rofi-rbw
+  bind=SUPERCONTROL,b,exec,rofi-bluetooth
 
   # Toggle waybar
   bind=SUPER,a,exec,pkill -USR1 waybar
@@ -215,8 +223,8 @@
   bind=SUPERCONTROL,m,focusurgentorlast
 
   # TODO
-  # bind=SUPERCONTROL,m,swapactiveworkspaces,Montior1 Montior2
-  # bind=SUPERCONTROL,m,swapactiveworkspaces,Montior1 Montior2
+  bind=SUPERCONTROL,m,swapactiveworkspaces,Montior1 Montior2
+  bind=SUPERCONTROL,m,swapactiveworkspaces,Montior1 Montior2
 
   bind=SUPER,1,workspace,01
   bind=SUPER,2,workspace,02
