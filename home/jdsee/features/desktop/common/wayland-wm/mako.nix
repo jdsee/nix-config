@@ -1,6 +1,6 @@
 { config, ... }:
 {
-  programs.mako = {
+  services.mako = {
     enable = true;
     # iconPath = "${config.gtk.iconTheme.package}/share/icons/Papirus-Dark";
     font = "${config.fontProfiles.regular.family} 12";

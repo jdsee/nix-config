@@ -6,12 +6,16 @@
     ../common/global
     ../common/users/jdsee
 
+    ../common/opt/docker.nix
     ../common/opt/pipewire.nix
+    ../common/opt/polkit.nix
     ../common/opt/systemd_boot.nix
     ../common/opt/udisks.nix
   ];
 
   services.greetd.settings.default_session.user = "jdsee";
+
+  programs.zsh.enable = true;
 
   networking = {
     hostName = "cogitare";
