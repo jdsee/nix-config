@@ -23,7 +23,6 @@
   networking.networkmanager.enable = true;
 
   security = {
-    polkit.enable = true; # required to setup sway with HomeManager
     pam.services.swaylock = {
       text = "auth include login";
     };
