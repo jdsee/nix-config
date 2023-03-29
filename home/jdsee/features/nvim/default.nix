@@ -1,9 +1,9 @@
 { config, pkgs, lib, ... }:
 {
-  home.sessionVariables.EDITOR = "nvim";
-
   programs.neovim = {
     enable = true;
+    defaultEditor = true;
+
     package = pkgs.neovim-nightly;
 
     viAlias = true;
@@ -12,12 +12,7 @@
     withNodeJs = true;
     withPython3 = true;
 
-    extraPackages = with pkgs; [
-      # TODO: Manage LSP servers with Zero.nvim
-      rnix-lsp
-      sumneko-lua-language-server
-      java-language-server
-    ];
+    extraPackages = with pkgs; [ ];
   };
 
   xdg.configFile = {
