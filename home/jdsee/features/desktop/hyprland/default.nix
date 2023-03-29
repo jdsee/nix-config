@@ -32,7 +32,7 @@
   wayland.windowManager.hyprland = {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.system}.default;
-    extraConfig = import ./config.nix {};
+    extraConfig = import ./config.nix { };
     xwayland.enable = true;
   };
 
@@ -46,8 +46,10 @@
   xdg.configFile = {
     "hypr/hyprpaper.conf" = {
       text = ''
-        preload = ~/.config/wallpapers/wp2150043-anime-city-wallpapers.jpg
-        wallpaper = eDP-1,~/.config/wallpapers/wp2150043-anime-city-wallpapers.jpg
+        ipc = off
+        preload = ~/.config/wallpapers/star-wars-broken-ship.jpg
+        wallpaper = eDP-1,~/.config/wallpapers/star-wars-broken-ship.jpg
+        wallpaper = DP-2,~/.config/wallpapers/star-wars-broken-ship.jpg
       '';
     };
   };
