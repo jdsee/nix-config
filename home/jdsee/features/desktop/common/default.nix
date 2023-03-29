@@ -3,8 +3,10 @@
   imports = [
     ./discord.nix
     ./firefox.nix
+    ./flameshot.nix
     ./font.nix
     ./gtk.nix
+    ./imv.nix
     ./intellij.nix
     ./obs.nix
     ./pavucontrol.nix
