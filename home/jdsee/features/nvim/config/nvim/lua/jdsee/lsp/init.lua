@@ -15,16 +15,13 @@ mason_lspconfig.setup {
     'html',
     'jsonls',
     'lemminx',
+    'lua_ls',
     'marksman',
     'pyright',
+    'rnix',
     'texlab',
     'yamlls',
   },
-}
-
-local servers = {
-  'rnix',
-  'sumneko_lua',
 }
 
 local lsp_defaults = {
@@ -41,17 +38,6 @@ lspconfig.util.default_config = vim.tbl_deep_extend(
   'force',
   lspconfig.util.default_config,
   lsp_defaults)
-
-for _, server in pairs(servers) do
-  opts = lsp_defaults
-  local extend, ext_opts = pcall(require, 'jdsee.lsp' .. server)
-
-  if extend then
-    opts = vim.tbl_deep_extend('force', opts, ext_opts)
-  end
-
-  lspconfig[server].setup(lsp_defaults)
-end
 
 require('mason-lspconfig').setup_handlers {
   -- default setup
