@@ -1,6 +1,9 @@
 { config, lib, pkgs, user, ... }:
 
 {
+  home.sessionVariables = {
+    TERMINAL = "alacritty";
+  };
   programs.alacritty = {
     enable = true;
     settings = {
@@ -49,9 +52,5 @@
         { key = "Semicolon"; mods = "Control"; chars = "\e[59;5u"; }
       ];
     };
-  };
-
-  home.sessionVariables = {
-    TERMINAL = "alacritty";
   };
 }
