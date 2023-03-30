@@ -64,6 +64,7 @@
         mv $1 $1.bak
         cp $1.bak $1
         chmod +w $1
+        vi $1
       }
 
       export PATH="$PATH:$HOME/bin:$HOME/.config/rofi/scripts";
