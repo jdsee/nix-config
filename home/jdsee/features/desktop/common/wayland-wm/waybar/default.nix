@@ -28,6 +28,7 @@ in
 {
   programs.waybar = {
     enable = true;
+    package = pkgs.waybar-experimental;
     settings = {
       primary = {
         layer = "top";
