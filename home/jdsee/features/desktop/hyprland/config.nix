@@ -2,6 +2,7 @@
 let
   launcher = "$HOME/.config/rofi/scripts/launcher_t4";
   powermenu = "$HOME/.config/rofi/scripts/powermenu_t1";
+  fileBrowser = "ranger";
 in
 ''
   monitor=eDP-1, preferred, auto, 1
@@ -118,8 +119,9 @@ in
   # Program bindings
   bind=SUPER,Return,exec,$TERMINAL
   bind=SUPER,m,exec,makoctl dismiss
-  bind=SUPER,v,exec,$TERMINAL $SHELL -ic nvim
+  bind=SUPER,v,exec,$TERMINAL -e $EDITOR
   bind=SUPER,b,exec,$BROWSER
+  bind=SUPER,r,exec,$TERMINAL -e ${fileBrowser}
 
   bind=SUPER,space,exec,${launcher}
   bind=SUPER,escape,exec,${powermenu}
@@ -130,7 +132,7 @@ in
   bind=SUPER,a,exec,pkill -USR1 waybar
 
   # Lock screen (TODO: move this to config file)
-  bind=SUPERCONTROL,q,exec,swaylock -Fk --clock --grace --indicator-idle-visible -i ~/Wallpapers/reunion-mountain.jpg
+  bind=SUPERCONTROL,q,exec,swaylock
 
   # Screenshots
   bind=,Print,exec,grimblast --notify copy output
