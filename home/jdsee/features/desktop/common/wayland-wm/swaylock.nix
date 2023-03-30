@@ -4,10 +4,8 @@
   home.packages = [ pkgs.swaylock-effects ];
   programs.swaylock = {
     settings = {
-      effect-blur = "20x3";
-      effect-scale = 0.3;
+      image = "$HOME/.config/wallpapers/monster-at-cafe.jpg";
       fade-in = 0.1;
-      screenshots = true;
       clock = true;
       font = config.fontProfiles.regular.family;
       font-size = 15;
@@ -19,6 +17,9 @@
       indicator-idle-visible = true;
       indicator-y-position = 1000;
 
+      # screenshots = true;
+      # effect-blur = "20x3";
+      # effect-scale = 0.3;
       # ring-color = "#${colors.base02}";
       # inside-wrong-color = "#${colors.base08}";
       # ring-wrong-color = "#${colors.base08}";
