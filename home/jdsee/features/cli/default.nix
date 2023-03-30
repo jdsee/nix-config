@@ -6,7 +6,7 @@
     ./direnv.nix
     ./exa.nix
     ./git
-    ./ranger.nix
+    ./ranger
     ./tmux.nix
     ./vim.nix
     ./zsh
