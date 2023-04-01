@@ -10,6 +10,7 @@ return packer.startup(
     use 'wellle/targets.vim' -- inner style text objects
     use 'dhruvasagar/vim-table-mode' -- markdown table support
     use 'ThePrimeagen/vim-be-good' -- game to practice vim movements
+    use 'xiyaowong/transparent.nvim' -- Simple command to make bg transparent
 
     -- Git Integration ---
     use {

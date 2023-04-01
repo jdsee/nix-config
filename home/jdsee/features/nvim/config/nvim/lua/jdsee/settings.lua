@@ -48,7 +48,6 @@ opt.joinspaces = false -- prevent some weird extra spaces
 
 -- Style
 vim.cmd [[ colorscheme tokyonight-night ]] -- theme
-vim.cmd [[ highlight Normal guibg=none]] -- make background transparent
 opt.termguicolors = true -- true color support
 opt.syntax = 'on' -- basic syntax highlighting
 opt.showmatch = true -- show matching brackets
