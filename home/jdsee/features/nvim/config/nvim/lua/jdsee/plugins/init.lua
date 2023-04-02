@@ -1,8 +1,9 @@
 require('jdsee.util.bootstrap').install_lazy()
 
 require('lazy').setup {
-  -- TO ADD:
-  -- 'SmiteshP/nvim-navbuddy'
+  -- Want to try:
+  -- - 'SmiteshP/nvim-navbuddy'
+  -- - 'nvim-pack/nvim-spectre'
 
   'tpope/vim-repeat', -- repeat plugin commands with .
   'tpope/vim-surround', -- work on surrounding characters like [({"'...
@@ -186,11 +187,17 @@ require('lazy').setup {
 
   {
     'VonHeikemen/lsp-zero.nvim',
-    branch = 'v1.x',
+    branch = 'v2.x',
+    config = function() require 'jdsee.lsp.zero' end,
     dependencies = {
       -- LSP Support
-      {'neovim/nvim-lspconfig'},
-      {'williamboman/mason.nvim'},
+      {'neovim/nvim-lspconfig', branch = 'master'},
+      {
+        'williamboman/mason.nvim',
+        build = function()
+          pcall(vim.cmd, 'MasonUpdate')
+        end,
+      },
       {'williamboman/mason-lspconfig.nvim'},
 
       -- Autocompletion
@@ -200,12 +207,9 @@ require('lazy').setup {
       {'hrsh7th/cmp-path'},
       {'saadparwaiz1/cmp_luasnip'},
       {'hrsh7th/cmp-nvim-lua'},
-
-      -- Snippets
       {'L3MON4D3/LuaSnip'},
       {'rafamadriz/friendly-snippets'},
     },
-    config = function() require 'jdsee.lsp.zero' end,
   },
 
   --- Java LSP ---
