@@ -27,9 +27,16 @@ vim.cmd [[
 vim.cmd [[
   augroup OpenReadFiles
     au!
-    au BufEnter *.md,*.tex setlocal wrap spell
+    au BufEnter *.md,*.tex,*.typ,*.adoc setlocal wrap spell
   augroup END
 ]]
+
+-- TODO: Try to delay saving the file or otherwise typst recompiling to prevent zathura from crashing
+vim.api.nvim_create_autocmd(
+  { 'InsertLeave', --[['TextChanged', 'TextChangedI']] }, {
+  pattern = {'*.typ'},
+  command = 'silent write',
+})
 
 -- Set mappings only for quickfix windows
 -- TODO: make this work
