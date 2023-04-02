@@ -1,299 +1,276 @@
-local packer_bootstraped = require('jdsee.util.bootstrap').installPacker()
-local packer = require 'packer'
+require('jdsee.util.bootstrap').install_lazy()
 
-return packer.startup(
-  function(use)
-    use { 'wbthomason/packer.nvim', opt = true }
+require('lazy').setup {
+  -- TO ADD:
+  -- 'SmiteshP/nvim-navbuddy'
 
-    use 'tpope/vim-repeat' -- repeat plugin commands with .
-    use 'tpope/vim-surround' -- work on surrounding characters like [({"'...
-    use 'wellle/targets.vim' -- inner style text objects
-    use 'dhruvasagar/vim-table-mode' -- markdown table support
-    use 'ThePrimeagen/vim-be-good' -- game to practice vim movements
-    use 'xiyaowong/transparent.nvim' -- Simple command to make bg transparent
+  'tpope/vim-repeat', -- repeat plugin commands with .
+  'tpope/vim-surround', -- work on surrounding characters like [({"'...
+  'wellle/targets.vim', -- inner style text objects
+  'dhruvasagar/vim-table-mode', -- markdown table support
+  'ThePrimeagen/vim-be-good', -- game to practice vim movements
+  'xiyaowong/transparent.nvim', -- Simple command to make bg transparent
 
-    -- Git Integration ---
-    use {
-      'tpope/vim-fugitive',
-      config = function() require('jdsee.plugins.fugitive') end,
+  -- Git Integration ---
+  {
+    'tpope/vim-fugitive',
+    config = function() require('jdsee.plugins.fugitive') end,
+  },
+
+  -- Git Worktree support ---
+  {
+    'ThePrimeagen/git-worktree.nvim',
+    config = function() require 'jdsee.plugins.git-worktree' end
+  },
+
+  --- Autopair Brackets ---
+  {
+    'windwp/nvim-autopairs',
+    config = function() require 'jdsee.plugins.nvim-autopairs' end,
+  },
+
+  --- Comment out Code with gc[motion] ---
+  {
+    'numToStr/Comment.nvim',
+    config = function() require('Comment').setup() end,
+  },
+
+  --- Visualize Colorcodes ---
+  {
+    'norcalli/nvim-colorizer.lua',
+    config = function() require('colorizer').setup() end,
+  },
+
+  --- Smooth Scrolling ---
+  {
+    'karb94/neoscroll.nvim',
+    config = function() require('neoscroll').setup() end,
+  },
+
+  --- Treesitter ---
+  {
+    'nvim-treesitter/nvim-treesitter',
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter-textobjects',
+      'nvim-treesitter/nvim-treesitter-context',
+    },
+    config = function() require 'jdsee.plugins.nvim-treesitter' end,
+    build = ':TSUpdate'
+    ,
+  },
+
+  --- Refactoring Tool ---
+  {
+    'ThePrimeagen/refactoring.nvim',
+    config = function() require 'jdsee.plugins.refactoring' end,
+    dependencies = {
+      { 'nvim-lua/plenary.nvim' },
+      { 'nvim-treesitter' }
     }
+  },
 
-    -- Git Worktree support ---
-    use {
-      'ThePrimeagen/git-worktree.nvim',
-      config = function() require 'jdsee.plugins.git-worktree' end
+  {
+    'ThePrimeagen/harpoon',
+    dependencies = 'nvim-lua/plenary.nvim',
+    config = function() require 'jdsee.plugins.harpoon' end
+  },
+
+  {
+    'pwntester/octo.nvim',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-telescope/telescope.nvim',
+      'kyazdani42/nvim-web-devicons',
+    },
+    config = function() require('octo').setup() end,
+    cond = true,
+  },
+
+  --- Nvim Build Tool ---
+  {
+    'pianocomposer321/yabs.nvim',
+    config = function() require 'jdsee.plugins.yabs' end,
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    cond = true,
+  },
+
+  --- Code Runner ---
+  {
+    'michaelb/sniprun',
+    config = function() require 'jdsee.plugins.sniprun' end,
+    build = 'bash ./install.sh',
+    cond = true,
+  },
+
+  --- GIT Marker ---
+  {
+    'lewis6991/gitsigns.nvim',
+    config = function() require 'jdsee.plugins.gitsigns' end,
+    dependencies = { 'nvim-lua/plenary.nvim' }
+  },
+
+  --- Tab View for Buffers ---
+  {
+    'romgrk/barbar.nvim',
+    dependencies = { 'kyazdani42/nvim-web-devicons' }
+  },
+
+  --- Colorschemes ---
+  {
+    { 'ellisonleao/gruvbox.nvim' },
+    { 'sainnhe/gruvbox-material' },
+    { 'sainnhe/everforest' },
+    { 'Mofiqul/adwaita.nvim' },
+    { 'rebelot/kanagawa.nvim' },
+    { 'folke/tokyonight.nvim' },
+    { 'EdenEast/nightfox.nvim' },
+    { 'catppuccin/catppuccin' },
+    { 'shaunsingh/oxocarbon.nvim' },
+    {
+      'mcchrish/zenbones.nvim',
+      dependencies = 'rktjmp/lush.nvim'
     }
+  },
 
-    --- Autopair Brackets ---
-    use {
-      'windwp/nvim-autopairs',
-      config = function() require 'jdsee.plugins.nvim-autopairs' end,
-    }
+  {
+    "smjonas/live-command.nvim",
+    config = function() require 'jdsee.plugins.live-command' end,
+  },
 
-    --- Comment out Code with gc[motion] ---
-    use {
-      'numToStr/Comment.nvim',
-      config = function() require('Comment').setup() end,
-    }
+  --- File Tree ---
+  {
+    'nvim-neo-tree/neo-tree.nvim',
+    config = function() require 'jdsee.plugins.neotree' end,
+    branch = "v2.x",
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'kyazdani42/nvim-web-devicons',
+      'MunifTanjim/nui.nvim',
+    },
+  },
 
-    --- Visualize Colorcodes ---
-    use {
-      'norcalli/nvim-colorizer.lua',
-      config = function() require('colorizer').setup() end,
-    }
+  --- Indentation Visualizer ---
+  {
+    'lukas-reineke/indent-blankline.nvim',
+    config = function() require 'jdsee.plugins.indent-blankline' end,
+  },
 
-    --- Smooth Scrolling ---
-    use {
-      'karb94/neoscroll.nvim',
-      config = function() require('neoscroll').setup() end,
-    }
+  --- Statusbar ---
+  {
+    'nvim-lualine/lualine.nvim',
+    config = function() require 'jdsee.plugins.lualine' end,
+  },
 
-    --- Treesitter ---
-    use {
-      'nvim-treesitter/nvim-treesitter',
-      requires = {
-        'nvim-treesitter/nvim-treesitter-textobjects',
-        'nvim-treesitter/nvim-treesitter-context',
-      },
-      config = function() require 'jdsee.plugins.nvim-treesitter' end,
-      run = ':TSUpdate'
-      ,
-    }
-
-    --- Refactoring Tool ---
-    use {
-      'ThePrimeagen/refactoring.nvim',
-      config = function() require 'jdsee.plugins.refactoring' end,
-      requires = {
-        { 'nvim-lua/plenary.nvim' },
-        { 'nvim-treesitter' }
-      }
-    }
-
-    use {
-      'ThePrimeagen/harpoon',
-      requires = 'nvim-lua/plenary.nvim',
-      config = function() require 'jdsee.plugins.harpoon' end
-    }
-
-    use {
-      'pwntester/octo.nvim',
-      requires = {
-        'nvim-lua/plenary.nvim',
-        'nvim-telescope/telescope.nvim',
-        'kyazdani42/nvim-web-devicons',
-      },
-      config = function() require('octo').setup() end,
-      diable = true,
-    }
-
-    --- Nvim Build Tool ---
-    use {
-      'pianocomposer321/yabs.nvim',
-      config = function() require 'jdsee.plugins.yabs' end,
-      requires = { 'nvim-lua/plenary.nvim' },
-      disable = true,
-    }
-
-    --- Code Runner ---
-    use {
-      'michaelb/sniprun',
-      config = function() require 'jdsee.plugins.sniprun' end,
-      run = 'bash ./install.sh',
-      disable = true,
-    }
-
-    --- GIT Marker ---
-    use {
-      'lewis6991/gitsigns.nvim',
-      config = function() require 'jdsee.plugins.gitsigns' end,
-      requires = { 'nvim-lua/plenary.nvim' }
-    }
-
-    --- Tab View for Buffers ---
-    use {
-      'romgrk/barbar.nvim',
-      requires = { 'kyazdani42/nvim-web-devicons' }
-    }
-
-    --- Colorschemes ---
-    use {
-      { 'ellisonleao/gruvbox.nvim' },
-      { 'sainnhe/gruvbox-material' },
-      { 'sainnhe/everforest' },
-      { 'Mofiqul/adwaita.nvim' },
-      { 'rebelot/kanagawa.nvim' },
-      { 'folke/tokyonight.nvim' },
-      { 'EdenEast/nightfox.nvim' },
-      { 'catppuccin/catppuccin' },
-      { 'shaunsingh/oxocarbon.nvim' },
-      use {
-        'mcchrish/zenbones.nvim',
-        requires = 'rktjmp/lush.nvim'
-      }
-    }
-
-    use {
-      "smjonas/live-command.nvim",
-      config = function() require 'jdsee.plugins.live-command' end,
-    }
-
-    --- File Tree ---
-    use {
-      'nvim-neo-tree/neo-tree.nvim',
-      config = function() require 'jdsee.plugins.neotree' end,
-      branch = "v2.x",
-      requires = {
-        'nvim-lua/plenary.nvim',
-        'kyazdani42/nvim-web-devicons',
-        'MunifTanjim/nui.nvim',
-      },
-    }
-
-    --- Indentation Visualizer ---
-    use {
-      'lukas-reineke/indent-blankline.nvim',
-      config = function() require 'jdsee.plugins.indent-blankline' end,
-    }
-
-    --- Statusbar ---
-    use {
-      'nvim-lualine/lualine.nvim',
-      config = function() require 'jdsee.plugins.lualine' end,
-    }
-
-    --- Telescope Fuzzy Finder ---
-    use {
-      {
-        'nvim-telescope/telescope.nvim',
-        config = function() require 'jdsee.plugins.telescope' end,
-        requires = {
-          'nvim-lua/plenary.nvim',
-          'jvgrootveld/telescope-zoxide',
-          'nvim-lua/popup.nvim',
-          'nvim-telescope/telescope-ui-select.nvim',
-        },
-      },
-      {
-        'nvim-telescope/telescope-fzf-native.nvim',
-        run = 'make'
-      },
-      {
-        'nvim-telescope/telescope-frecency.nvim',
-        after = 'telescope.nvim',
-        requires = 'tami5/sqlite.lua',
-      },
-    }
-
-    use {
+  --- Telescope Fuzzy Finder ---
+  {
+    'nvim-telescope/telescope.nvim',
+    config = function()
+      require 'jdsee.plugins.telescope'
+      require 'jdsee.plugins.neoclip' 
+    end,
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'jvgrootveld/telescope-zoxide',
+      'nvim-lua/popup.nvim',
+      'nvim-telescope/telescope-ui-select.nvim',
+      'nvim-telescope/telescope-frecency.nvim',
+      'tami5/sqlite.lua',
       'AckslD/nvim-neoclip.lua',
-      after = 'telescope.nvim',
-      config = function() require 'jdsee.plugins.neoclip' end,
-    }
+    },
+  },
 
-    use {
-      'VonHeikemen/lsp-zero.nvim',
-      branch = 'v1.x',
-      requires = {
-        -- LSP Support
-        {'neovim/nvim-lspconfig'},
-        {'williamboman/mason.nvim'},
-        {'williamboman/mason-lspconfig.nvim'},
+  {
+    'nvim-telescope/telescope-fzf-native.nvim',
+    build = 'make'
+  },
 
-        -- Autocompletion
-        {'hrsh7th/nvim-cmp'},
-        {'hrsh7th/cmp-nvim-lsp'},
-        {'hrsh7th/cmp-buffer'},
-        {'hrsh7th/cmp-path'},
-        {'saadparwaiz1/cmp_luasnip'},
-        {'hrsh7th/cmp-nvim-lua'},
+  {
+    'VonHeikemen/lsp-zero.nvim',
+    branch = 'v1.x',
+    dependencies = {
+      -- LSP Support
+      {'neovim/nvim-lspconfig'},
+      {'williamboman/mason.nvim'},
+      {'williamboman/mason-lspconfig.nvim'},
 
-        -- Snippets
-        {'L3MON4D3/LuaSnip'},
-        {'rafamadriz/friendly-snippets'},
-      },
-      config = function() require 'jdsee.lsp.zero' end,
-    }
+      -- Autocompletion
+      {'hrsh7th/nvim-cmp'},
+      {'hrsh7th/cmp-nvim-lsp'},
+      {'hrsh7th/cmp-buffer'},
+      {'hrsh7th/cmp-path'},
+      {'saadparwaiz1/cmp_luasnip'},
+      {'hrsh7th/cmp-nvim-lua'},
 
-    -- use {
-    --     "SmiteshP/nvim-navbuddy",
-    --     requires = {
-    --         "neovim/nvim-lspconfig",
-    --         "SmiteshP/nvim-navic",
-    --         "MunifTanjim/nui.nvim"
-    --     },
-    --     config = function() require 'jdsee.plugins.nvim-navbuddy' end,
-    -- }
+      -- Snippets
+      {'L3MON4D3/LuaSnip'},
+      {'rafamadriz/friendly-snippets'},
+    },
+    config = function() require 'jdsee.lsp.zero' end,
+  },
 
-    --- Java LSP ---
-    use { 'mfussenegger/nvim-jdtls' }
+  --- Java LSP ---
+  { 'mfussenegger/nvim-jdtls' },
 
-    --- Scala LSP ---
-    use {
-      'scalameta/nvim-metals',
-      requires = { "nvim-lua/plenary.nvim" }
-    }
+  --- Scala LSP ---
+  {
+    'scalameta/nvim-metals',
+    dependencies = { "nvim-lua/plenary.nvim" }
+  },
 
-    --- Latex Integration ---
-    use {
-      'lervag/vimtex',
-      config = function() require 'jdsee.plugins.vimtex' end
-    }
+  --- Latex Integration ---
+  {
+    'lervag/vimtex',
+    config = function() require 'jdsee.plugins.vimtex' end
+  },
 
-    --- Typst language support ---
-    use {
-      'SeniorMars/typst.nvim',
-    }
+  --- Typst language support ---
+  {
+    'SeniorMars/typst.nvim',
+  },
 
-    --- Clojure Integration ---
-    use {
-      {
-        'Olical/conjure',
-        config = function() require 'jdsee.plugins.conjure' end
-      },
-      {
-        'clojure-vim/vim-jack-in',
-        requires = {
-          'tpope/vim-dispatch',
-          'radenling/vim-dispatch-neovim',
-        }
-      },
-      {
-        'tpope/vim-sexp-mappings-for-regular-people',
-        requires = 'guns/vim-sexp'
+  --- Clojure Integration ---
+  {
+    {
+      'Olical/conjure',
+      config = function() require 'jdsee.plugins.conjure' end
+    },
+    {
+      'clojure-vim/vim-jack-in',
+      dependencies = {
+        'tpope/vim-dispatch',
+        'radenling/vim-dispatch-neovim',
       }
+    },
+    {
+      'tpope/vim-sexp-mappings-for-regular-people',
+      dependencies = 'guns/vim-sexp'
     }
+  },
 
-    --- Testrunner ---
-    use {
-      'nvim-neotest/neotest',
-      requires = {
-        'nvim-lua/plenary.nvim',
-        'nvim-treesitter/nvim-treesitter',
-        'antoinemadec/FixCursorHold.nvim',
-        'vim-test/vim-test',
-        'nvim-neotest/neotest-python',
-        'nvim-neotest/neotest-plenary',
-        'nvim-neotest/neotest-vim-test',
-      },
-      config = function() require 'jdsee.plugins.neotest' end
+  --- Testrunner ---
+  {
+    'nvim-neotest/neotest',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-treesitter/nvim-treesitter',
+      'antoinemadec/FixCursorHold.nvim',
+      'vim-test/vim-test',
+      'nvim-neotest/neotest-python',
+      'nvim-neotest/neotest-plenary',
+      'nvim-neotest/neotest-vim-test',
+    },
+    config = function() require 'jdsee.plugins.neotest' end
+  },
+
+  {
+    'mfussenegger/nvim-dap',
+    config = function() require 'jdsee.plugins.nvim-dap' end,
+    dependencies = {
+      { 'nvim-telescope/telescope-dap.nvim' },
+      { 'theHamsta/nvim-dap-virtual-text' },
+      { 'rcarriga/nvim-dap-ui' },
+      { 'jbyuki/one-small-step-for-vimkind' },
+      { 'mfussenegger/nvim-dap-python' },
     }
-
-    use {
-      'mfussenegger/nvim-dap',
-      config = function() require 'jdsee.plugins.nvim-dap' end,
-      requires = {
-        { 'nvim-telescope/telescope-dap.nvim' },
-        { 'theHamsta/nvim-dap-virtual-text' },
-        { 'rcarriga/nvim-dap-ui' },
-        { 'jbyuki/one-small-step-for-vimkind' },
-        { 'mfussenegger/nvim-dap-python' },
-      }
-    }
-
-    -- Automatically set up configuration after cloning packer.nvim
-    if packer_bootstraped then
-      packer.sync()
-    end
-
-  end)
+  }
+}
