@@ -4,7 +4,7 @@
   home.packages = [ pkgs.swaylock-effects ];
   programs.swaylock = {
     settings = {
-      image = "$HOME/.config/wallpapers/monster-at-cafe.jpg";
+      image = "$HOME/.config/wallpapers/star-wars-broken-ship.jpg";
       fade-in = 0.1;
       clock = true;
       font = config.fontProfiles.regular.family;
