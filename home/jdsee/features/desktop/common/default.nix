@@ -13,6 +13,7 @@
     ./pulsemixer.nix
     ./qt.nix
     ./rbw.nix
+    ./typesetting.nix
   ];
 
   xdg.mimeApps.enable = true;
@@ -22,6 +23,6 @@
     signal-desktop
 
     # editing
-    texlive.combined.scheme-full
+    obsidian
   ];
 }
