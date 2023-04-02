@@ -2,6 +2,10 @@ local mason = require 'mason'
 local mason_lspconfig = require 'mason-lspconfig'
 local lspconfig = require 'lspconfig'
 
+local external_servers = {
+    'lua_ls',
+}
+
 mason.setup()
 mason_lspconfig.setup {
   ensure_installed = {
@@ -15,7 +19,6 @@ mason_lspconfig.setup {
     'html',
     'jsonls',
     'lemminx',
-    'lua_ls',
     'marksman',
     'pyright',
     'rnix',
@@ -45,10 +48,26 @@ require('mason-lspconfig').setup_handlers {
     require('lspconfig')[server_name].setup(lsp_defaults)
   end,
 
-  ['sumneko_lua'] = require('jdsee.lsp.sumneko_lua').setup,
   ['hls'] = require('jdsee.lsp.hls').setup,
   ['jsonls'] = require('jdsee.lsp.jsonls').setup,
 }
+
+-- TODO: Manage this with mason as soon as it's available
+lspconfig.typst_lsp.setup {
+  cmd = { "typst-lsp" },
+  filetypes = { "typst" },
+}
+
+for _, server in pairs(external_servers) do
+  local opts = lsp_defaults
+  local extend, ext_opts = pcall(require, 'jdsee.lsp' .. server)
+
+  if extend then
+    opts = vim.tbl_deep_extend('force', opts, ext_opts)
+  end
+
+  lspconfig[server].setup(lsp_defaults)
+end
 
 -- Autoformat on save
 vim.api.nvim_create_autocmd('BufWritePre', {

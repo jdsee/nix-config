@@ -15,6 +15,10 @@
     extraPackages = with pkgs; [ ];
   };
 
+  home.packages = with pkgs; [
+    sumneko-lua-language-server
+  ];
+
   xdg.configFile = {
     nvim = {
       source = ./config/nvim;

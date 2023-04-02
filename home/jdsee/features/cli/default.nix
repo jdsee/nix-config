@@ -17,6 +17,9 @@
     bottom
     htop-vim
 
+    # util
+    file
+
     fd # Better find
     httpie # Better curl
     wget # File download
