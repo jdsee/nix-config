@@ -111,6 +111,9 @@ in
   windowrule=dimaround,^(Rofi)$
   windowrule=center,^(Rofi)$
 
+  windowrule=opacity 0.85,^(foot)$
+  windowrule=opacity 0.85,^(org.pwmt.zathura)$
+
   # Mouse binding
   bindm=SUPER,mouse:272,movewindow
   bindm=SUPER,mouse:273,resizewindow
