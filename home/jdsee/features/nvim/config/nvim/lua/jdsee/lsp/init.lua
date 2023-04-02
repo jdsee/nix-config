@@ -2,10 +2,6 @@ local mason = require 'mason'
 local mason_lspconfig = require 'mason-lspconfig'
 local lspconfig = require 'lspconfig'
 
-local external_servers = {
-    'lua_ls',
-}
-
 mason.setup()
 mason_lspconfig.setup {
   ensure_installed = {
@@ -52,15 +48,14 @@ require('mason-lspconfig').setup_handlers {
   ['jsonls'] = require('jdsee.lsp.jsonls').setup,
 }
 
--- TODO: Manage this with mason as soon as it's available
-lspconfig.typst_lsp.setup {
-  cmd = { "typst-lsp" },
-  filetypes = { "typst" },
+local external_servers = {
+    'lua_ls',
+    'typst_lsp'
 }
 
 for _, server in pairs(external_servers) do
   local opts = lsp_defaults
-  local extend, ext_opts = pcall(require, 'jdsee.lsp' .. server)
+  local extend, ext_opts = pcall(require, 'jdsee.lsp.' .. server)
 
   if extend then
     opts = vim.tbl_deep_extend('force', opts, ext_opts)
