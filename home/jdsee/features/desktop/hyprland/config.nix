@@ -110,7 +110,6 @@ in
   windowrule=float,^(Rofi)$
   windowrule=dimaround,^(Rofi)$
   windowrule=center,^(Rofi)$
-  # windowrule=size 50% 70%,^(Rofi)$
 
   # Mouse binding
   bindm=SUPER,mouse:272,movewindow
@@ -120,8 +119,8 @@ in
   bind=SUPER,Return,exec,$TERMINAL
   bind=SUPER,m,exec,makoctl dismiss
   bind=SUPER,v,exec,$TERMINAL -e $EDITOR
+  bind=SUPERSHIFT,Return,exec,$BROWSER
   bind=SUPER,b,exec,$BROWSER
-  bind=SUPER,r,exec,$TERMINAL -e ${fileBrowser}
 
   bind=SUPER,space,exec,${launcher}
   bind=SUPER,escape,exec,${powermenu}
@@ -164,7 +163,7 @@ in
 
   # Window manager controls
   bind=SUPER,w,killactive
-  bind=SUPERSHIFT,e,exit
+  bind=SUPERSHIFTCONTROL,e,exit
 
   bind=SUPER,s,togglesplit
   bind=SUPER,f,fullscreen,1
@@ -234,16 +233,30 @@ in
   bind=SUPERALT,k,movecurrentworkspacetomonitor,u
   bind=SUPERALT,j,movecurrentworkspacetomonitor,d
 
-  bind=SUPER,u,togglespecialworkspace
-  bind=SUPERSHIFT,u,movetoworkspace,special
-  bind=SUPERCONTROL,u,movetoworkspace,previous
+  # >>> SPECIAL WORKSPACES
+  bind=SUPER,u,togglespecialworkspace,scratchpad
+  bind=SUPERSHIFT,u,movetoworkspace,special:scratchpad
+
+  # this drops a window from a special ws to the underlying one
+  bind=SUPERCONTROL,u,movetoworkspace,e+0
+  bind=SUPERCONTROL,u,togglespecialworkspace,explorer
+
+  bind=SUPERCONTROL,e,exec,$TERMINAL --title=explorer -e ${fileBrowser}
+  bind=SUPERCONTROL,e,exec,sleep 0.3 && hyprctl dispatch togglespecialworkspace explorer
+  bind=SUPERSHIFT,e,movetoworkspace,special:scratchpad
+  bind=SUPER,e,togglespecialworkspace,explorer
+  windowrule=workspace special:explorer,title:.*explorer
+
+  bind=SUPERCONTROL,return,movetoworkspace,e+0
+  bind=SUPERCONTROL,return,togglespecialworkspace,explorer
+  # <<<
 
   bind=SUPERSHIFTCONTROL,l,movetoworkspace,+1
   bind=SUPERSHIFTCONTROL,h,movetoworkspace,-1
 
   bind=SUPERCONTROL,l,workspace,+1
   bind=SUPERCONTROL,h,workspace,-1
-  bind=SUPERCONTROL,m,focusurgentorlast
+  bind=SUPER,n,focusurgentorlast
 
   # TODO
   bind=SUPERCONTROL,m,swapactiveworkspaces,Montior1 Montior2
