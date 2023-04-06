@@ -137,11 +137,12 @@ in
   bind=SUPERCONTROL,q,exec,swaylock
 
   # Screenshots
-  bind=,Print,exec,grimblast --notify copy output
-  bind=SHIFT,Print,exec,grimblast --notify copy active
-  bind=CONTROL,Print,exec,grimblast --notify copy screen
-  bind=SUPER,Print,exec,grimblast --notify copy window
-  bind=ALT,Print,exec,grimblast --notify copy area
+  bind=,Print,exec,flameshot gui -c
+  bind=SUPER,Print,exec,flameshot screen -c
+  bind=ALT,Print,exec,flameshot full -c
+  bind=CONTROL,Print,exec,flameshot gui -c
+  bind=SUPERCONTROL,Print,exec,flameshot screen -c
+  bind=ALTCONTROL,Print,exec,flameshot full -c
 
   # Keyboard controls (brightness, media, sound, etc)
   bind=,XF86MonBrightnessUp,exec,light -A 10

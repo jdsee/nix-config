@@ -19,7 +19,7 @@
   };
 
   home.packages = with pkgs; [
-    inputs.hyprwm-contrib.packages.${system}.grimblast
+    # inputs.hyprwm-contrib.packages.${system}.grimblast
     hyprpaper
     swaybg
     swayidle
