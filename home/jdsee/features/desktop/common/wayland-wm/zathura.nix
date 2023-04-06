@@ -6,6 +6,8 @@
       selection-clipboard = "clipboard";
       font = "${config.fontProfiles.regular.family} 12";
       recolor = true;
+      default-bg = "#0C0C0C";
+
       # default-bg = "#${colors.base00}";
       # default-fg = "#${colors.base01}";
       # statusbar-bg = "#${colors.base02}";
