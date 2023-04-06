@@ -10,7 +10,8 @@ let
   isLocked = "${pgrep} -x swaylock";
   actionLock = "${swaylock} --daemonize";
 
-  lockTime = 4 * 60; # TODO: configurable desktop (10 min)/laptop (4 min)
+  lockTimeInMinutes = 4;
+  lockTime = lockTimeInMinutes * 60;
 
   mkEvent = time: start: resume: ''
     timeout ${toString (lockTime + time)} '${start}' ${lib.optionalString (resume != null) "resume '${resume}'"}
