@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./atuin.nix
     ./babashka.nix
     ./bat.nix
     ./direnv.nix
