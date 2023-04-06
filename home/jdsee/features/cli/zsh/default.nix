@@ -67,7 +67,7 @@
         vi $1
       }
 
-      export PATH="$PATH:$HOME/bin:$HOME/.config/rofi/scripts";
+      export PATH="$PATH:$HOME/bin:$HOME/.config/rofi/scripts:$HOME/.cargo/bin";
 
       # Script to open man-page in tmux popup
       source ~/.config/zsh/popman.sh
