@@ -1,11 +1,14 @@
 { inputs, outputs, lib, config, pkgs, ... }:
-{
+let
+  user = "jdsee";
+in {
   imports = [
     ./hardware-configuration.nix
 
     ../common/global
     ../common/users/jdsee
 
+    ../common/opt/virtualbox.nix
     ../common/opt/docker.nix
     ../common/opt/pipewire.nix
     ../common/opt/polkit.nix
@@ -13,7 +16,7 @@
     ../common/opt/udisks.nix
   ];
 
-  services.greetd.settings.default_session.user = "jdsee";
+  services.greetd.settings.default_session.user = user;
 
   programs.zsh.enable = true;
 
