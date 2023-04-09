@@ -7,12 +7,20 @@
 
   modifications = final: prev: {
     # Activate experimential features in waybar
-    waybar-experimental = prev.waybar.overrideAttrs (oldAttrs: {
-      mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+    waybar-experimental = prev.waybar.overrideAttrs (old: {
+      mesonFlags = old.mesonFlags ++ [ "-Dexperimental=true" ];
+
+      # Support for persistent workspaces - TODO: remove when PR merged
+      src = final.fetchFromGitHub {
+          owner = "MonstrousOgre";
+          repo = "Waybar_hyprland_persistent";
+          rev = "master";
+          sha256 = "sha256-rD2K7hy3o7fDwC9usyhNJh4iasgGev8PpAbCUaiAtRU=";
+        };
     });
 
-    ranger-sixel = prev.ranger.overrideAttrs (oldAttrs: {
-      patches = (oldAttrs.patches or [ ]) ++ [
+    ranger-sixel = prev.ranger.overrideAttrs (old: {
+      patches = (old.patches or [ ]) ++ [
         (prev.fetchpatch {
           url = "https://github.com/3ap/ranger/commit/ef9ec1f0e0786e2935c233e4321684514c2c6553.patch";
           sha256 = "sha256-MJbIBuFeOvYnF6KntWJ2ODQ4KAcbnFEQ1axt1iQGkWY=";
