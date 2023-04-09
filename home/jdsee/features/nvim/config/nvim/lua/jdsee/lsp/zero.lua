@@ -12,7 +12,7 @@ local lsp = require('lsp-zero').preset {
     { name = 'luasnip' },
     { name = 'treesitter' },
     { name = 'conjure' },
-    { name = 'buffer', keyword_length = 5 },
+    { name = 'buffer',    keyword_length = 5 },
   }
 }
 
@@ -49,6 +49,23 @@ local rt = require 'rust-tools'
 rt.setup {
   server = {
     on_attach = config.on_attach,
+  },
+  assist = {
+    importEnforceGranularity = true,
+    importPrefix = 'crate',
+  },
+  cargo = {
+    allFeatures = true,
+  },
+  checkOnSave = {
+    command = 'clippy',
+  },
+  inlayHints = { locationLinks = false },
+  diagnostics = {
+    enable = true,
+    experimental = {
+      enable = true,
+    },
   },
 }
 
