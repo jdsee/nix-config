@@ -21,6 +21,8 @@
 
     # util
     file
+    lsof
+    networkmanagerapplet
 
     fd # Better find
     httpie # Better curl
