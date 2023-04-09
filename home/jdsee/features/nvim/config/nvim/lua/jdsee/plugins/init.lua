@@ -212,6 +212,12 @@ require('lazy').setup {
     },
   },
 
+  --- Rust LSP ---
+  {
+    'simrat39/rust-tools.nvim',
+    config = function() require 'jdsee.lsp.rust-tools' end,
+  },
+
   --- Java LSP ---
   { 'mfussenegger/nvim-jdtls' },
 

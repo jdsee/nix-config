@@ -5,19 +5,18 @@ local lsp = require('lsp-zero').preset {
   set_lsp_keymaps = true,
   manage_nvim_cmp = true,
   suggest_lsp_servers = true,
-  -- cmp_capabilities = {
-  --   { name = 'nvim_lua' },
-  --   { name = 'nvim_lsp' },
-  --   { name = 'path' },
-  --   { name = 'luasnip' },
-  --   { name = 'treesitter' },
-  --   { name = 'conjure' },
-  --   { name = 'buffer', keyword_length = 5 },
-  -- }
+  cmp_capabilities = {
+    { name = 'nvim_lua' },
+    { name = 'nvim_lsp' },
+    { name = 'path' },
+    { name = 'luasnip' },
+    { name = 'treesitter' },
+    { name = 'conjure' },
+    { name = 'buffer', keyword_length = 5 },
+  }
 }
 
 lsp.nvim_workspace()
-
 lsp.ensure_installed {
   'bashls',
   'clangd',
@@ -29,12 +28,28 @@ lsp.ensure_installed {
   'jsonls',
   'lemminx',
   'marksman',
+  'lua_ls',
+  'rnix',
   'pyright',
   'texlab',
   'yamlls',
 }
 
-lsp.on_attach(require('jdsee.lsp.config').on_attach)
+local config = require('jdsee.lsp.config')
+
+lsp.on_attach(config.on_attach)
+lsp.skip_server_setup {
+  'rust_analyzer'
+}
 
 lsp.setup()
 
+local rt = require 'rust-tools'
+
+rt.setup {
+  server = {
+    on_attach = config.on_attach,
+  },
+}
+
+require 'jdsee.lsp' -- Configure manually managed lsp servers

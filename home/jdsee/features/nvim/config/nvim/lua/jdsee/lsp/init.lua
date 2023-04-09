@@ -1,27 +1,4 @@
-local mason = require 'mason'
-local mason_lspconfig = require 'mason-lspconfig'
 local lspconfig = require 'lspconfig'
-
-mason.setup()
-mason_lspconfig.setup {
-  ensure_installed = {
-    'angularls',
-    'bashls',
-    'clangd',
-    'clojure_lsp',
-    'cssls',
-    'dockerls',
-    'eslint',
-    'html',
-    'jsonls',
-    'lemminx',
-    'marksman',
-    'pyright',
-    'rnix',
-    'texlab',
-    'yamlls',
-  },
-}
 
 local lsp_defaults = {
   flags = {
@@ -38,18 +15,7 @@ lspconfig.util.default_config = vim.tbl_deep_extend(
   lspconfig.util.default_config,
   lsp_defaults)
 
-require('mason-lspconfig').setup_handlers {
-  -- default setup
-  function(server_name)
-    require('lspconfig')[server_name].setup(lsp_defaults)
-  end,
-
-  ['hls'] = require('jdsee.lsp.hls').setup,
-  ['jsonls'] = require('jdsee.lsp.jsonls').setup,
-}
-
 local external_servers = {
-    'lua_ls',
     'typst_lsp'
 }
 
