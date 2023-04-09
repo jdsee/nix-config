@@ -7,6 +7,7 @@ in
 ''
   monitor=eDP-1, preferred, auto, 1
   monitor=DP-2, preferred, auto, 1, # mirror, eDP-1
+  monitor=HDMI-A-1, preferred, auto, 1,
   monitor=,preferred,auto,1
 
   # Disable/Enable builtin screen when lid closed/opened
