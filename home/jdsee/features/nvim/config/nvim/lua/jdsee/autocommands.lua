@@ -38,6 +38,22 @@ vim.api.nvim_create_autocmd(
   command = 'silent write',
 })
 
+-- Set insert mappings for German umlauts in text files
+vim.api.nvim_create_autocmd(
+  { 'BufEnter' }, {
+  group = 'OpenReadFiles',
+  pattern = { '*.md', '*.tex', '*.typ', '*.adoc' },
+  callback = function()
+    vim.keymap.set('i', 'Ae', 'Ä')
+    vim.keymap.set('i', 'Oe', 'Ö')
+    vim.keymap.set('i', 'Ue', 'Ü')
+    vim.keymap.set('i', 'ae', 'ä')
+    vim.keymap.set('i', 'oe', 'ö')
+    vim.keymap.set('i', 'ue', 'ü')
+    vim.keymap.set('i', 'sz', 'ß')
+  end,
+})
+
 -- Set mappings only for quickfix windows
 -- TODO: make this work
 -- vim.cmd [[
