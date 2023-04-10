@@ -49,6 +49,7 @@
       '';
     };
     "hypr/disable_internal_monitor.sh" = {
+      executable = true;
       text = ''
         #! /usr/bin/env bash
         if (( "$(hyprctl monitors -j | jq length)" > 1 )) ; then
