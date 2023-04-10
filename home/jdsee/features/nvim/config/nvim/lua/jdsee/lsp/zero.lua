@@ -58,6 +58,7 @@ rt.setup {
     allFeatures = true,
   },
   checkOnSave = {
+    allFeatures = true,
     command = 'clippy',
   },
   inlayHints = { locationLinks = false },
