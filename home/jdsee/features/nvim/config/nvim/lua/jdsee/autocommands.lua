@@ -23,14 +23,6 @@ vim.cmd [[
   augroup END
 ]]
 
--- Set wrap for text files
-vim.cmd [[
-  augroup OpenReadFiles
-    au!
-    au BufEnter *.md,*.tex,*.typ,*.adoc setlocal wrap spell
-  augroup END
-]]
-
 -- TODO: Try to delay saving the file or otherwise typst recompiling to prevent zathura from crashing
 vim.api.nvim_create_autocmd(
   { 'InsertLeave', --[['TextChanged', 'TextChangedI']] }, {
@@ -38,20 +30,70 @@ vim.api.nvim_create_autocmd(
   command = 'silent write',
 })
 
+local open_read_files_group_id = vim.api.nvim_create_augroup('OpenReadFiles', { clear = true })
+local text_filetypes = { '*.md', '*.tex', '*.typ', '*.adoc' }
+local function set_umlaut_mappings(delete)
+  local mappings = {
+    Ae = 'Ä',
+    Oe = 'Ö',
+    Ue = 'Ü',
+    ae = 'ä',
+    oe = 'ö',
+    ue = 'ü',
+    sz = 'ß',
+  }
+  for lhs, rhs in pairs(mappings) do
+    if (not delete) then
+      vim.keymap.set('i', lhs, rhs)
+    else
+      pcall(function() vim.keymap.del('i', lhs) end)
+    end
+  end
+end
+
+local function contains_spelllang(term)
+    for _, lang in ipairs(vim.opt_local.spelllang:get()) do
+      if (string.match(lang, '^'..term)) then return true end
+    end
+    return false
+end
+
 -- Set insert mappings for German umlauts in text files
 vim.api.nvim_create_autocmd(
   { 'BufEnter' }, {
-  group = 'OpenReadFiles',
-  pattern = { '*.md', '*.tex', '*.typ', '*.adoc' },
+  group = open_read_files_group_id,
+  pattern = text_filetypes,
   callback = function()
-    vim.keymap.set('i', 'Ae', 'Ä')
-    vim.keymap.set('i', 'Oe', 'Ö')
-    vim.keymap.set('i', 'Ue', 'Ü')
-    vim.keymap.set('i', 'ae', 'ä')
-    vim.keymap.set('i', 'oe', 'ö')
-    vim.keymap.set('i', 'ue', 'ü')
-    vim.keymap.set('i', 'sz', 'ß')
+    vim.o.spell = true
+    vim.o.wrap = true
+    if (contains_spelllang('de')) then
+      set_umlaut_mappings()
+    end
   end,
+})
+
+-- Activate/deactivate umlaut mappings if spelllang switched to german
+vim.api.nvim_create_autocmd(
+  { 'OptionSet' }, {
+  group = open_read_files_group_id,
+  pattern = { 'spelllang' },
+  callback = function()
+    if (contains_spelllang('de')) then
+      vim.api.nvim_exec_autocmds(
+        { 'BufEnter' },
+        { group = open_read_files_group_id })
+    else
+      set_umlaut_mappings(true)
+    end
+  end,
+})
+
+
+-- Set rustfmt as format expression in rust files. See ':help gq'
+vim.api.nvim_create_autocmd(
+  { 'BufEnter' }, {
+  pattern  = { '*.rs' },
+  command = 'set fp=rustfmt',
 })
 
 -- Set mappings only for quickfix windows
