@@ -31,7 +31,7 @@ vim.api.nvim_create_autocmd(
 })
 
 local open_read_files_group_id = vim.api.nvim_create_augroup('OpenReadFiles', { clear = true })
-local text_filetypes = { '*.md', '*.tex', '*.typ', '*.adoc' }
+local text_filetypes = { '*.md', '*.adoc', '*.tex', '*.txt', '*.typ' }
 local function set_umlaut_mappings(delete)
   local mappings = {
     Ae = 'Ä',
