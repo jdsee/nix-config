@@ -12,7 +12,8 @@ in
 
   # Disable/Enable builtin screen when lid closed/opened
   bindl = , switch:off:Lid Switch, exec, hyprctl keyword monitor "eDP-1, preferred, auto, 1"
-  bindl = , switch:on:Lid Switch, exec, hyprctl keyword monitor "eDP-1, disable"
+  bindl = , switch:on:Lid Switch, exec, ~/.config/hypr/disable_internal_monitor.sh
+  bindl = , switch:on:Lid Switch, exec, hyprpaper # Restart hyprpaper since it crashes when disabling eDP-1
 
   wsbind=1,DP-2
   wsbind=2,DP-2
@@ -102,10 +103,18 @@ in
   }
 
   # Startup
-  exec-once=waybar
-  exec-once=mako
-  exec-once=swayidle -w
-  exec-once=hyprpaper
+  exec-once=waybar && waybar
+  exec-once=mako && mako
+  exec-once=swayidle && swayidle -w
+  exec-once=hyprpaper && hyprpaper
+  exec-once=blueman-applet && blueman-applet
+  exec-once=nm-applet && nm-applet --indicator
+
+  # Spawn default apps
+  exec-once = [workspace special:scratchpad silent] signal-desktop && signal-desktop
+  exec-once = command -v foot && foot
+  exec-once = command -v firefox && firefox
+  exec-once = command -v thunderbird && thunderbird
 
   # Window rules
   windowrule=float,^(Rofi)$

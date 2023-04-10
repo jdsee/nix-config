@@ -48,5 +48,13 @@
         wallpaper = DP-2,~/.config/wallpapers/star-wars-broken-ship.jpg
       '';
     };
+    "hypr/disable_internal_monitor.sh" = {
+      text = ''
+        #! /usr/bin/env bash
+        if (( "$(hyprctl monitors -j | jq length)" > 1 )) ; then
+          hyprctl keyword monitor "eDP-1, disable"
+        fi
+      '';
+    };
   };
 }
