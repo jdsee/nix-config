@@ -112,7 +112,7 @@ in
 
   # Spawn default apps
   exec-once = [workspace special:scratchpad silent] signal-desktop && signal-desktop
-  exec-once = command -v foot && foot -e tmuxinator me
+  exec-once = command -v foot && foot -e tmuxinator me --title main-term
   exec-once = command -v firefox && firefox
   exec-once = command -v thunderbird && thunderbird
 
@@ -127,7 +127,7 @@ in
   windowrulev2 = float, class:^(blueman-manager)$
   windowrulev2 = float, class:^(nm-connection-editor)$
 
-  windowrulev2 = workspace 2, class:^(foot)$
+  windowrulev2 = workspace 2, title:.*main-term
   windowrulev2 = workspace 3 silent, class:^(firefox)$
   windowrulev2 = workspace 4 silent, class:^(Signal)$
   windowrulev2 = workspace 5 silent, class:^(thunderbird)$
