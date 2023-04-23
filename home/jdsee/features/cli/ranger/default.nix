@@ -1,6 +1,6 @@
 { pkgs, ... }: {
   home.packages = with pkgs; [
-    ranger-sixel
+    ranger
     imagemagick # expected by sixel patch
   ];
 

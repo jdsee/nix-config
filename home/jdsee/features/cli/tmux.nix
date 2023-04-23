@@ -6,6 +6,7 @@
   };
   programs.tmux = {
     enable = true;
+    package = pkgs.tmux-31c;
     tmuxinator.enable = true;
     keyMode = "vi";
     shortcut = "f";
@@ -27,6 +28,10 @@
       set-window-option -g pane-base-index 1
 
       setw -g mouse on
+
+      set -s extended-keys always
+      set -as terminal-features 'xterm*:extkeys'
+      set -g default-terminal tmux-256color
 
       # Reload tmux.conf
       unbind r

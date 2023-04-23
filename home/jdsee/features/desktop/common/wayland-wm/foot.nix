@@ -17,6 +17,10 @@
       mouse = {
         hide-when-typing = "yes";
       };
+
+      text-bindings = {
+        "\\x1b[105;5u" = "Control+i";
+      };
     };
   };
 }
