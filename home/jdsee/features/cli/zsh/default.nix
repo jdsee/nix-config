@@ -107,6 +107,8 @@
       clip = "xclip -sel clip";
 
       mux = "tmuxinator";
+
+      htwconnect = "rbw get account.htw-berlin.de | sudo openconnect --protocol anyconnect --passwd-on-stdin --user=s0566845@htw-berlin.de --authgroup=HTW-SSL-VPN-Full https://vpncl.htw-berlin.de";
     };
   };
 

@@ -4,9 +4,9 @@
   fontProfiles = {
     enable = true;
     monospace = {
-      # TODO: Use Hack
-      family = "FiraCode Nerd Font";
-      package = pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; };
+      family = "Hack Nerd Font";
+      # family = "FiraCode Nerd Font";
+      package = pkgs.nerdfonts.override { fonts = [ "Hack" ]; };
     };
     regular = {
       family = "Fira Sans";

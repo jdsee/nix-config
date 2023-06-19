@@ -12,7 +12,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland.url = "github:hyprwm/hyprland/v0.21.0beta";
+    hyprland.url = "github:hyprwm/hyprland/v0.21.0beta"; # TODO: update
     hyprwm-contrib.url = "github:hyprwm/contrib";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
 
@@ -22,7 +22,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, nix-ld, hyprland, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, nix-ld, ... }@inputs:
     let
       inherit (self) outputs;
       forEachSystem = nixpkgs.lib.genAttrs [ "x86_64-linux" "aarch64-linux" ];
@@ -45,7 +45,6 @@
           specialArgs = { inherit inputs outputs; };
           modules = [
             ./hosts/cogitare
-            hyprland.nixosModules.default
             nix-ld.nixosModules.nix-ld
           ];
         };

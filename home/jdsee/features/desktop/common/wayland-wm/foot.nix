@@ -3,6 +3,7 @@
   home.sessionVariables = {
     TERMINAL = "foot";
   };
+ 
   programs.foot = {
     enable = true;
     settings = {
@@ -10,7 +11,7 @@
         title = "Foot";
         term = "foot";
 
-        # font = "Fira Code:size=12";
+        font = "Hack Nerd Font Mono:size=10";
         dpi-aware = "yes";
       };
 

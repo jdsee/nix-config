@@ -32,5 +32,9 @@
       };
     });
 
+    # jetbrains.idea-ultimate-2023 = prev.jetbrains.idea-ultimate.overrideAttrs (old: rec {
+    #     version = "";
+    #   });
+
   };
 }

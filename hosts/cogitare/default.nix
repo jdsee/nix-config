@@ -1,7 +1,5 @@
 { inputs, outputs, lib, config, pkgs, ... }:
-let
-  user = "jdsee";
-in {
+{
   imports = [
     ./hardware-configuration.nix
 
@@ -16,7 +14,10 @@ in {
     ../common/opt/udisks.nix
   ];
 
-  services.greetd.settings.default_session.user = user;
+  services.greetd = {
+    enable = false; # TODO: Fix this
+    settings.default_session.user = "jdsee";
+  };
 
   programs.zsh.enable = true;
 
@@ -41,6 +42,8 @@ in {
   };
 
   systemd.services = {
+    NetworkManager-wait-online.enable = false;
+    systemd-udevd.restartIfChanged = false;
     keyd = {
       enable = false;
       description = "key remapping daemon";

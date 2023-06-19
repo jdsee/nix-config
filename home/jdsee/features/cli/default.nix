@@ -26,6 +26,7 @@
 
     fd # Better find
     httpie # Better curl
+    hyperfine # Micro benchmark
     wget # File download
     jq # JSON pretty printer and manipulator
     ncdu # TUI disk usage
@@ -39,6 +40,9 @@
 
     # tui
     lazydocker
+
+    # vpn
+    openconnect
   ];
 
   home.sessionVariables = {

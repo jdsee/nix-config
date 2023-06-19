@@ -1,4 +1,4 @@
-{ ... }: 
+{ ... }:
 let
   launcher = "$HOME/.config/rofi/scripts/launcher_t4";
   powermenu = "$HOME/.config/rofi/scripts/powermenu_t1";
@@ -6,8 +6,9 @@ let
 in
 ''
   monitor=eDP-1, preferred, auto, 1
-  monitor=DP-2, preferred, auto, 1, # mirror, eDP-1
-  monitor=HDMI-A-1, preferred, auto, 1,
+  monitor=DP-1, preferred, auto, 1, # mirror, eDP-1
+  monitor=HDMI-A-1, preferred, 0x0, 1
+  monitor=HDMI-A-1, transform, 1
   monitor=,preferred,auto,1
 
   # Disable/Enable builtin screen when lid closed/opened
@@ -15,17 +16,17 @@ in
   bindl = , switch:on:Lid Switch, exec, ~/.config/hypr/disable_internal_monitor.sh
   bindl = , switch:on:Lid Switch, exec, hyprpaper # Restart hyprpaper since it crashes when disabling eDP-1
 
-  wsbind=1,DP-2
-  wsbind=2,DP-2
-  wsbind=3,DP-2
-  wsbind=4,DP-2
-  wsbind=5,DP-2
+  wsbind=1,DP-1
+  wsbind=2,DP-1
+  wsbind=3,DP-1
+  wsbind=4,DP-1
+  wsbind=5,DP-1
 
-  wsbind=6,eDP-1
-  wsbind=7,eDP-1
-  wsbind=8,eDP-1
-  wsbind=9,eDP-1
-  wsbind=0,eDP-1
+  wsbind=6,HDMI-A-1
+  wsbind=7,HDMI-A-1
+  wsbind=8,HDMI-A-1
+  wsbind=9,HDMI-A-1
+  wsbind=0,HDMI-A-1
 
   general {
     gaps_in=2
@@ -127,10 +128,16 @@ in
   windowrulev2 = float, class:^(blueman-manager)$
   windowrulev2 = float, class:^(nm-connection-editor)$
 
-  windowrulev2 = workspace 2, title:.*main-term
+  windowrulev2 = workspace 2,        class:^(Foot)$
   windowrulev2 = workspace 3 silent, class:^(firefox)$
   windowrulev2 = workspace 4 silent, class:^(Signal)$
   windowrulev2 = workspace 5 silent, class:^(thunderbird)$
+
+  # This is needed for Zotero to show dropdown menus properly
+  windowrulev2 = float,class:^(Zotero*)
+  #windowrulev2 = forceinput,class:^(Zotero*)
+  #windowrulev2 = nofocus,class:^(Zotero*)
+  windowrulev2 = windowdance,class:^(Zotero*)
 
   # Mouse binding
   bindm=SUPER,mouse:272,movewindow
@@ -138,7 +145,7 @@ in
 
   # Program bindings
   bind=SUPER,Return,exec,$TERMINAL
-  bind=SUPER,m,exec,makoctl dismiss
+  bind=SUPER,d,exec,makoctl dismiss
   bind=SUPER,v,exec,$TERMINAL -e $EDITOR
   bind=SUPERSHIFT,Return,exec,$BROWSER
   bind=SUPER,b,exec,$BROWSER
@@ -156,7 +163,7 @@ in
 
   # Screenshots
   bind=,Print,exec,flameshot gui -c
-  bind=SUPER,Print,exec,flameshot screen -c
+  bind=SUPER SHIFT,s ,exec ,flameshot screen -c
   bind=ALT,Print,exec,flameshot full -c
   bind=CONTROL,Print,exec,flameshot gui -c
   bind=SUPERCONTROL,Print,exec,flameshot screen -c
@@ -186,6 +193,7 @@ in
   # Window manager controls
   bind=SUPER,w,killactive
   bind=SUPERSHIFTCONTROL,e,exit
+  bind=SUPERSHIFT,c,centerwindow,
 
   bind=SUPER,s,togglesplit
   bind=SUPER,f,fullscreen,1
@@ -228,6 +236,11 @@ in
   # bind=SUPERCONTROL,l,focusmonitor,r
   # bind=SUPERCONTROL,k,focusmonitor,u
   # bind=SUPERCONTROL,j,focusmonitor,d
+
+  bind=SUPER, m, focusmonitor, +1
+
+  bind=SUPER ALT, h, focusmonitor, l
+  bind=SUPER ALT, l, focusmonitor, r
 
   bind=SUPERCONTROL,1,focusmonitor,DP-1
   bind=SUPERCONTROL,2,focusmonitor,DP-2

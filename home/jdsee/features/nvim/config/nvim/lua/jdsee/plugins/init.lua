@@ -5,12 +5,27 @@ require('lazy').setup {
   -- - 'SmiteshP/nvim-navbuddy'
   -- - 'nvim-pack/nvim-spectre'
 
+  dev = {
+    path = '~/my/code/nvim-plugins/',
+    fallback = false,
+  },
+
+  -- Local plugins
+  {
+    -- 'jdsee/umlauts.nvim'
+    name = 'Umlauts.nvim',
+    dir = '/home/jdsee/my/code/nvim-plugins/umlauts.nvim',
+    config = function() require('umlauts').setup() end,
+    dev = true,
+  },
+
   'tpope/vim-repeat', -- repeat plugin commands with .
   'tpope/vim-surround', -- work on surrounding characters like [({"'...
   'wellle/targets.vim', -- inner style text objects
   'dhruvasagar/vim-table-mode', -- markdown table support
   'ThePrimeagen/vim-be-good', -- game to practice vim movements
   'xiyaowong/transparent.nvim', -- Simple command to make bg transparent
+  'folke/neodev.nvim', -- Supprt for nvim lua
 
   -- Git Integration ---
   {
@@ -175,6 +190,7 @@ require('lazy').setup {
       'nvim-lua/popup.nvim',
       'nvim-telescope/telescope-ui-select.nvim',
       'nvim-telescope/telescope-frecency.nvim',
+      'nvim-telescope/telescope-bibtex.nvim',
       'tami5/sqlite.lua',
       'AckslD/nvim-neoclip.lua',
     },
@@ -235,8 +251,13 @@ require('lazy').setup {
 
   --- Typst language support ---
   {
-    'SeniorMars/typst.nvim',
+    'kaarmu/typst.vim',
+    ft = 'typst',
+    lazy = false,
   },
+  -- {
+  --   'SeniorMars/typst.nvim',
+  -- },
 
   --- Clojure Integration ---
   {

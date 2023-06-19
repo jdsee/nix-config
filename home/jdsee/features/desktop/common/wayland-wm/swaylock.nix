@@ -3,6 +3,7 @@
 {
   home.packages = [ pkgs.swaylock-effects ];
   programs.swaylock = {
+    # package = pkgs.swaylock-effects;
     settings = {
       image = "$HOME/.config/wallpapers/star-wars-broken-ship.jpg";
       fade-in = 0.1;

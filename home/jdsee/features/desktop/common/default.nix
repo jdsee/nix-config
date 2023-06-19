@@ -14,6 +14,7 @@
     ./qt.nix
     ./rbw.nix
     ./typesetting.nix
+    ./xcape.nix
   ];
 
   xdg.mimeApps.enable = true;
@@ -22,7 +23,8 @@
     thunderbird
     signal-desktop
 
-    # editing
+    # research
     obsidian
+    zotero
   ];
 }

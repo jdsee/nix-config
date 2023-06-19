@@ -30,64 +30,15 @@ vim.api.nvim_create_autocmd(
   command = 'silent write',
 })
 
-local open_read_files_group_id = vim.api.nvim_create_augroup('OpenReadFiles', { clear = true })
 local text_filetypes = { '*.md', '*.adoc', '*.tex', '*.txt', '*.typ' }
-local function set_umlaut_mappings(delete)
-  local mappings = {
-    Ae = 'Ä',
-    Oe = 'Ö',
-    Ue = 'Ü',
-    ae = 'ä',
-    oe = 'ö',
-    ue = 'ü',
-    sz = 'ß',
-  }
-  for lhs, rhs in pairs(mappings) do
-    if (not delete) then
-      vim.keymap.set('i', lhs, rhs)
-    else
-      pcall(function() vim.keymap.del('i', lhs) end)
-    end
-  end
-end
-
-local function contains_spelllang(term)
-    for _, lang in ipairs(vim.opt_local.spelllang:get()) do
-      if (string.match(lang, '^'..term)) then return true end
-    end
-    return false
-end
 
 -- Set insert mappings for German umlauts in text files
 vim.api.nvim_create_autocmd(
   { 'BufEnter' }, {
-  group = open_read_files_group_id,
+  group = vim.api.nvim_create_augroup('TextFileSettings', { clear = true }),
   pattern = text_filetypes,
-  callback = function()
-    vim.o.spell = true
-    vim.o.wrap = true
-    if (contains_spelllang('de')) then
-      set_umlaut_mappings()
-    end
-  end,
+  command = "setlocal spell wrap",
 })
-
--- Activate/deactivate umlaut mappings if spelllang switched to german
-vim.api.nvim_create_autocmd(
-  { 'OptionSet' }, {
-  group = open_read_files_group_id,
-  pattern = { 'spelllang' },
-  callback = function()
-    if (contains_spelllang('de')) then
-      vim.api.nvim_exec_autocmds(
-        { 'BufEnter' },
-        { group = open_read_files_group_id })
-    else
-      set_umlaut_mappings(true)
-    end
-  end,
-})
-
 
 -- Set rustfmt as format expression in rust files. See ':help gq'
 vim.api.nvim_create_autocmd(
@@ -109,13 +60,6 @@ vim.api.nvim_create_autocmd(
 vim.cmd [[
   au BufNewFile,BufRead /dev/shm/gopass.* setlocal noswapfile nobackup noundofile
 ]]
-
--- Call PackerSync when plugins changed
-vim.api.nvim_create_autocmd(
-  'BufWritePost', {
-  pattern = 'lua/plugins.lua',
-  command = 'PackerSync',
-})
 
 -- Make macro indicator visible with cmdheight=0
 vim.api.nvim_create_autocmd(

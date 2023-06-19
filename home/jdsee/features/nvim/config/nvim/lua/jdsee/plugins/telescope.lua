@@ -36,7 +36,17 @@ telescope.setup {
           end,
         },
       }
-    }
+    },
+    bibtex = {
+      context = true,
+      context_fallback = false,
+      custom_formats = {
+        { id = 'typst', cite_marker = '@%s', pattern = '*.typ' },
+      },
+      global_files = {
+        '~/.local/share/zotero/biblatex/bib/refs.bib',
+      },
+    },
   }
 }
 
@@ -44,6 +54,7 @@ telescope.load_extension 'fzf'
 telescope.load_extension 'harpoon'
 telescope.load_extension 'ui-select'
 telescope.load_extension 'zoxide'
+telescope.load_extension 'bibtex'
 
 M = {}
 
@@ -110,6 +121,7 @@ vim.keymap.set('n', '<Leader>/', M.current_buffer_fuzzy_find) -- grep current bu
 vim.keymap.set('n', '<Leader>:', builtin.command_history) -- search command history
 vim.keymap.set('n', '<Leader>fd', builtin.diagnostics) -- search errors from lsp
 vim.keymap.set('n', '<Leader>a', M.lsp_code_actions) -- search code actions in telescope
+vim.keymap.set('n', '<Leader>fl', telescope.extensions.bibtex.bibtex) -- search errors from lsp
 vim.keymap.set('n', '<Leader><Tab>', M.buffers) -- search buffers
 vim.keymap.set('n', 'z=', M.spell_suggestions) -- search spell suggestions
 vim.keymap.set('n', 'gr', M.lsp_find_references) -- find references with lsp
