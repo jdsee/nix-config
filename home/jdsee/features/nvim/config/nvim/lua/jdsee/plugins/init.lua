@@ -26,6 +26,7 @@ require('lazy').setup {
   'ThePrimeagen/vim-be-good', -- game to practice vim movements
   'xiyaowong/transparent.nvim', -- Simple command to make bg transparent
   'folke/neodev.nvim', -- Supprt for nvim lua
+  'chentoast/marks.nvim', -- View marks in sign column
 
   -- Git Integration ---
   {

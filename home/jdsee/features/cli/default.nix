@@ -32,6 +32,7 @@
     ncdu # TUI disk usage
     ripgrep # Better grep
     colordiff # Colored diff
+    restic # Backup tool
 
     # compression
     p7zip

@@ -16,6 +16,11 @@ vim.keymap.set('x', 'K', ":m '<-2<CR>gv=gv") -- Move visual selection up
 -- Files
 vim.keymap.set('n', 'gf', ':edit <cfile><cr>') -- open non existing files with gf
 
+-- Insert
+vim.keymap.set('i', '<S-CR>', '<C-O>o') -- Jump to new line in insert mode
+vim.keymap.set('i', '<S-C-CR>', '<C-O>O') -- Jump to new line above in insert mode
+
+
 -- Windows / Tabs
 vim.keymap.set('n', '<M-K>', '<C-W>k') -- go window up
 vim.keymap.set('n', '<M-J>', '<C-W>j') -- go window down

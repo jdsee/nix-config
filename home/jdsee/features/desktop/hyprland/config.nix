@@ -11,27 +11,72 @@ in
   monitor=HDMI-A-1, transform, 1
   monitor=,preferred,auto,1
 
+  # STARTUP
+  exec-once=waybar && waybar
+  exec-once=mako && mako
+  exec-once=swayidle && swayidle -w
+  exec-once=hyprpaper && hyprpaper
+  exec-once=blueman-applet && blueman-applet
+  exec-once=nm-applet && nm-applet --indicator
+
+  # DEFAULT APPS
+  exec-once = command -v signal-desktop && signal-desktop
+  exec-once = command -v foot && foot --app-id main-term -e tmuxinator me
+  exec-once = command -v firefox && firefox
+  exec-once = command -v thunderbird && thunderbird
+
+  # WORKSPACE RULES
+
+  workspace=1,monitor:DP-1
+  workspace=2,monitor:DP-1
+  workspace=3,monitor:DP-1
+  workspace=4,monitor:DP-1
+  workspace=5,monitor:DP-1
+  workspace=6,monitor:HDMI-A-1
+  workspace=7,monitor:HDMI-A-1
+  workspace=8,monitor:HDMI-A-1
+  workspace=9,monitor:HDMI-A-1
+  workspace=0,monitor:HDMI-A-1
+
+  # WINDOW RULES
+
+  windowrule=float,^(Rofi)$
+  windowrule=dimaround,^(Rofi)$
+  windowrule=center,^(Rofi)$
+
+  windowrule=opacity 0.85,^(foot|main-term)$
+  windowrule=opacity 0.85,^(org.pwmt.zathura)$
+
+  windowrulev2 = float, title:^Bluetooth Devices$
+  windowrulev2 = size 50% 70%, title:^Bluetooth Devices$
+  windowrulev2 = center, title:^Bluetooth Devices$
+
+  windowrulev2 = float, class:^(nm-connection-editor)$
+
+  windowrulev2 = workspace 3 silent, class:^(firefox)$
+  windowrulev2 = workspace 4 silent, class:^(Signal)$
+  windowrulev2 = workspace 5 silent, class:^(thunderbird)$
+  windowrulev2 = workspace 2,        class:^(main-term)$
+
+  # This is needed for Zotero to show dropdown menus properly
+  windowrulev2 = float,class:^(Zotero*)
+  windowrulev2 = windowdance,class:^(Zotero*)
+  #windowrulev2 = forceinput,class:^(Zotero*)
+  #windowrulev2 = nofocus,class:^(Zotero*)
+
+
   # Disable/Enable builtin screen when lid closed/opened
   bindl = , switch:off:Lid Switch, exec, hyprctl keyword monitor "eDP-1, preferred, auto, 1"
   bindl = , switch:on:Lid Switch, exec, ~/.config/hypr/disable_internal_monitor.sh
   bindl = , switch:on:Lid Switch, exec, hyprpaper # Restart hyprpaper since it crashes when disabling eDP-1
 
-  wsbind=1,DP-1
-  wsbind=2,DP-1
-  wsbind=3,DP-1
-  wsbind=4,DP-1
-  wsbind=5,DP-1
-
-  wsbind=6,HDMI-A-1
-  wsbind=7,HDMI-A-1
-  wsbind=8,HDMI-A-1
-  wsbind=9,HDMI-A-1
-  wsbind=0,HDMI-A-1
+  # SETTINGS
 
   general {
     gaps_in=2
     gaps_out=4
-    border_size=1
+    border_size=2
+    col.active_border=0xFF7688BF
     cursor_inactive_timeout=0
   }
 
@@ -80,7 +125,7 @@ in
   }
 
   misc {
-    no_vfr=false
+    # no_vfr=false
   }
 
   input {
@@ -102,42 +147,6 @@ in
   gestures {
     workspace_swipe=true
   }
-
-  # Startup
-  exec-once=waybar && waybar
-  exec-once=mako && mako
-  exec-once=swayidle && swayidle -w
-  exec-once=hyprpaper && hyprpaper
-  exec-once=blueman-applet && blueman-applet
-  exec-once=nm-applet && nm-applet --indicator
-
-  # Spawn default apps
-  exec-once = [workspace special:scratchpad silent] signal-desktop && signal-desktop
-  exec-once = command -v foot && foot -e tmuxinator me --title main-term
-  exec-once = command -v firefox && firefox
-  exec-once = command -v thunderbird && thunderbird
-
-  # Window rules
-  windowrule=float,^(Rofi)$
-  windowrule=dimaround,^(Rofi)$
-  windowrule=center,^(Rofi)$
-
-  windowrule=opacity 0.85,^(foot)$
-  windowrule=opacity 0.85,^(org.pwmt.zathura)$
-
-  windowrulev2 = float, class:^(blueman-manager)$
-  windowrulev2 = float, class:^(nm-connection-editor)$
-
-  windowrulev2 = workspace 2,        class:^(Foot)$
-  windowrulev2 = workspace 3 silent, class:^(firefox)$
-  windowrulev2 = workspace 4 silent, class:^(Signal)$
-  windowrulev2 = workspace 5 silent, class:^(thunderbird)$
-
-  # This is needed for Zotero to show dropdown menus properly
-  windowrulev2 = float,class:^(Zotero*)
-  #windowrulev2 = forceinput,class:^(Zotero*)
-  #windowrulev2 = nofocus,class:^(Zotero*)
-  windowrulev2 = windowdance,class:^(Zotero*)
 
   # Mouse binding
   bindm=SUPER,mouse:272,movewindow
@@ -238,6 +247,7 @@ in
   # bind=SUPERCONTROL,j,focusmonitor,d
 
   bind=SUPER, m, focusmonitor, +1
+  bind=SUPERALT, m, movecurrentworkspacetomonitor, l
 
   bind=SUPER ALT, h, focusmonitor, l
   bind=SUPER ALT, l, focusmonitor, r

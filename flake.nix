@@ -12,8 +12,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland.url = "github:hyprwm/hyprland/v0.21.0beta"; # TODO: update
-    hyprwm-contrib.url = "github:hyprwm/contrib";
+    hyprland.url = "github:hyprwm/Hyprland"; #/v0.26.0";
+    # hyprwm-contrib.url = "github:hyprwm/contrib";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
 
     nix-ld = {

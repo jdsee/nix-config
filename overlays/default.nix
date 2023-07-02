@@ -6,11 +6,8 @@
   neovim-nightly = inputs.neovim-nightly-overlay.overlay;
 
   modifications = final: prev: {
-    # Activate experimential features in waybar
-    waybar-experimental = prev.waybar.overrideAttrs (old: {
-      mesonFlags = old.mesonFlags ++ [ "-Dexperimental=true" ];
-    });
 
+    # TODO: update revision
     flameshot-wayland = prev.flameshot.overrideAttrs (old: {
       src = final.fetchFromGitHub {
         owner = "flameshot-org";
@@ -31,10 +28,6 @@
         sha256 = "sha256-jkGcaghCP4oqw280pLt9XCJEZDZvb9o1sK0grdy/D7s=";
       };
     });
-
-    # jetbrains.idea-ultimate-2023 = prev.jetbrains.idea-ultimate.overrideAttrs (old: rec {
-    #     version = "";
-    #   });
 
   };
 }

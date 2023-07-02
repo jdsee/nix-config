@@ -8,22 +8,24 @@
     ./rofi.nix
     ./swayidle.nix
     ./swaylock.nix
+    ./gtklock.nix
     ./waybar
     ./zathura.nix
   ];
 
   home.packages = with pkgs; [
-    sway-contrib.grimshot
     grim
     imv
     mimeo
     pulseaudio
     slurp
+    sway-contrib.grimshot
+    theme-sh
     waypipe
-    wtype
     wf-recorder
     wl-clipboard
     wl-mirror
+    wtype
     ydotool
   ];
 

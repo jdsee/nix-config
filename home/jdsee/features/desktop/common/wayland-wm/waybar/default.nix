@@ -1,4 +1,4 @@
-{ outputs, config, lib, pkgs, ... }:
+{ inputs, outputs, config, lib, pkgs, ... }:
 
 let
   # Dependencies
@@ -24,11 +24,12 @@ let
       --arg percentage "${percentage}" \
       '{text:$text,tooltip:$tooltip,alt:$alt,class:$class,percentage:$percentage}'
   ''}/bin/waybar-${name}";
+  system = "x86_64-linux";
 in
 {
   programs.waybar = {
     enable = true;
-    package = pkgs.waybar-experimental;
+    package = inputs.hyprland.packages.${system}.waybar-hyprland;
     settings = {
       primary = {
         layer = "top";
@@ -44,11 +45,10 @@ in
         ];
         modules-center = [ "clock" ];
         modules-right = [
-          "custom/language"
+          "hyprland/language"
           "battery"
           "backlight"
           "pulseaudio"
-          "network"
           "pulseaudio#microphone"
           "tray"
         ];
@@ -62,10 +62,10 @@ in
           format = "{icon}";
           all-outputs = true;
           active-only = false;
-          format-icons = {
-            default = "";
-            active = "";
-          };
+          # format-icons = {
+          #   default = "";
+          #   active = "";
+          # };
           persistent-workspaces = {
             "1" = [ ];
             "2" = [ ];
@@ -79,7 +79,7 @@ in
             "10" = [ ];
           };
         };
-        "custom/language" = {
+        "keyboard-state" = {
         };
         "custom/weather" = {
           tooltip = true;

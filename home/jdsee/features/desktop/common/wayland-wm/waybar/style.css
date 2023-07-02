@@ -190,11 +190,11 @@
     color: #888888;
 }
 
-/* #workspaces button.active { */
-/*     border-color: #4c7899; */
-/*     color: white; */
-/*     background-color: #285577; */
-/* } */
+#workspaces button.active {
+    border-color: #141414;
+    /* color: white; */
+    background-color: #141414;
+}
 
 #workspaces button.urgent {
     color: #c9545d;

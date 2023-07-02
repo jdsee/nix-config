@@ -23,8 +23,11 @@
   networking.networkmanager.enable = true;
 
   security = {
-    pam.services.swaylock = {
-      text = "auth include login";
+    pam.services = {
+      swaylock = {
+        text = "auth include login";
+      };
+      gtklock = {};
     };
   };
 

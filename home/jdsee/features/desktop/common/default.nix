@@ -19,6 +19,9 @@
 
   xdg.mimeApps.enable = true;
   home.packages = with pkgs; [
+    gnome.nautilus
+    nautilus-open-any-terminal
+
     # communication
     thunderbird
     signal-desktop

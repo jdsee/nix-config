@@ -5,7 +5,7 @@
     enable = true;
     enableCompletion = false; # leads to bugs when enabled - zplug already calls compinit
     enableAutosuggestions = true;
-    enableSyntaxHighlighting = true;
+    syntaxHighlighting.enable = true;
 
     defaultKeymap = "emacs";
 
