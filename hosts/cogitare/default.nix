@@ -44,18 +44,24 @@
   systemd.services = {
     NetworkManager-wait-online.enable = false;
     systemd-udevd.restartIfChanged = false;
-    keyd = {
-      enable = false;
-      description = "key remapping daemon";
-      requires = [ "local-fs.target" ];
-      after = [ "local-fs.target" ];
-      wantedBy = [ "sysinit.target" ];
-      unitConfig = {
-        Type = "simple";
-      };
-      serviceConfig = {
-        ExecStart = "/usr/bin/keyd";
-      };
+  };
+
+  services.xremap = {
+    userName = "jdsee";
+    config = {
+      modmap = [
+        {
+          name = "Custom Keymap";
+          remap = {
+            CapsLock = {
+              held = "Control_L";
+              alone = "Esc";
+              alone_timeout_millis = 420;
+            };
+          };
+        }
+      ];
+      keymap = [ ];
     };
   };
 
@@ -63,10 +69,6 @@
     blueman.enable = true;
     openssh.enable = true;
     pcscd.enable = true;
-    # kubernetes = {
-    #   roles = [ "master" "node" ];
-    #   masterAddress = "master.jdsee.de";
-    # };
   };
 
   hardware = {

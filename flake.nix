@@ -16,13 +16,15 @@
     # hyprwm-contrib.url = "github:hyprwm/contrib";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
 
+    xremap-flake.url = "github:xremap/nix-flake";
+
     nix-ld = {
       url = "github:Mic92/nix-ld";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, nix-ld, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, nix-ld, xremap-flake, ... }@inputs:
     let
       inherit (self) outputs;
       forEachSystem = nixpkgs.lib.genAttrs [ "x86_64-linux" "aarch64-linux" ];
@@ -45,6 +47,7 @@
           specialArgs = { inherit inputs outputs; };
           modules = [
             ./hosts/cogitare
+            xremap-flake.nixosModules.default
             nix-ld.nixosModules.nix-ld
           ];
         };
