@@ -1,15 +1,14 @@
 { pkgs, lib, config, ... }:
 
 let
-  swaylock = "${pkgs.swaylock-effects}/bin/swaylock";
-  # locker = "${pkgs.gtklock}/bin/"
+  gtklock = "${pkgs.gtklock}/bin/gtklock";
   pactl = "${pkgs.pulseaudio}/bin/pactl";
   pgrep = "${pkgs.procps}/bin/pgrep";
   hyprctl = "${pkgs.hyprland}/bin/hyprctl";
   swaymsg = "${pkgs.sway}/bin/swaymsg";
 
-  isLocked = "${pgrep} -x swaylock";
-  actionLock = "${swaylock} --daemonize";
+  isLocked = "${pgrep} -x gtklock";
+  actionLock = "${gtklock}";
 
   lockTimeInMinutes = 5;
   lockTime = lockTimeInMinutes * 60;
@@ -35,6 +34,6 @@ in
     # Sway - Turn off screen (DPMS)
     lib.optionalString config.wayland.windowManager.hyprland.enable
       (mkEvent 40 "${swaymsg} 'output * dpms off'" "${swaymsg} 'output * dpms on'") +
-      "before-sleep '${actionLock}'";
+    "before-sleep '${actionLock}'";
   };
 }

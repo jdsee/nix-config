@@ -27,7 +27,9 @@
       swaylock = {
         text = "auth include login";
       };
-      gtklock = {};
+      gtklock = {
+        text = "auth include login";
+      };
     };
   };
 

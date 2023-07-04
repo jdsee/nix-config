@@ -1,7 +1,10 @@
-{ ... }:
+{ pkgs, ... }:
 let
-  launcher = "$HOME/.config/rofi/scripts/launcher_t4";
-  powermenu = "$HOME/.config/rofi/scripts/powermenu_t1";
+  # launcher = "$HOME/.config/rofi/scripts/launcher_t4";
+  # powermenu = "$HOME/.config/rofi/scripts/powermenu_t1";
+  rofi = "${pkgs.rofi}/bin/rofi";
+  rofi-power-menu = "${pkgs.rofi-power-menu}/bin/rofi-power-menu";
+  powermenu = "${rofi} -show pm -modi pm:${rofi-power-menu}";
   fileBrowser = "ranger";
 in
 ''
@@ -76,7 +79,7 @@ in
     gaps_in=2
     gaps_out=4
     border_size=2
-    col.active_border=0xFF7688BF
+    col.active_border=0xFFEBDBB2
     cursor_inactive_timeout=0
   }
 
@@ -131,7 +134,7 @@ in
   input {
     kb_layout=us,de
     natural_scroll=true
-    kb_options=ctrl:nocaps,grp:alt_space_toggle,altwin:swap_alt_win
+    kb_options=ctrl:nocaps,grp:alt_space_toggle,altwin:swap_alt_win,shift:both_capslock_cancel
     touchpad {
       natural_scroll=true
       disable_while_typing=true
@@ -159,24 +162,22 @@ in
   bind=SUPERSHIFT,Return,exec,$BROWSER
   bind=SUPER,b,exec,$BROWSER
 
-  bind=SUPER,space,exec,${launcher}
+  bind=SUPER,space,exec,${rofi} -show drun
   bind=SUPER,escape,exec,${powermenu}
-  bind=SUPERCONTROL,space,exec,rofi-rbw
-  bind=SUPERCONTROL,b,exec,rofi-bluetooth
+  bind=ALT CONTROL,space,exec,${rofi} -show combi
+  bind=SUPER CONTROL,u,exec,${rofi} -show ssh
+  bind=SUPER CONTROL,space,exec,rofi-rbw
+  bind=SUPER CONTROL,b,exec,rofi-bluetooth
 
   # Toggle waybar
   bind=SUPER,a,exec,pkill -USR1 waybar
 
   # Lock screen (TODO: move this to config file)
-  bind=SUPERCONTROL,q,exec,swaylock
+  bind=SUPERCONTROL,q,exec,gtklock
 
   # Screenshots
-  bind=,Print,exec,flameshot gui -c
-  bind=SUPER SHIFT,s ,exec ,flameshot screen -c
-  bind=ALT,Print,exec,flameshot full -c
-  bind=CONTROL,Print,exec,flameshot gui -c
-  bind=SUPERCONTROL,Print,exec,flameshot screen -c
-  bind=ALTCONTROL,Print,exec,flameshot full -c
+  bind=SUPER SHIFT,s ,exec , shotman -c output -C
+  bind=SUPER SHIFT CONTROL,s ,exec , shotman -c region -C
 
   # Keyboard controls (brightness, media, sound, etc)
   bind=,XF86MonBrightnessUp,exec,light -A 10

@@ -20,6 +20,7 @@
     pulseaudio
     slurp
     sway-contrib.grimshot
+    # TODO: wayrecorder
     theme-sh
     waypipe
     wf-recorder

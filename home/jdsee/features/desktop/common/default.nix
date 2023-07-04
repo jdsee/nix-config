@@ -3,7 +3,7 @@
   imports = [
     ./discord.nix
     ./firefox.nix
-    ./flameshot.nix
+    # ./flameshot.nix
     ./font.nix
     ./gtk.nix
     ./imv.nix
@@ -19,8 +19,9 @@
 
   xdg.mimeApps.enable = true;
   home.packages = with pkgs; [
-    gnome.nautilus
-    nautilus-open-any-terminal
+    cinnamon.nemo-with-extensions
+    shotman
+    libreoffice
 
     # communication
     thunderbird

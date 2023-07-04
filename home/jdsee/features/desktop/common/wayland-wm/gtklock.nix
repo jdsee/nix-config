@@ -13,6 +13,7 @@
         [main]
         style=/home/jdsee/.config/gtklock/style.css
         module=${pkgs.gtklock-powerbar-module}/lib/gtklock/powerbar-module.so
+        lock-command=${pkgs.rbw}/bin/rbw lock
       '';
     };
     "gtklock/style.css" = {

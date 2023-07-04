@@ -6,7 +6,6 @@
   };
   programs.tmux = {
     enable = true;
-    package = pkgs.tmux-31c;
     tmuxinator.enable = true;
     keyMode = "vi";
     shortcut = "f";

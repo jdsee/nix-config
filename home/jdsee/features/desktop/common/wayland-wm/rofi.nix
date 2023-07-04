@@ -2,16 +2,17 @@
 
 {
   programs.rofi = {
-    enable = false; # TODO: Use home-manager in conjunction with adi1090x/rofi
+    enable = true;
     package = pkgs.rofi-wayland;
     cycle = true;
-    plugins = [];
+    plugins = with pkgs; [ ];
     theme = "android_notification";
   };
 
   home.packages = with pkgs; [
-    rofi
+    pinentry-rofi
     rofi-rbw
-    rofi-bluetooth
+    rofi-power-menu
+    bitwarden-menu
   ];
 }

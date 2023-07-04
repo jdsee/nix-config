@@ -7,6 +7,15 @@
       name = config.fontProfiles.regular.family;
       size = 12;
     };
+
+    gtk3.extraConfig = {
+      gtk-application-prefer-dark-theme = true;
+    };
+
+    gtk4.extraConfig = {
+      gtk-application-prefer-dark-theme = true;
+    };
+
     theme = {
       name = "Orchis-Grey-Dark-Compact";
       package = pkgs.orchis-theme;
@@ -18,9 +27,9 @@
       # package = pkgs.theme-vertex;
     };
     # theme = {
-      # name = "Adwaita-Dark";
-      # name = "${config.colorscheme.slug}";
-      # package = gtkThemeFromScheme { scheme = config.colorscheme; };
+    # name = "Adwaita-Dark";
+    # name = "${config.colorscheme.slug}";
+    # package = gtkThemeFromScheme { scheme = config.colorscheme; };
     # };
     iconTheme = {
       name = "Papirus";

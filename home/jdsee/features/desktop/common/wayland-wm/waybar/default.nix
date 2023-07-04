@@ -45,6 +45,7 @@ in
         ];
         modules-center = [ "clock" ];
         modules-right = [
+          "keyboard-state"
           "hyprland/language"
           "battery"
           "backlight"
@@ -79,8 +80,6 @@ in
             "10" = [ ];
           };
         };
-        "keyboard-state" = {
-        };
         "custom/weather" = {
           tooltip = true;
           format = "{}";
@@ -89,11 +88,11 @@ in
           return-type = "json";
         };
         "keyboard-state" = {
-          "capslock" = true;
+          # "capslock" = true;
           "format" = "{icon}";
           "format-icons" = {
-            "locked" = "";
-            "unlocked" = "";
+            "locked" = " ";
+            "unlocked" = " ";
           };
         };
         tray = {
@@ -119,8 +118,8 @@ in
             critical = 20;
           };
           format = "{icon} {capacity}%";
-          format-charging = " {capacity}%";
-          format-plugged = " {capacity}%";
+          format-charging = "⚡ {capacity}%";
+          format-plugged = "⚡ {capacity}%";
           format-alt = "{time} {icon}";
           format-icons = [ "" "" "" "" "" "" "" "" "" "" "" ];
         };
