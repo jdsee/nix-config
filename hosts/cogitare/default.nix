@@ -8,16 +8,12 @@
 
     ../common/opt/virtualbox.nix
     ../common/opt/docker.nix
+    ../common/opt/greetd.nix
     ../common/opt/pipewire.nix
     ../common/opt/polkit.nix
     ../common/opt/systemd_boot.nix
     ../common/opt/udisks.nix
   ];
-
-  services.greetd = {
-    enable = false; # TODO: Fix this
-    settings.default_session.user = "jdsee";
-  };
 
   programs.zsh.enable = true;
 
@@ -58,6 +54,13 @@
               alone = "Esc";
               alone_timeout_millis = 420;
             };
+            # Esc = {
+            #   alone = "Esc";
+            #   held = {
+            #     launch = "rofi -show pm -modi pm:rofi-power-menu";
+            #   };
+            #   alone_timeout_millis = 2000;
+            # };
           };
         }
       ];

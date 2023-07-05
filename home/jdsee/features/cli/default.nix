@@ -23,6 +23,7 @@
     file
     lsof
     networkmanagerapplet
+    pdftk
 
     fd # Better find
     httpie # Better curl

@@ -43,7 +43,9 @@ in
           "wlr/workspaces"
           # "hyprland/window"
         ];
-        modules-center = [ "clock" ];
+        modules-center = [
+          "clock"
+        ];
         modules-right = [
           "keyboard-state"
           "hyprland/language"
@@ -89,10 +91,10 @@ in
         };
         "keyboard-state" = {
           # "capslock" = true;
-          "format" = "{icon}";
+          "format" = "{icon} ";
           "format-icons" = {
             "locked" = " ";
-            "unlocked" = " ";
+            "unlocked" = "";
           };
         };
         tray = {
@@ -100,7 +102,7 @@ in
           spacing = 10;
         };
         clock = {
-          format = "{: %R   %d/%m}";
+          format = "{: %R - %d/%m}";
           tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
         };
         backlight = {

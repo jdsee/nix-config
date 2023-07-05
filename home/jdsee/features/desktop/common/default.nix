@@ -6,6 +6,7 @@
     # ./flameshot.nix
     ./font.nix
     ./gtk.nix
+    ./gtkgreet.nix
     ./imv.nix
     ./intellij.nix
     ./obs.nix

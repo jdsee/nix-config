@@ -6,12 +6,16 @@ let
   rofi-power-menu = "${pkgs.rofi-power-menu}/bin/rofi-power-menu";
   powermenu = "${rofi} -show pm -modi pm:${rofi-power-menu}";
   fileBrowser = "ranger";
+  terminal = "${pkgs.foot}/bin/foot";
 in
 ''
   monitor=eDP-1, preferred, auto, 1
-  monitor=DP-1, preferred, auto, 1, # mirror, eDP-1
-  monitor=HDMI-A-1, preferred, 0x0, 1
-  monitor=HDMI-A-1, transform, 1
+
+  # Home Setup
+  monitor=DP-3, preferred, auto, 1, # mirror, eDP-1
+  monitor=DP-4, preferred, 0x0, 1
+  monitor=DP-4, transform, 1
+
   monitor=,preferred,auto,1
 
   # STARTUP
@@ -30,16 +34,19 @@ in
 
   # WORKSPACE RULES
 
-  workspace=1,monitor:DP-1
-  workspace=2,monitor:DP-1
-  workspace=3,monitor:DP-1
-  workspace=4,monitor:DP-1
-  workspace=5,monitor:DP-1
-  workspace=6,monitor:HDMI-A-1
-  workspace=7,monitor:HDMI-A-1
-  workspace=8,monitor:HDMI-A-1
-  workspace=9,monitor:HDMI-A-1
-  workspace=0,monitor:HDMI-A-1
+  # primary
+  workspace=1,monitor:DP-3
+  workspace=2,monitor:DP-3
+  workspace=3,monitor:DP-3
+  workspace=4,monitor:DP-3
+  workspace=5,monitor:DP-3
+
+  # secondary
+  workspace=6,monitor:DP-4
+  workspace=7,monitor:DP-4
+  workspace=8,monitor:DP-4
+  workspace=9,monitor:DP-4
+  workspace=0,monitor:DP-4
 
   # WINDOW RULES
 
@@ -156,9 +163,8 @@ in
   bindm=SUPER,mouse:273,resizewindow
 
   # Program bindings
-  bind=SUPER,Return,exec,$TERMINAL
+  bind=SUPER,Return,exec,${terminal}
   bind=SUPER,d,exec,makoctl dismiss
-  bind=SUPER,v,exec,$TERMINAL -e $EDITOR
   bind=SUPERSHIFT,Return,exec,$BROWSER
   bind=SUPER,b,exec,$BROWSER
 

@@ -46,6 +46,9 @@
         wallpaper = eDP-1,~/.config/wallpapers/star-wars-broken-ship.jpg
         wallpaper = DP-1,~/.config/wallpapers/star-wars-broken-ship.jpg
         wallpaper = DP-2,~/.config/wallpapers/star-wars-broken-ship.jpg
+        wallpaper = DP-3,~/.config/wallpapers/star-wars-broken-ship.jpg
+        wallpaper = DP-4,~/.config/wallpapers/star-wars-broken-ship.jpg
+        wallpaper = DP-5,~/.config/wallpapers/star-wars-broken-ship.jpg
         wallpaper = HDMI-A-1,~/.config/wallpapers/star-wars-broken-ship.jpg
       '';
     };
