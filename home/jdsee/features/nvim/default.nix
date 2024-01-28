@@ -16,7 +16,17 @@
   };
 
   home.packages = with pkgs; [
-    sumneko-lua-language-server
+    dockerfile-language-server-nodejs
+      lua-language-server
+      marksman
+      nodePackages.eslint
+      nodePackages.pyright
+      nodePackages.typescript-language-server
+      rnix-lsp
+      rust-analyzer
+      texlab
+      vscode-langservers-extracted # html/css/json/eslint
+      yaml-language-server
   ];
 
   xdg.configFile = {
@@ -24,6 +34,5 @@
       source = ./config/nvim;
       recursive = true;
     };
-    # TODO: pre-install treesitter grammars
   };
 }

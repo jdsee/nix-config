@@ -1,3 +1,54 @@
+local function setup_zero()
+  local lsp_zero = require('lsp-zero')
+  lsp_zero.extend_lspconfig()
+  lsp_zero.on_attach(require('jdsee.plugins.lsp.config').on_attach)
+  lsp_zero.format_on_save({
+    format_opts = {
+      async = false,
+      timeout_ms = 10000,
+    },
+    servers = {
+      ['tsserver'] = { 'javascript', 'typescript' },
+      ['rust_analyzer'] = { 'rust' },
+      ['lua-ls'] = { 'lua' },
+    }
+  })
+  lsp_zero.set_sign_icons({
+    error = '✘',
+    warn = '▲',
+    hint = '⚑',
+    info = '»'
+  })
+end
+
+local function setup_servers()
+  local lspconfig = require('lspconfig')
+  local lsp_zero = require('lsp-zero')
+
+  lspconfig.lua_ls.setup {
+    on_attach = function()
+      local lua_opts = lsp_zero.nvim_lua_ls()
+      require('lspconfig').lua_ls.setup(lua_opts)
+    end
+  }
+end
+
+local function setup_mason()
+  local lsp_zero = require('lsp-zero')
+
+  require('mason').setup()
+  require('mason-lspconfig').setup {
+    handlers = {
+      lsp_zero.default_setup,
+      rust_analyzer = lsp_zero.noop,
+      lua_ls = function()
+        local lua_opts = lsp_zero.nvim_lua_ls()
+        require('lspconfig').lua_ls.setup(lua_opts)
+      end,
+    },
+  }
+end
+
 return {
   'VonHeikemen/lsp-zero.nvim',
   branch = 'v3.x',
@@ -15,37 +66,8 @@ return {
     }
   },
   config = function()
-    local lsp_zero = require('lsp-zero')
-    lsp_zero.extend_lspconfig()
-    lsp_zero.on_attach(require('jdsee.plugins.lsp.config').on_attach)
-    require('mason').setup()
-    require('mason-lspconfig').setup {
-      ensure_installed = {
-        'bashls',
-        'clangd',
-        'clojure_lsp',
-        'cssls',
-        'dockerls',
-        'eslint',
-        'html',
-        'jsonls',
-        'lemminx',
-        'marksman',
-        'pyright',
-        'rnix',
-        'rust_analyzer',
-        'texlab',
-        'tsserver',
-        'yamlls',
-      },
-      handlers = {
-        lsp_zero.default_setup,
-        rust_analyzer = lsp_zero.noop,
-        lua_ls = function()
-          local lua_opts = lsp_zero.nvim_lua_ls()
-          require('lspconfig').lua_ls.setup(lua_opts)
-        end,
-      },
-    }
+    setup_zero()
+    setup_servers()
+    setup_mason()
   end,
 }
