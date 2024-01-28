@@ -64,7 +64,11 @@
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [ ./home/jdsee/cogitare.nix ];
         };
-
+        "jdsee@exodus" = home-manager.lib.homeManagerConfiguration {
+          pkgs = import nixpkgs { system = "x86_64-linux"; };
+          extraSpecialArgs = { inherit inputs outputs; };
+          modules = [ ./home/jdsee/cogitare.nix ];
+        };
         "seelij@nuntius" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = { inherit inputs outputs; };
