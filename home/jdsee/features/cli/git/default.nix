@@ -40,6 +40,7 @@
         autocorrect = true;
       };
     };
+
     ignores = [
       ".DS_Store"
       "*.pyc"

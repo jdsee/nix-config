@@ -80,10 +80,9 @@
       vind = "nvim -c 'Telescope zoxide list'";
       vile = "nvim -c 'Telescope find_files'";
 
-      ls = "exa";
-      ll = "ls -alh";
-      la = "ls -a";
-      ld = "ls -ad";
+      # ll = "ls -alh";
+      # la = "ls -a";
+      # ld = "ls -ad";
       tree = "la --tree";
       trees = "tree --depth 4";
 
