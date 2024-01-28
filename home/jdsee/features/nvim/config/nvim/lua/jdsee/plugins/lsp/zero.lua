@@ -25,10 +25,11 @@ local function setup_servers()
   local lspconfig = require('lspconfig')
   local lsp_zero = require('lsp-zero')
 
+  lspconfig.rnix.setup({})
   lspconfig.lua_ls.setup {
     on_attach = function()
       local lua_opts = lsp_zero.nvim_lua_ls()
-      require('lspconfig').lua_ls.setup(lua_opts)
+      lspconfig.lua_ls.setup(lua_opts)
     end
   }
 end
@@ -63,6 +64,7 @@ return {
         "SmiteshP/nvim-navic",
         "MunifTanjim/nui.nvim"
       },
+      opts = { lsp = { auto_attach = true } }
     }
   },
   config = function()

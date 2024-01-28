@@ -107,7 +107,8 @@ in
         backlight = {
           device = "intel_backlight";
           format = "{icon} {percent}%";
-          format-icons = [ "" "" "" ];
+          format-icons = [ "☼" "☼" "☀" ];
+
           on-scroll-up = "brightnessctl set 1%+";
           on-scroll-down = "brightnessctl set 1%-";
           min-length = 6;
@@ -122,7 +123,7 @@ in
           format-charging = "⚡ {capacity}%";
           format-plugged = "⚡ {capacity}%";
           format-alt = "{time} {icon}";
-          format-icons = [ "" "" "" "" "" "" "" "" "" "" "" ];
+          format-icons = [ "" "" "" "" "" ];
         };
         pulseaudio = {
           format = "{icon} {volume}%";

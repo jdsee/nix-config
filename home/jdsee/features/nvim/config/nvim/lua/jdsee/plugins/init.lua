@@ -1,6 +1,5 @@
 return {
   -- Want to try:
-  -- - 'SmiteshP/nvim-navbuddy'
   -- - 'nvim-pack/nvim-spectre'
 
   'tpope/vim-repeat', -- repeat plugin commands with .

@@ -17,16 +17,16 @@
 
   home.packages = with pkgs; [
     dockerfile-language-server-nodejs
-      lua-language-server
-      marksman
-      nodePackages.eslint
-      nodePackages.pyright
-      nodePackages.typescript-language-server
-      rnix-lsp
-      rust-analyzer
-      texlab
-      vscode-langservers-extracted # html/css/json/eslint
-      yaml-language-server
+    lua-language-server
+    marksman
+    nodePackages.eslint
+    nodePackages.pyright
+    nodePackages.typescript-language-server
+    rnix-lsp
+    rust-analyzer
+    texlab
+    vscode-langservers-extracted # html/css/json/eslint
+    yaml-language-server
   ];
 
   xdg.configFile = {

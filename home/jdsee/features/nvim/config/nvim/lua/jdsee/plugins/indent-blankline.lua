@@ -6,5 +6,9 @@ return {
   main = 'ibl',
   config = function()
     require('ibl').setup()
+    vim.opt.list = true
+    vim.opt.listchars:append('trail:-')
+    vim.opt.listchars:append('tab:>>>')
+    -- vim.opt.listchars:append('eol:%')
   end,
 }
