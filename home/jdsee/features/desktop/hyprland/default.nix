@@ -2,7 +2,6 @@
   imports = [
     ../common
     ../common/wayland-wm
-    inputs.hyprland.homeManagerModules.default
   ];
 
   programs = {
@@ -19,7 +18,6 @@
   };
 
   home.packages = with pkgs; [
-    # inputs.hyprwm-contrib.packages.${system}.grimblast
     hyprpaper
     swaybg
     swayidle

@@ -6,7 +6,7 @@
     ../common/global
     ../common/users/jdsee
 
-    # ../common/opt/virtualbox.nix
+    ../common/opt/virtualbox.nix
     ../common/opt/docker.nix
     ../common/opt/greetd.nix
     ../common/opt/pipewire.nix
@@ -17,10 +17,6 @@
   ];
 
   programs.zsh.enable = true;
-
-  programs.nix-ld = {
-    enable = true;
-  };
 
   networking = {
     hostName = "cogitare";

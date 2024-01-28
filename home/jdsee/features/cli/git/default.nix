@@ -8,7 +8,7 @@
     userEmail = "jdsee@protonmail.com";
     aliases = {
       last = "log - 1 - -stat";
-      aa = "add - -all";
+      aa = "add --all";
       cp = "cherry-pick";
       co = "checkout";
       cl = "clone";

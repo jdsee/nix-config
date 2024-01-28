@@ -2,52 +2,55 @@
 
 {
   imports = [
-    ./atuin.nix
-    ./babashka.nix
     ./bat.nix
     ./direnv.nix
-    ./exa.nix
     ./git
     ./ranger
-    ./tmux.nix
+    ./tmux
     ./vim.nix
     ./zsh
   ];
 
-  home.packages = with pkgs; [
-    # monitoring
-    bottom
-    htop-vim
+  programs = {
+    eza = {
+      enable = true;
+      enableAliases = false; # TODO
+    };
 
-    # util
-    file
-    lsof
-    networkmanagerapplet
-    pdftk
+    atuin = {
+      enable = true;
+      flags = [ "--disable-up-arrow" ];
+    };
+  };
 
-    fd # Better find
-    httpie # Better curl
-    hyperfine # Micro benchmark
-    wget # File download
-    jq # JSON pretty printer and manipulator
-    ncdu # TUI disk usage
-    ripgrep # Better grep
-    colordiff # Colored diff
-    restic # Backup tool
+  home = {
+    sessionVariables = {
+      EDITOR = "nvim";
+    };
 
-    # compression
-    p7zip
-    unzip
-    zip
+    packages = with pkgs; [
+      file
+      lsof
+      networkmanagerapplet
 
-    # tui
-    lazydocker
+      fd # Better find
+      httpie # Better curl
+      hyperfine # Micro benchmark
+      wget # File download
+      jq # JSON pretty printer and manipulator
+      ncdu # TUI disk usage
+      ripgrep # Better grep
+      colordiff # Colored diff
+      restic # Backup tool
+      bottom # Monitoring like htop
+      lazydocker # Docker TUI
+      openconnect # VPN
+      pdftk # PDF utils
 
-    # vpn
-    openconnect
-  ];
-
-  home.sessionVariables = {
-    EDITOR = "nvim";
+      # compression
+      p7zip
+      unzip
+      zip
+    ];
   };
 }

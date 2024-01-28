@@ -31,11 +31,6 @@ in
     packages = [ pkgs.home-manager ];
   };
 
-  # sops.secrets.jdsee-password = {
-  #   sopsFile = ../../secrets.yaml;
-  #   neededForUsers = true;
-  # };
-
   home-manager.users.${user} = import home/${config.networking.hostName}.nix;
 
   services.geoclue2.enable = true;

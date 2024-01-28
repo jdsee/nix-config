@@ -29,7 +29,6 @@ in
 {
   programs.waybar = {
     enable = true;
-    package = inputs.hyprland.packages.${system}.waybar-hyprland;
     settings = {
       primary = {
         layer = "top";

@@ -4,6 +4,4 @@
   additions = final: prev: import ../pkgs { pkgs = final; };
 
   neovim-nightly = inputs.neovim-nightly-overlay.overlay;
-
-  modifications = final: prev: { };
 }

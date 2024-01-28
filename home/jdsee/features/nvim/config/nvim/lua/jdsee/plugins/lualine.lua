@@ -1,10 +1,14 @@
 -- lualine
 -- https://github.com/nvim-lualine/lualine.nvim
 
-require('lualine').setup {
-  options = {
-    theme = 'auto',
-    globalstatus = true,
-  }
+return {
+  'nvim-lualine/lualine.nvim',
+  config = function()
+    require('lualine').setup {
+      options = {
+        theme = 'auto',
+        globalstatus = true,
+      }
+    }
+  end,
 }
-

@@ -74,4 +74,9 @@
       # TODO: bind -r i run-shell "tmux popup -w 75% -h 75% ~/cht.sh.tmux.sh"
     '';
   };
+
+  xdg.configFile."tmuxinator" = {
+    source = ./tmuxinator;
+    recursive = true;
+  };
 }
