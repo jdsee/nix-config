@@ -3,7 +3,7 @@
   imports = [
     ./discord.nix
     ./firefox.nix
-    # ./flameshot.nix
+    ./flameshot.nix
     ./font.nix
     ./gtk.nix
     ./gtkgreet.nix
@@ -15,7 +15,6 @@
     ./qt.nix
     ./rbw.nix
     ./typesetting.nix
-    ./xcape.nix
   ];
 
   xdg.mimeApps.enable = true;
@@ -32,4 +31,11 @@
     obsidian
     zotero
   ];
+
+  services.xcape = {
+    enable = false;
+    mapExpression = {
+      Control_L = "Control_L|Escape";
+    };
+  };
 }
