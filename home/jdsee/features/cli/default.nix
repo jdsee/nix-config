@@ -43,28 +43,29 @@
 
     packages = with pkgs; [
       file
-        lsof
-        networkmanagerapplet
+      lsof
+      networkmanagerapplet
 
-        fd # Better find
-        httpie # Better curl
-        hyperfine # Micro benchmark
-        wget # File download
-        jq # JSON pretty printer and manipulator
-        ncdu # TUI disk usage
-        ripgrep # Better grep
-        colordiff # Colored diff
-        restic # Backup tool
-        bottom # Monitoring like htop
-        lazydocker # Docker TUI
-        openconnect # VPN
-        pdftk # PDF utils
-        steam-run # Emulate FHS file system
+      fd # Better find
+      httpie # Better curl
+      hyperfine # Micro benchmark
+      wget # File download
+      jq # JSON pretty printer and manipulator
+      ncdu # TUI disk usage
+      ripgrep # Better grep
+      colordiff # Colored diff
+      restic # Backup tool
+      bottom # Monitoring like htop
+      lazydocker # Docker TUI
+      openconnect # VPN
+      pdftk # PDF utils
+      steam-run # Emulate FHS file system
+      tomato-c # Focus timer
 
-# compression
-        p7zip
-        unzip
-        zip
-        ];
+      # compression
+      p7zip
+      unzip
+      zip
+    ];
   };
 }
