@@ -64,7 +64,6 @@ return {
 
     local extensions = {
       'fzf',
-      'harpoon',
       'ui-select',
       'zoxide',
       'bibtex',
