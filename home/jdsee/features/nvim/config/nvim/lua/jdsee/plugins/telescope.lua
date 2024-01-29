@@ -121,7 +121,7 @@ return {
       builtin.spell_suggest(themes.get_cursor())
     end
 
-    vim.keymap.set('n', '<C-A>', builtin.builtin)                                     -- search telescope actions
+    vim.keymap.set('n', '<C-S-A>', builtin.builtin)                                     -- search telescope actions
     vim.keymap.set('n', '<Leader>ff', find_git_or_all_files)                          -- git_files if git repo, else all files
     vim.keymap.set('n', '<Leader>fj', telescope.extensions.zoxide.list)               -- search autojump list
     vim.keymap.set('n', '<Leader>fa', find_all_files)                                 -- search all files
