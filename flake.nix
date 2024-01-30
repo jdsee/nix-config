@@ -13,27 +13,24 @@
     };
   };
 
-  outputs =
-    inputs @ { self
-    , nixpkgs
-    , home-manager
-    , xremap-flake
-    , ...
-    }:
+  outputs = inputs @ { self, nixpkgs, home-manager, xremap-flake, ... }:
     let
       inherit (self) outputs;
-      forEachSystem = nixpkgs.lib.genAttrs [ "x86_64-linux" "aarch64-linux" ];
-      forEachPkgs = f: forEachSystem (sys: f nixpkgs.legacyPackages.${sys});
+      systems = [
+        "aarch64-linux"
+        "i686-linux"
+        "x86_64-linux"
+        "aarch64-darwin"
+        "x86_64-darwin"
+      ];
+      forAllSystems = nixpkgs.lib.genAttrs systems;
     in
     {
+      packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
+      formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
+      overlays = import ./overlays { inherit inputs; };
       nixosModules = import ./modules/nixos;
       homeManagerModules = import ./modules/home-manager;
-
-      overlays = import ./overlays { inherit inputs outputs; };
-
-      packages = forEachPkgs (pkgs: import ./pkgs { inherit pkgs; });
-      devShells = forEachPkgs (pkgs: import ./shell.nix { inherit pkgs; });
-      formatter = forEachPkgs (pkgs: pkgs.nixpkgs-fmt);
 
       defaultPackage.x86_64-linux = home-manager.defaultPackage.x86_64-linux;
 
