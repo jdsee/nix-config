@@ -20,7 +20,7 @@
       };
 
       text-bindings = {
-        "\\x1b[105;5u" = "Control+i";
+        "\\x1b[105;5u" = "Control+i"; # Send Tab-Escape-Sequence as <C-i>
       };
 
       colors = {
