@@ -19,8 +19,7 @@
     mimeo
     pulseaudio
     slurp
-    sway-contrib.grimshot
-    # TODO: wayrecorder
+    satty # screenshot annotator (swappy would be an alternative)
     theme-sh
     waypipe
     wf-recorder

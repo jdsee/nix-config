@@ -7,6 +7,9 @@ let
   powermenu = "${rofi} -show pm -modi pm:${rofi-power-menu}";
   fileBrowser = "ranger";
   terminal = "${pkgs.foot}/bin/foot";
+  grim = "${pkgs.grim}/bin/grim";
+  slurp = "${pkgs.slurp}/bin/slurp";
+  annotateScreenshot = "${pkgs.satty}/bin/satty --filename - --init-tool blur --output-filename ~/Screenshots/screenshot-$(date '+%Y%m%d-%H:%M:%S').png";
 in
 ''
   monitor=eDP-1, preferred, auto, 1
@@ -177,9 +180,8 @@ in
   bind=SUPERCONTROL,q,exec,gtklock
 
   # Screenshots
-  bind=SUPER SHIFT,s ,exec , shotman -c output -C
-  bind=SUPER SHIFT CONTROL,s ,exec , shotman -c region -C
-
+  bind=SUPER SHIFT, s, exec, ${grim} -g "$(${slurp} -o -r -c '40E0D0')" - | ${annotateScreenshot}
+  bind=SUPER SHIFT CONTROL, s, exec, ${grim} -g "$(${slurp} -c '40E0D0')" - | ${annotateScreenshot}
   # Keyboard controls (brightness, media, sound, etc)
   bind=,XF86MonBrightnessUp,exec,light -A 10
   bind=,XF86MonBrightnessDown,exec,light -U 10

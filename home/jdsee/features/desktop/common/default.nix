@@ -3,7 +3,6 @@
   imports = [
     ./discord.nix
     ./firefox.nix
-    ./flameshot.nix
     ./font.nix
     ./gtk.nix
     ./gtkgreet.nix
@@ -20,7 +19,6 @@
   xdg.mimeApps.enable = true;
   home.packages = with pkgs; [
     cinnamon.nemo-with-extensions
-    shotman
     libreoffice
 
     # communication
