@@ -6,6 +6,10 @@
 
     package = pkgs.neovim-nightly;
 
+    plugins = [
+      pkgs.rustaceanvim
+    ];
+
     viAlias = true;
     vimdiffAlias = true;
 
