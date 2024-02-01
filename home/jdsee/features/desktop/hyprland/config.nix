@@ -9,7 +9,7 @@ let
   terminal = "${pkgs.foot}/bin/foot";
   grim = "${pkgs.grim}/bin/grim";
   slurp = "${pkgs.slurp}/bin/slurp";
-  annotateScreenshot = "${pkgs.satty}/bin/satty --filename - --earyl-exit --init-tool blur --output-filename ~/Screenshots/screenshot-$(date '+%Y%m%d-%H:%M:%S').png";
+  annotateScreenshot = "${pkgs.satty}/bin/satty --filename - --init-tool blur --output-filename ~/Screenshots/screenshot-$(date '+%Y%m%d-%H:%M:%S').png";
 in
 ''
   monitor=eDP-1, preferred, auto, 1

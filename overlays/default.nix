@@ -14,6 +14,8 @@
 
   neovim-nightly = inputs.neovim-nightly-overlay.overlay;
 
+  rustaceanvim = inputs.rustaceanvim.overlays.default;
+
   modifications = final: prev: {
 
     tmux-31c = prev.tmux.overrideAttrs (old: rec {

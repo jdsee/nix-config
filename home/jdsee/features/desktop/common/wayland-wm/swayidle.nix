@@ -1,14 +1,14 @@
 { pkgs, lib, config, ... }:
 
 let
-  gtklock = "${pkgs.gtklock}/bin/gtklock";
   pactl = "${pkgs.pulseaudio}/bin/pactl";
   pgrep = "${pkgs.procps}/bin/pgrep";
   hyprctl = "${pkgs.hyprland}/bin/hyprctl";
   swaymsg = "${pkgs.sway}/bin/swaymsg";
+  swaylock = "${pkgs.swaylock}/bin/swaylock";
 
-  isLocked = "${pgrep} -x gtklock";
-  actionLock = "${gtklock}";
+  isLocked = "${pgrep} -x swaylock";
+  actionLock = "${swaylock}";
 
   lockTimeInMinutes = 5;
   lockTime = lockTimeInMinutes * 60;

@@ -11,7 +11,7 @@ return {
   config = function()
     require('nvim-treesitter.configs').setup {
       highlight = {
-        enable = true,
+        enable = false, -- TODO: This creates errors atm. Revert at some point
       },
       textobjects = {
         swap = {

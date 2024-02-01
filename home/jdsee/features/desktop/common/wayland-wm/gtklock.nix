@@ -1,11 +1,12 @@
 { config, pkgs, ... }:
 
 {
+  # TODO: This is broken on hyprland atm
+
   home.packages = with pkgs; [
     gtklock
     gtklock-powerbar-module
   ];
-
 
   xdg.configFile = {
     "gtklock/config.ini" = {

@@ -23,7 +23,6 @@
     nodePackages.pyright
     nodePackages.typescript-language-server
     rnix-lsp
-    rust-analyzer
     texlab
     vscode-langservers-extracted # html/css/json/eslint
     yaml-language-server
