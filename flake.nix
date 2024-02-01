@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-master.url = "github:nixos/nixpkgs/master";
+    flake-utils.url = "github:numtide/flake-utils";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     xremap-flake.url = "github:xremap/nix-flake";
     rustaceanvim.url = "github:mrcjkb/rustaceanvim";
@@ -14,21 +15,14 @@
     };
   };
 
-  outputs = inputs @ { self, nixpkgs, home-manager, xremap-flake, ... }:
+  outputs = inputs @ { self, nixpkgs, home-manager, flake-utils, xremap-flake, ... }:
     let
       inherit (self) outputs;
-      systems = [
-        "aarch64-linux"
-        "i686-linux"
-        "x86_64-linux"
-        "aarch64-darwin"
-        "x86_64-darwin"
-      ];
-      forAllSystems = nixpkgs.lib.genAttrs systems;
+      forEachSystem = flake-utils.lib.eachDefaultSystem;
     in
     {
-      packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
-      formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
+      packages = forEachSystem (system: import ./pkgs nixpkgs.legacyPackages.${system});
+      formatter = forEachSystem (system: nixpkgs.legacyPackages.${system}.alejandra);
       overlays = import ./overlays { inherit inputs; };
       nixosModules = import ./modules/nixos;
       homeManagerModules = import ./modules/home-manager;
@@ -44,7 +38,6 @@
             xremap-flake.nixosModules.default
           ];
         };
-
         exodus = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
           modules = [
@@ -57,12 +50,12 @@
       # home-manager switch --flake .#your-username@your-hostname
       homeConfigurations = {
         "jdsee@cogitare" = home-manager.lib.homeManagerConfiguration {
-          pkgs = import nixpkgs { system = "x86_64-linux"; };
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [ ./home/jdsee/cogitare.nix ];
         };
         "jdsee@exodus" = home-manager.lib.homeManagerConfiguration {
-          pkgs = import nixpkgs { system = "x86_64-linux"; };
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [ ./home/jdsee/cogitare.nix ];
         };
