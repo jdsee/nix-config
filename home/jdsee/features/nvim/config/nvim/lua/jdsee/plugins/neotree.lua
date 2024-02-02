@@ -24,6 +24,7 @@ return {
           ['<cr>'] = 'open',
           ['v'] = 'open_vsplit',
           ['<tab>'] = 'close_window',
+          ['<esc>'] = 'toggle_window',
         }
       }
     }

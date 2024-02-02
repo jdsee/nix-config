@@ -21,6 +21,7 @@
 
   home.packages = with pkgs; [
     dockerfile-language-server-nodejs
+    elmPackages.elm-language-server
     lua-language-server
     marksman
     nodePackages.eslint

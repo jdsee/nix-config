@@ -25,6 +25,9 @@ local function setup_servers()
   local lspconfig = require('lspconfig')
   local lsp_zero = require('lsp-zero')
 
+  lspconfig.cssls.setup({})
+  lspconfig.elmls.setup({})
+  lspconfig.jsonls.setup({})
   lspconfig.rnix.setup({})
   lspconfig.lua_ls.setup {
     on_attach = function()
