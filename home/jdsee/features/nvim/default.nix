@@ -22,11 +22,13 @@
   home.packages = with pkgs; [
     dockerfile-language-server-nodejs
     elmPackages.elm-language-server
+    kotlin-language-server
     lua-language-server
     marksman
-    nodePackages.eslint
-    nodePackages.pyright
-    nodePackages.typescript-language-server
+    nodePackages_latest.eslint
+    nodePackages_latest.pyright
+    nodePackages_latest.typescript-language-server
+    nodePackages_latest.bash-language-server
     rnix-lsp
     texlab
     vscode-langservers-extracted # html/css/json/eslint
