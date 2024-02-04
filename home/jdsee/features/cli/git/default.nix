@@ -13,6 +13,7 @@
       co = "checkout";
       cl = "clone";
       ci = "commit";
+      cane = "commit --amend --no-edit";
       s = "status";
       br = "branch";
       unstage = "reset HEAD - -";
@@ -63,6 +64,18 @@
         syntax-theme = "DarkNeon";
       };
     };
+  };
+
+  programs.gh = {
+    enable = true;
+    gitCredentialHelper = {
+      enable = true;
+      hosts = [ "https://github.com" ];
+    };
+  };
+
+  programs.gh-dash = {
+    enable = true;
   };
 
   programs.gitui = {
