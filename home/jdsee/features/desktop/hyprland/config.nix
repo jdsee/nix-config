@@ -57,7 +57,7 @@ in
   windowrule=dimaround,^(Rofi)$
   windowrule=center,^(Rofi)$
 
-  windowrule=opacity 0.85,^(foot|main-term)$
+  windowrule=opacity 1.0,^(foot|main-term)$
   windowrule=opacity 0.85,^(org.pwmt.zathura)$
 
   windowrulev2 = float, title:^Bluetooth Devices$
@@ -77,6 +77,20 @@ in
   #windowrulev2 = forceinput,class:^(Zotero*)
   #windowrulev2 = nofocus,class:^(Zotero*)
 
+  # -- Fix odd behaviors in IntelliJ IDEs --
+  #! Fix focus issues when dialogs are opened or closed
+  windowrulev2 = windowdance,class:^(jetbrains-.*)$,floating:1
+  #! Fix splash screen showing in weird places and prevent annoying focus takeovers
+  windowrulev2 = center,class:^(jetbrains-.*)$,title:^(splash)$,floating:1
+  windowrulev2 = nofocus,class:^(jetbrains-.*)$,title:^(splash)$,floating:1
+  windowrulev2 = noborder,class:^(jetbrains-.*)$,title:^(splash)$,floating:1
+
+  #! Center popups/find windows
+  windowrulev2 = center,class:^(jetbrains-.*)$,title:^( )$,floating:1
+  windowrulev2 = stayfocused,class:^(jetbrains-.*)$,title:^( )$,floating:1
+  windowrulev2 = noborder,class:^(jetbrains-.*)$,title:^( )$,floating:1
+  #! Disable window flicker when autocomplete or tooltips appear
+  windowrulev2 = nofocus,class:^(jetbrains-.*)$,title:^(win.*)$,floating:1
 
   # Disable/Enable builtin screen when lid closed/opened
   bindl = , switch:off:Lid Switch, exec, hyprctl keyword monitor "eDP-1, preferred, auto, 1"
@@ -176,8 +190,8 @@ in
   # Toggle waybar
   bind=SUPER,a,exec,pkill -USR1 waybar
 
-  # Lock screen (TODO: move this to config file)
-  bind=SUPERCONTROL,q,exec,gtklock
+  # Lock screen
+  bind=SUPERCONTROL,q,exec,swaylock
 
   # Screenshots
   bind=SUPER SHIFT, s, exec, ${grim} -g "$(${slurp} -o -r -c '40E0D0')" - | ${annotateScreenshot}
@@ -296,8 +310,8 @@ in
   bind=SUPER,e,togglespecialworkspace,explorer
   windowrule=workspace special:explorer,title:.*explorer
 
-  bind=SUPERCONTROL,return,movetoworkspace,e+0
-  bind=SUPERCONTROL,return,togglespecialworkspace,explorer
+  bind=SUPERCONTROL,backspace,movetoworkspace,e+0
+  bind=SUPERCONTROL,backspace,togglespecialworkspace,explorer
   # <<<
 
   bind=SUPERSHIFTCONTROL,l,movetoworkspace,+1

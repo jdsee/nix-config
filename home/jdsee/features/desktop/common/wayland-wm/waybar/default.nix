@@ -39,8 +39,7 @@ in
         gtk-layer-shell = true;
         height = 0;
         modules-left = [
-          "wlr/workspaces"
-          # "hyprland/window"
+          "hyprland/workspaces"
         ];
         modules-center = [
           "clock"
@@ -51,23 +50,18 @@ in
           "battery"
           "backlight"
           "pulseaudio"
-          "pulseaudio#microphone"
+          # "pulseaudio#microphone"
           "tray"
         ];
 
         "hyprland/window" = {
           format = "{}";
         };
-        "wlr/workspaces" = {
-          disable-scroll = true;
-          on-click = "activate";
+
+        "hyprland/workspaces" = {
           format = "{icon}";
-          all-outputs = true;
-          active-only = false;
-          # format-icons = {
-          #   default = "";
-          #   active = "";
-          # };
+          on-scroll-up = "hyprctl dispatch workspace e+1";
+          on-scroll-down = "hyprctl dispatch workspace e-1";
           persistent-workspaces = {
             "1" = [ ];
             "2" = [ ];
@@ -81,13 +75,7 @@ in
             "10" = [ ];
           };
         };
-        "custom/weather" = {
-          tooltip = true;
-          format = "{}";
-          interval = 30;
-          exec = "~/.config/waybar/scripts/waybar-wttr.py";
-          return-type = "json";
-        };
+
         "keyboard-state" = {
           # "capslock" = true;
           "format" = "{icon} ";
@@ -96,14 +84,17 @@ in
             "unlocked" = "";
           };
         };
+
         tray = {
           icon-size = 13;
           spacing = 10;
         };
+
         clock = {
           format = "{: %R - %d/%m}";
           tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
         };
+
         backlight = {
           device = "intel_backlight";
           format = "{icon} {percent}%";
@@ -113,6 +104,7 @@ in
           on-scroll-down = "brightnessctl set 1%-";
           min-length = 6;
         };
+
         battery = {
           states = {
             good = 95;
@@ -134,24 +126,25 @@ in
           on-scroll-down = "pamixer -d 5";
           scroll-step = 5;
           format-icons = {
-            headphone = "";
-            hands-free = "";
-            headset = "";
-            phone = "";
-            portable = "";
-            car = "";
-            default = [ "" "" "" ];
+            headphone = " ";
+            hands-free = " ";
+            headset = " ";
+            phone = " ";
+            portable = " ";
+            car = " ";
+            default = [ " " " " " " ];
           };
         };
         "pulseaudio#microphone" = {
           format = "{format_source}";
-          format-source = " {volume}%";
-          format-source-muted = " Muted";
+          format-source = "{volume}%";
+          format-source-muted = "Muted";
           on-click = "pamixer --default-source -t";
           on-scroll-up = "pamixer --default-source -i 5";
           on-scroll-down = "pamixer --default-source -d 5";
           scroll-step = 5;
         };
+
       };
     };
     style = ./style.css;

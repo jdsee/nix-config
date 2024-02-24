@@ -8,7 +8,7 @@ let
   swaylock = "${pkgs.swaylock}/bin/swaylock";
 
   isLocked = "${pgrep} -x swaylock";
-  actionLock = "${swaylock}";
+  actionLock = "${swaylock} -i $HOME/.config/wallpapers/star-wars-broken-ship.jpg";
 
   lockTimeInMinutes = 5;
   lockTime = lockTimeInMinutes * 60;

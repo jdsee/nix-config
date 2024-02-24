@@ -14,7 +14,7 @@ return {
 
     telescope.load_extension('harpoon')
 
-    vim.keymap.set('n', '<Leader>hl', telescope.extensions.harpoon.marks)
+    vim.keymap.set('n', '<Leader>hl', ui.toggle_quick_menu)
     vim.keymap.set('n', '<Leader>ha', mark.add_file)
     vim.keymap.set('n', '<Leader>hr', mark.rm_file)
     vim.keymap.set('n', '<Leader>hh', mark.toggle_file)

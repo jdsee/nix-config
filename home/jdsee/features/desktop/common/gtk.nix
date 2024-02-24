@@ -17,20 +17,16 @@
     };
 
     theme = {
-      name = "Orchis-Grey-Dark-Compact";
-      package = pkgs.orchis-theme;
+      # name = "Orchis-Grey-Dark-Compact";
+      # package = pkgs.orchis-theme;
 
-      # name = "Colloid-Dark";
-      # package = pkgs.colloid-gtk-theme;
+      name = "Colloid-Dark";
+      package = pkgs.colloid-gtk-theme;
 
       # name = "Vertex-Dark";
       # package = pkgs.theme-vertex;
     };
-    # theme = {
-    # name = "Adwaita-Dark";
-    # name = "${config.colorscheme.slug}";
-    # package = gtkThemeFromScheme { scheme = config.colorscheme; };
-    # };
+
     iconTheme = {
       name = "Papirus";
       package = pkgs.papirus-icon-theme;

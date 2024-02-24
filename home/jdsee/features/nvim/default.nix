@@ -27,6 +27,7 @@
     marksman
     nodePackages_latest.eslint
     nodePackages_latest.pyright
+    nodePackages_latest.volar
     nodePackages_latest.typescript-language-server
     nodePackages_latest.bash-language-server
     rnix-lsp

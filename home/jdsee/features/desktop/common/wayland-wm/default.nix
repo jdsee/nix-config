@@ -3,6 +3,7 @@
   imports = [
     # ./alacritty.nix
     ./foot.nix
+    ./fuzzel.nix
     ./gammastep.nix
     ./mako.nix
     ./rofi.nix
