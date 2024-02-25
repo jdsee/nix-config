@@ -6,8 +6,9 @@
 
     package = pkgs.neovim-nightly;
 
-    plugins = [
-      pkgs.rustaceanvim
+    plugins = with pkgs; [
+      rustaceanvim
+      vimPlugins.nvim-treesitter.withAllGrammars
     ];
 
     viAlias = true;

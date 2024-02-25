@@ -10,17 +10,20 @@ return {
     local actions = require('oil.actions')
     oil.setup(
       {
+        delete_to_trash = true,
         view_options = {
           show_hidden = true,
         },
         win_options = {
           signcolumn = 'number',
         },
-        delete_to_trash = true,
+        preview = {
+          max_width = 0.9,
+          min_width = 0.4,
+        },
         keymaps = {
-          ['-'] = actions.parent,
           ['H'] = actions.parent,
-          ['L'] = '<C-o>',
+          ['L'] = actions.select,
           ['q'] = oil.close,
         },
       }
