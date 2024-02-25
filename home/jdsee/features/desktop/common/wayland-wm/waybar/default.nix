@@ -29,34 +29,34 @@ in
 {
   programs.waybar = {
     enable = true;
+    style = ./style.css;
     settings = {
-      primary = {
+      dock = {
         layer = "top";
         position = "top";
         mod = "dock";
+        height = 25;
         exclusive = true;
         passthrough = false;
         gtk-layer-shell = true;
-        height = 0;
+
         modules-left = [
           "hyprland/workspaces"
         ];
+
         modules-center = [
+          "hyprland/window"
           "clock"
         ];
+
         modules-right = [
-          "keyboard-state"
-          "hyprland/language"
-          "battery"
-          "backlight"
           "pulseaudio"
-          # "pulseaudio#microphone"
+          # "network"
+          "cpu"
+          "memory"
+          "battery"
           "tray"
         ];
-
-        "hyprland/window" = {
-          format = "{}";
-        };
 
         "hyprland/workspaces" = {
           format = "{icon}";
@@ -86,68 +86,61 @@ in
         };
 
         tray = {
-          icon-size = 13;
+          icon-size = 21;
           spacing = 10;
         };
 
         clock = {
-          format = "{: %R - %d/%m}";
+          format = "{ |  %R - %d/%m}";
           tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
         };
 
-        backlight = {
-          device = "intel_backlight";
-          format = "{icon} {percent}%";
-          format-icons = [ "☼" "☼" "☀" ];
+        cpu = {
+          format = "{usage}% ";
+        };
 
-          on-scroll-up = "brightnessctl set 1%+";
-          on-scroll-down = "brightnessctl set 1%-";
-          min-length = 6;
+        memory = {
+          format = "{}% ";
         };
 
         battery = {
+          bat = "BAT0";
           states = {
             good = 95;
             warning = 30;
-            critical = 20;
+            critical = 15;
           };
-          format = "{icon} {capacity}%";
-          format-charging = "⚡ {capacity}%";
-          format-plugged = "⚡ {capacity}%";
-          format-alt = "{time} {icon}";
+          format = "{capacity}% {icon}";
+          # format-full =  "", // An empty format will hide the module
+          format-charging = "🗲 {capacity}%";
+          format-plugged = "🗲 {capacity}%";
           format-icons = [ "" "" "" "" "" ];
         };
-        pulseaudio = {
-          format = "{icon} {volume}%";
-          tooltip = false;
-          format-muted = " Muted";
-          on-click = "pamixer -t";
-          on-scroll-up = "pamixer -i 5";
-          on-scroll-down = "pamixer -d 5";
-          scroll-step = 5;
-          format-icons = {
-            headphone = " ";
-            hands-free = " ";
-            headset = " ";
-            phone = " ";
-            portable = " ";
-            car = " ";
-            default = [ " " " " " " ];
-          };
-        };
-        "pulseaudio#microphone" = {
-          format = "{format_source}";
-          format-source = "{volume}%";
-          format-source-muted = "Muted";
-          on-click = "pamixer --default-source -t";
-          on-scroll-up = "pamixer --default-source -i 5";
-          on-scroll-down = "pamixer --default-source -d 5";
-          scroll-step = 5;
+
+        network = {
+          format-wifi = "{essid} ({signalStrength}%) ";
+          format-ethernet = "{ifname}: {ipaddr}/{cidr} ";
+          format-disconnected = "Disconnected ⚠";
         };
 
+        pulseaudio = {
+          scroll-step = 1;
+          format = "{volume}% {icon}";
+          format-bluetooth = "{volume}% {icon}";
+          format-muted = "";
+          format-icons = {
+            headphones = "";
+            hands-free = " ";
+            headset = " ";
+            phone = "";
+            portable = "";
+            car = "";
+            default = [ " " " " " " ];
+          };
+          on-click = "pavucontrol";
+        };
       };
     };
-    style = ./style.css;
   };
 }
 

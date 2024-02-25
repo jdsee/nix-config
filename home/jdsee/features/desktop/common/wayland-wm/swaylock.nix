@@ -8,7 +8,7 @@
       fade-in = 1;
       clock = true;
       font = config.fontProfiles.regular.family;
-      font-size = 28;
+      font-size = 26;
       line-uses-inside = true;
       disable-caps-lock-text = true;
 

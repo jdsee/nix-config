@@ -3,6 +3,7 @@ let
   # launcher = "$HOME/.config/rofi/scripts/launcher_t4";
   # powermenu = "$HOME/.config/rofi/scripts/powermenu_t1";
   rofi = "${pkgs.rofi}/bin/rofi";
+  bemoji = "${pkgs.bemoji}/bin/bemoji";
   rofi-power-menu = "${pkgs.rofi-power-menu}/bin/rofi-power-menu";
   powermenu = "${rofi} -show pm -modi pm:${rofi-power-menu}";
   fileBrowser = "ranger";
@@ -186,6 +187,7 @@ in
   bind=SUPER CONTROL,u,exec,${rofi} -show ssh
   bind=SUPER CONTROL,space,exec,rofi-rbw
   bind=SUPER CONTROL,b,exec,rofi-bluetooth
+  bind=SHIFT SUPER,e,exec,${bemoji} -t
 
   # Toggle waybar
   bind=SUPER,a,exec,pkill -USR1 waybar
@@ -306,7 +308,8 @@ in
 
   bind=SUPERCONTROL,e,exec,$TERMINAL --title=explorer -e ${fileBrowser}
   bind=SUPERCONTROL,e,exec,sleep 0.3 && hyprctl dispatch togglespecialworkspace explorer
-  bind=SUPERSHIFT,e,movetoworkspace,special:scratchpad
+  # TODO: find good shortcuts for special workspace stuff
+  # bind=SUPERSHIFT,e,movetoworkspace,special:scratchpad
   bind=SUPER,e,togglespecialworkspace,explorer
   windowrule=workspace special:explorer,title:.*explorer
 

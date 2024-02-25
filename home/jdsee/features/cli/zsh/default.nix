@@ -79,6 +79,7 @@
     shellAliases = {
       vind = "nvim -c 'Telescope zoxide list'";
       vile = "nvim -c 'Telescope find_files'";
+      oil= "nvim -c Oil";
 
       # ll = "ls -alh";
       # la = "ls -a";

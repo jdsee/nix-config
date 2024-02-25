@@ -17,185 +17,105 @@
 /* -----------------------------------------------------------------------------
  * Keyframes
  * -------------------------------------------------------------------------- */
-
-@keyframes blink-warning {
-    70% {
-        color: white;
-    }
-
-    to {
-        color: white;
-        background-color: orange;
-    }
-}
-
-@keyframes blink-critical {
-    70% {
-      color: white;
-    }
-
-    to {
-        color: white;
-        background-color: red;
-    }
-}
-
-
-/* -----------------------------------------------------------------------------
- * Base styles
- * -------------------------------------------------------------------------- */
-
-/* Reset all styles */
 * {
+    background: #323232;
+    color: #d3d3d3;
+    font-family: "FiraSans Nerd Font";
+    font-size: 14px;
     border: none;
     border-radius: 0;
     min-height: 0;
-    margin: 0;
-    padding: 0;
 }
 
-/* The whole bar */
-#waybar {
-    background: #323232;
+window#waybar {
+    background: transparent;
     color: white;
-    font-family: Hurmit Nerd Font;
-    font-size: 13px;
 }
 
-/* Each module */
-#battery,
-#clock,
-#cpu,
-#custom-keyboard-layout,
-#memory,
-#mode,
-#network,
-#pulseaudio,
-#temperature,
-#tray {
-    padding-left: 10px;
-    padding-right: 10px;
+#window {
+    font-weight: bold;
+    font-family: "FiraSans Nerd Font";
+}
+/*
+#workspaces {
+    padding: 0 5px;
+}
+*/
+
+#workspaces button {
+    padding: 0 5px;
+    background: transparent;
+    color: white;
+    border-top: 2px solid transparent;
 }
 
-
-/* -----------------------------------------------------------------------------
- * Module styles
- * -------------------------------------------------------------------------- */
-
-#battery {
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
+#workspaces button.active {
+    color: #c9545d;
+    border-top: 2px solid #c9545d;
 }
 
-#battery.warning {
-    color: orange;
+#mode {
+    background: #64727D;
+    border-bottom: 3px solid white;
 }
 
-#battery.critical {
-    color: red;
-}
-
-#battery.warning.discharging {
-    animation-name: blink-warning;
-    animation-duration: 3s;
-}
-
-#battery.critical.discharging {
-    animation-name: blink-critical;
-    animation-duration: 2s;
+#clock, #battery, #cpu, #memory, #network, #pulseaudio, #custom-spotify, #tray, #mode {
+    padding: 0 3px;
+    margin: 0 2px;
 }
 
 #clock {
     font-weight: bold;
 }
 
-#cpu {
-  /* No styles */
+#battery {
 }
 
-#cpu.warning {
-    color: orange;
-}
-
-#cpu.critical {
+#battery icon {
     color: red;
 }
 
-#memory {
+#battery.charging {
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffb21b;
+        color: black;
+    }
+}
+
+#battery.warning:not(.charging) {
+    color: white;
+    animation-name: blink;
+    animation-duration: 1s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     animation-direction: alternate;
 }
 
-#memory.warning {
-    color: orange;
+#cpu {
 }
 
-#memory.critical {
-    color: red;
-    animation-name: blink-critical;
-    animation-duration: 2s;
-}
-
-#mode {
-    background: #64727D;
-    border-top: 2px solid white;
-    /* To compensate for the top border and still have vertical centering */
-    padding-bottom: 2px;
+#memory {
 }
 
 #network {
-    /* No styles */
 }
 
 #network.disconnected {
-    color: orange;
+    background: #f53c3c;
 }
 
 #pulseaudio {
-    /* No styles */
 }
 
 #pulseaudio.muted {
-    /* No styles */
 }
 
 #custom-spotify {
     color: rgb(102, 220, 105);
 }
 
-#temperature {
-    /* No styles */
-}
-
-#temperature.critical {
-    color: red;
-}
-
 #tray {
-    /* No styles */
-}
-
-#window {
-    font-weight: bold;
-}
-
-#workspaces button {
-    border-top: 2px solid transparent;
-    /* To compensate for the top border and still have vertical centering */
-    padding-bottom: 2px;
-    padding-left: 10px;
-    padding-right: 10px;
-    color: #888888;
-}
-
-#workspaces button.active {
-    border-color: #282828;
-    /* color: white; */
-    background-color: #282828;
-}
-
-#workspaces button.urgent {
-    color: #c9545d;
 }
