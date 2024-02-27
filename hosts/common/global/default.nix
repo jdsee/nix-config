@@ -5,6 +5,7 @@
     inputs.home-manager.nixosModules.home-manager
     ./locale.nix
     ./nix.nix
+    ./nix-ld.nix
   ] ++ (builtins.attrValues outputs.nixosModules);
 
   home-manager = {
