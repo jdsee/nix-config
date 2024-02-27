@@ -29,6 +29,7 @@
     wl-mirror
     wtype
     ydotool
+    xwaylandvideobridge
   ];
 
   home.sessionVariables = {
