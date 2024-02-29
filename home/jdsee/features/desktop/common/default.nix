@@ -20,6 +20,7 @@
   home.packages = with pkgs; [
     cinnamon.nemo-with-extensions
     libreoffice
+    xdg-utils
 
     # communication
     thunderbird
