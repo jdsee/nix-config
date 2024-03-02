@@ -1,10 +1,7 @@
 { pkgs, ... }:
 {
   imports = [
-    # ./alacritty.nix
-    ./eww
     ./foot.nix
-    ./fuzzel.nix
     ./gammastep.nix
     ./mako.nix
     ./rofi.nix
