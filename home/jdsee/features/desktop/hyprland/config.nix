@@ -1,15 +1,16 @@
 { pkgs, ... }:
 let
-  # launcher = "$HOME/.config/rofi/scripts/launcher_t4";
-  # powermenu = "$HOME/.config/rofi/scripts/powermenu_t1";
   rofi = "${pkgs.rofi}/bin/rofi";
   bemoji = "${pkgs.bemoji}/bin/bemoji";
   rofi-power-menu = "${pkgs.rofi-power-menu}/bin/rofi-power-menu";
   powermenu = "${rofi} -show pm -modi pm:${rofi-power-menu}";
-  fileBrowser = "ranger";
+  fileBrowser = "nnn";
   terminal = "${pkgs.foot}/bin/foot";
   grim = "${pkgs.grim}/bin/grim";
   slurp = "${pkgs.slurp}/bin/slurp";
+  hyprlock = "${pkgs.hyprlock}/bin/hyprlock";
+  hypridle = "${pkgs.hypridle}/bin/hypridle";
+  hyprpaper = "${pkgs.hyprpaper}/bin/hyprpaper";
   annotateScreenshot = "${pkgs.satty}/bin/satty --filename - --init-tool blur --output-filename ~/Screenshots/screenshot-$(date '+%Y%m%d-%H:%M:%S').png";
 in
 ''
@@ -25,8 +26,8 @@ in
   # STARTUP
   exec-once=waybar && waybar
   exec-once=mako && mako
-  exec-once=swayidle && swayidle -w
-  exec-once=hyprpaper && hyprpaper
+  exec-once=${hypridle} && ${hypridle}
+  exec-once=${hyprpaper} && ${hyprpaper}
   exec-once=blueman-applet && blueman-applet
   exec-once=nm-applet && nm-applet --indicator
 
@@ -37,6 +38,8 @@ in
   exec-once = command -v thunderbird && thunderbird
 
   # WORKSPACE RULES
+
+  # TODO: Setup workspaces with https://github.com/emersion/kanshi
 
   # primary
   workspace=1,monitor:DP-3
@@ -58,7 +61,7 @@ in
   windowrule=dimaround,^(Rofi)$
   windowrule=center,^(Rofi)$
 
-  windowrule=opacity 1.0,^(foot|main-term)$
+  windowrule=opacity 0.9,^(foot|main-term)$
   windowrule=opacity 0.85,^(org.pwmt.zathura)$
 
   windowrulev2 = float, title:^Bluetooth Devices$
@@ -96,14 +99,14 @@ in
   # Disable/Enable builtin screen when lid closed/opened
   bindl = , switch:off:Lid Switch, exec, hyprctl keyword monitor "eDP-1, preferred, auto, 1"
   bindl = , switch:on:Lid Switch, exec, ~/.config/hypr/disable_internal_monitor.sh
-  bindl = , switch:on:Lid Switch, exec, hyprpaper # Restart hyprpaper since it crashes when disabling eDP-1
+  bindl = , switch:on:Lid Switch, exec, ${hyprpaper} # Restart hyprpaper since it crashes when disabling eDP-1
 
   # SETTINGS
 
   general {
-    gaps_in=2
-    gaps_out=4
-    border_size=2
+    gaps_in=5
+    gaps_out=10
+    border_size=3
     col.active_border=0xFFEBDBB2
     cursor_inactive_timeout=0
   }
@@ -184,7 +187,7 @@ in
   bind=SUPER,space,exec,${rofi} -show drun
   bind=SUPER,escape,exec,${powermenu}
   bind=ALT CONTROL,space,exec,${rofi} -show combi
-  bind=SUPER CONTROL,u,exec,${rofi} -show ssh
+  bind=SUPER CONTROL,s,exec,${rofi} -show ssh
   bind=SUPER CONTROL,space,exec,rofi-rbw
   bind=SUPER CONTROL,b,exec,rofi-bluetooth
   bind=SHIFT SUPER,e,exec,${bemoji} -t
@@ -193,7 +196,7 @@ in
   bind=SUPER,a,exec,pkill -USR1 waybar
 
   # Lock screen
-  bind=SUPERCONTROL,q,exec,swaylock
+  bind=SUPERCONTROL,q,exec,${hyprlock}
 
   # Screenshots
   bind=SUPER SHIFT, s, exec, ${grim} -g "$(${slurp} -o -r -c '40E0D0')" - | ${annotateScreenshot}

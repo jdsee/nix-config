@@ -19,8 +19,9 @@
 
   home.packages = with pkgs; [
     hyprpaper
-    swaybg
-    swayidle
+    hyprlock
+    hypridle
+    swayidle # TODO: drop this if hypridle is cool
   ];
 
   wayland.windowManager.hyprland = {
@@ -37,11 +38,18 @@
   };
 
   xdg.configFile = {
+    "hypr/hyprlock.conf" = {
+      text = builtins.readFile ./hyprlock.conf;
+    };
+    "hypr/hypridle.conf" = {
+      text = builtins.readFile ./hypridle.conf;
+    };
     "hypr/hyprpaper.conf" = {
       text = ''
         ipc = off
         preload = ~/.config/wallpapers/star-wars-broken-ship.jpg
-        wallpaper = eDP-1,~/.config/wallpapers/star-wars-broken-ship.jpg
+        preload = ~/.config/wallpapers/Road-Trip_2560x1440.png
+        wallpaper = eDP-1,~/.config/wallpapers/Road-Trip_2560x1440.png
         wallpaper = DP-1,~/.config/wallpapers/star-wars-broken-ship.jpg
         wallpaper = DP-2,~/.config/wallpapers/star-wars-broken-ship.jpg
         wallpaper = DP-3,~/.config/wallpapers/star-wars-broken-ship.jpg
