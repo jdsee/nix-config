@@ -3,9 +3,9 @@
 {
   imports = [
     ./git
-    ./ranger
     ./tmux
     ./vim.nix
+    ./nnn.nix
     ./zsh
   ];
 
