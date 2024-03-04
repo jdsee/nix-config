@@ -45,8 +45,8 @@ in
         ];
 
         modules-center = [
-          "hyprland/window"
-          "clock"
+          # "hyprland/window"
+          "clock" # TODO: this doesn't seem to work :(
         ];
 
         modules-right = [

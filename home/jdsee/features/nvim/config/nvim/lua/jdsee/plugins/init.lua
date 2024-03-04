@@ -1,15 +1,16 @@
 return {
-  -- Want to try:
+  -- TODO: Want to try:
   -- - 'nvim-pack/nvim-spectre'
+  -- - Nvim ChatGpt
 
-  'tpope/vim-repeat', -- repeat plugin commands with .
-  'tpope/vim-surround', -- work on surrounding characters like [(
-  'tpope/vim-unimpaired', -- Pairs of hande bracket mappings       
-  'wellle/targets.vim', -- inner style text objects                
-  'dhruvasagar/vim-table-mode', -- markdown table support          
-  'ThePrimeagen/vim-be-good', -- game to practice vim movements    
-  'xiyaowong/transparent.nvim', -- Simple command to make bg tran  
-  'chentoast/marks.nvim', -- View marks in sign column             
+  'tpope/vim-repeat',           -- repeat plugin commands with .
+  'tpope/vim-surround',         -- work on surrounding characters like [(
+  'tpope/vim-unimpaired',       -- Pairs of hande bracket mappings
+  'wellle/targets.vim',         -- inner style text objects
+  'dhruvasagar/vim-table-mode', -- markdown table support
+  'ThePrimeagen/vim-be-good',   -- game to practice vim movements
+  'xiyaowong/transparent.nvim', -- Simple command to make bg tran
+  'chentoast/marks.nvim',       -- View marks in sign column
 
   {
     'jdsee/umlauts.nvim',
@@ -42,5 +43,19 @@ return {
     'nvim-telescope/telescope-fzf-native.nvim',
     build = 'make'
   },
+
+  {
+    'stevearc/dressing.nvim',
+    opts = {},
+  },
+
+  {
+    'smjonas/inc-rename.nvim',
+    config = function()
+      require('inc_rename').setup {
+        input_buffer_type = 'dressing',
+      }
+    end,
+  }
 
 }
