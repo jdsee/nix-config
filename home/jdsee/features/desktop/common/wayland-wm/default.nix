@@ -24,6 +24,8 @@
     wf-recorder
     wl-clipboard
     wl-mirror
+    wlr-randr
+    nwg-displays
     wtype
     ydotool
     xwaylandvideobridge
