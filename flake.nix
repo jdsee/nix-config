@@ -9,11 +9,6 @@
     xremap-flake.url = "github:xremap/nix-flake";
     rustaceanvim.url = "github:mrcjkb/rustaceanvim";
 
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nix-ld-rs = {
       url = "github:nix-community/nix-ld-rs";
       inputs.nixpkgs.follows = "nixpkgs";

@@ -61,6 +61,8 @@
       pdftk # PDF utils
       steam-run # Emulate FHS file system
       tomato-c # Focus timer
+      tldr # Abbreviated man pages
+      dust # More intuitive alternative to du
 
       # compression
       p7zip
