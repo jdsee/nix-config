@@ -46,7 +46,7 @@ in
 
         modules-center = [
           # "hyprland/window"
-          "clock" # TODO: this doesn't seem to work :(
+          "clock"
         ];
 
         modules-right = [
@@ -91,7 +91,6 @@ in
         };
 
         clock = {
-          format = "{ |  %R - %d/%m}";
           tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
         };
 
