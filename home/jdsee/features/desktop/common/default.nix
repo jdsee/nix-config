@@ -21,6 +21,7 @@
     cinnamon.nemo-with-extensions
     libreoffice
     xdg-utils
+    bruno
 
     # communication
     thunderbird
