@@ -166,10 +166,6 @@ in
     }
   }
 
-  device:keyboard {
-    kb_layout=us,de
-  }
-
   gestures {
     workspace_swipe=true
   }
