@@ -8,6 +8,10 @@ return {
       options = {
         theme = 'auto',
         globalstatus = true,
+        section_separators = {
+          left = '',
+          right = ''
+        },
       }
     }
   end,
