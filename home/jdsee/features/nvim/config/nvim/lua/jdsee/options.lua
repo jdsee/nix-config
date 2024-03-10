@@ -25,7 +25,7 @@ opt.formatoptions:remove 'o'
 opt.wildmode = 'longest:full'
 opt.wildoptions = 'pum'
 opt.completeopt = { 'menu', 'menuone', 'noselect' }
--- TODO: opt.shortmess:append 'a'                -- use all message abbreviations
+opt.shortmess:append 'a' -- use all message abbreviations
 
 -- Scrolling
 opt.scrolloff = 2 -- keep cursor away from vertical borders
