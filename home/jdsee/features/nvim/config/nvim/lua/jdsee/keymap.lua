@@ -53,8 +53,3 @@ vim.keymap.set('i', '<A-S-j>', '<Esc>:m .+1<CR>==gi') -- move line down
 vim.keymap.set('i', '<A-S-k>', ':m .+1<CR>==') -- move line up
 vim.keymap.set('v', '<A-S-j>', ":m '>+1<CR>gv=gv") -- move line down
 vim.keymap.set('v', '<A-S-k>', ":m '<-2<CR>gv=gv") -- move line up
-
--- Custom text objects
--- TODO: these don't work
-vim.keymap.set('o', 'af', ':exec "normal! ggVG"<CR>') -- whole buffer text object
-vim.keymap.set('o', 'if', ':exec "normal! ggVG"<CR>') ---

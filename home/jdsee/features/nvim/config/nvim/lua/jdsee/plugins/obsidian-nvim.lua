@@ -20,19 +20,23 @@ return {
       },
 
       daily_notes = {
-        folder = 'dailies',
+        folder = '05 - Daily Notes',
         date_format = '%Y-%m-%d',
         template = nil,
       },
 
       templates = {
-        subdir = "templates",
+        subdir = "04 - Templates",
         date_format = "%Y-%m-%d",
         time_format = "%H:%M",
         substitutions = {},
       },
 
       mappings = {
+        ['gd'] = {
+          action = obsidian.util.gf_passthrough,
+          opts = { noremap = false, expr = true, buffer = true },
+        },
         ['gf'] = {
           action = obsidian.util.gf_passthrough,
           opts = { noremap = false, expr = true, buffer = true },
@@ -41,9 +45,10 @@ return {
           action = obsidian.util.toggle_checkbox,
           opts = { buffer = true },
         },
-        -- ['<leader>ob'] = {
-        --   action = nil, -- TODO
-        -- }
+        ['<leader>ot'] = {
+          action = obsidian.commands.template,
+          opts = { buffer = true },
+        },
       },
 
       note_id_func = function(title)

@@ -12,10 +12,7 @@
   programs = {
     nushell.enable = true;
 
-    eza = {
-      enable = true;
-      enableAliases = true; # TODO
-    };
+    eza.enable = true;
 
     atuin = {
       enable = true;

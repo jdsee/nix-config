@@ -8,6 +8,7 @@
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     xremap-flake.url = "github:xremap/nix-flake";
     rustaceanvim.url = "github:mrcjkb/rustaceanvim";
+    # nixvim-config.url = "github:jdsee/nixvim-config";
 
     nix-ld-rs = {
       url = "github:nix-community/nix-ld-rs";
@@ -21,7 +22,7 @@
     };
   };
 
-  outputs = inputs @ { self, nixpkgs, home-manager, flake-utils, xremap-flake, nixvim, ... }:
+  outputs = inputs @ { self, nixpkgs, home-manager, flake-utils, xremap-flake, ... }:
     let
       inherit (self) outputs;
       forEachSystem = flake-utils.lib.eachDefaultSystem;

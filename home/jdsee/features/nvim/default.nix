@@ -1,10 +1,13 @@
 { config, pkgs, lib, inputs, ... }:
+let
+  system = "x86_64-linux";
+in
 {
+  # TODO: Move Neovim config to separate flake
+
   programs.neovim = {
     enable = true;
     defaultEditor = true;
-
-    package = pkgs.neovim-nightly;
 
     plugins = with pkgs; [
       rustaceanvim
@@ -21,6 +24,7 @@
   };
 
   home.packages = with pkgs; [
+    # inputs.nixvim-config.packages.${system}.default
     dockerfile-language-server-nodejs
     elmPackages.elm-language-server
     kotlin-language-server
@@ -31,8 +35,9 @@
     nodePackages_latest.volar
     nodePackages_latest.typescript-language-server
     nodePackages_latest.bash-language-server
-    rnix-lsp
+    nil
     texlab
+    phpactor
     vscode-langservers-extracted # html/css/json/eslint
     yaml-language-server
   ];

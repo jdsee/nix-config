@@ -9,8 +9,10 @@ return {
   'wellle/targets.vim',         -- inner style text objects
   'dhruvasagar/vim-table-mode', -- markdown table support
   'ThePrimeagen/vim-be-good',   -- game to practice vim movements
-  'xiyaowong/transparent.nvim', -- Simple command to make bg tran
+  'xiyaowong/transparent.nvim', -- Simple command to make bg transparent
   'chentoast/marks.nvim',       -- View marks in sign column
+  'gleam-lang/gleam.vim',       -- Syntax Highlighting and snippets for Gleam
+  'ChrisWellsWood/roc.vim',     -- Syntax Highlighting for Roc
 
   {
     'jdsee/umlauts.nvim',
