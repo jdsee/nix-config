@@ -4,8 +4,7 @@
   programs.zsh = {
     enable = true;
     enableCompletion = false; # leads to bugs when enabled - zplug already calls compinit
-    enableAutosuggestions = true;
-    # autosuggestion.enable = true;
+    autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
 
     defaultKeymap = "emacs";

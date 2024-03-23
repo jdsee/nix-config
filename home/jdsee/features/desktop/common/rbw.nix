@@ -8,8 +8,7 @@ in {
     settings = {
       email = "joscha-seelig@protonmail.com";
       lock_timeout = timeoutInSeconds;
-      pinentry = "gnome3";
-      # pinentry = pkgs.pinentry-gnome3;
+      pinentry = pkgs.pinentry-gnome3;
     };
   };
 }
