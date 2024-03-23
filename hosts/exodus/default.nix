@@ -1,7 +1,8 @@
-{ inputs, outputs, lib, config, pkgs, ... }:
+{ pkgs, ... }:
 {
   imports = [
     ./hardware-configuration.nix
+    ./services/restic-backup.nix
 
     ../common/global
     ../common/users/jdsee
