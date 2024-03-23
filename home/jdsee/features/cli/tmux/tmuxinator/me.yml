@@ -45,4 +45,4 @@ windows:
       panes:
         - nvim -c "Telescope git_files"
         - git status
-  - editor: nvim -c "Telescope zoxide list"
+  - editor: ~/projects
