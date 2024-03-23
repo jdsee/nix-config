@@ -1,5 +1,6 @@
 -- General
 vim.keymap.set('n', '<C-C>', ':noh<CR>', { nowait = true }) -- remove visual selection
+vim.keymap.set('n', '<C-i>', '<C-i>') -- this prevents the implicit remap to <TAB>
 
 -- Navigation
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true }) -- move up wrapped line
