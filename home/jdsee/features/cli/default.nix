@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./atuin.nix
     ./git
     ./tmux
     ./vim.nix
@@ -13,11 +14,6 @@
     nushell.enable = true;
 
     eza.enable = true;
-
-    atuin = {
-      enable = true;
-      flags = [ "--disable-up-arrow" ];
-    };
 
     bat = {
       enable = true;
