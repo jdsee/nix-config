@@ -82,9 +82,10 @@
       vile = "nvim -c 'Telescope find_files'";
       oil= "nvim -c Oil";
 
-      # ll = "ls -alh";
-      # la = "ls -a";
-      # ld = "ls -ad";
+      ls = "exa";
+      ll = "ls -alh";
+      la = "ls -a";
+      ld = "ls -ad";
       tree = "la --tree";
       trees = "tree --depth 4";
 
