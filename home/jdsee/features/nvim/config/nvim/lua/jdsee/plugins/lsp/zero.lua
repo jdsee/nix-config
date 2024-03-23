@@ -33,6 +33,7 @@ local function setup_servers()
   lspconfig.tsserver.setup({})
   lspconfig.volar.setup({})
   lspconfig.phpactor.setup({})
+  lspconfig.ocamllsp.setup({})
   -- TODO, this is broken: lspconfig.kotlin_language_server.setup({})
 
   lspconfig.lua_ls.setup {

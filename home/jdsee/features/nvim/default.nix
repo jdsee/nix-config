@@ -1,7 +1,4 @@
 { config, pkgs, lib, inputs, ... }:
-let
-  system = "x86_64-linux";
-in
 {
   # TODO: Move Neovim config to separate flake
 
@@ -19,8 +16,6 @@ in
 
     withNodeJs = true;
     withPython3 = true;
-
-    extraPackages = with pkgs; [ ];
   };
 
   home.packages = with pkgs; [
@@ -29,6 +24,7 @@ in
     elmPackages.elm-language-server
     kotlin-language-server
     lua-language-server
+    ocamlPackages.ocaml-lsp
     marksman
     nodePackages_latest.eslint
     nodePackages_latest.pyright
