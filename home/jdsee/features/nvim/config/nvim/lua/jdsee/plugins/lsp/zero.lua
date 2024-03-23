@@ -30,16 +30,27 @@ local function setup_servers()
   lspconfig.elmls.setup({})
   lspconfig.gleam.setup({})
   lspconfig.jsonls.setup({})
-  lspconfig.nil_ls.setup({})
   lspconfig.tsserver.setup({})
   lspconfig.volar.setup({})
   lspconfig.phpactor.setup({})
   -- TODO, this is broken: lspconfig.kotlin_language_server.setup({})
+
   lspconfig.lua_ls.setup {
     on_attach = function()
       local lua_opts = lsp_zero.nvim_lua_ls()
       lspconfig.lua_ls.setup(lua_opts)
     end
+  }
+
+  lspconfig.nil_ls.setup {
+    autostart = true,
+    settings = {
+      ['nil'] = {
+        formatting = {
+          command = { "nixpkgs-fmt" },
+        },
+      },
+    },
   }
 end
 

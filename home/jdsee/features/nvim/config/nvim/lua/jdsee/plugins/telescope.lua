@@ -128,9 +128,6 @@ return {
     vim.keymap.set('n', '<Leader>fg', builtin.live_grep)                              -- grep everywhere
     vim.keymap.set('n', '<Leader>f*', builtin.grep_string)                            -- grep string under cursor
     vim.keymap.set('n', '<Leader>fh', builtin.help_tags)                              -- search help tags
-    vim.keymap.set('n', '<Leader>gb', builtin.git_branches)                           -- search git branches
-    vim.keymap.set('n', '<Leader>gf', builtin.git_files)                              -- search git files
-    vim.keymap.set('n', '<Leader>gc', builtin.git_commits)                            -- search git commits
     vim.keymap.set('n', '<Leader>fc', builtin.commands)                               -- search command history
     vim.keymap.set('n', '<Leader>s', builtin.treesitter)                              -- search treesitter structure
     vim.keymap.set('n', '<Leader>/', current_buffer_fuzzy_find)                       -- grep current buffer
@@ -142,5 +139,8 @@ return {
     vim.keymap.set('n', 'z=', spell_suggestions)                                      -- search spell suggestions
     vim.keymap.set('n', 'gr', lsp_find_references)                                    -- find references with lsp
     vim.keymap.set('n', '<Leader>gw', telescope.extensions.git_worktree.git_worktrees)
+    vim.keymap.set('n', '<Leader>gb', builtin.git_branches)                           -- search git branches
+    vim.keymap.set('n', '<Leader>gf', builtin.git_files)                              -- search git files
+    vim.keymap.set('n', '<Leader>gc', builtin.git_commits)                            -- search git commits
   end,
 }

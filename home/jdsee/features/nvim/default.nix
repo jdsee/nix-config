@@ -36,6 +36,7 @@ in
     nodePackages_latest.typescript-language-server
     nodePackages_latest.bash-language-server
     nil
+    nixpkgs-fmt
     texlab
     phpactor
     vscode-langservers-extracted # html/css/json/eslint

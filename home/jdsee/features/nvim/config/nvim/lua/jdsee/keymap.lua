@@ -42,9 +42,13 @@ vim.keymap.set('n', '<C-,>', ':bd<CR>') -- close buffer
 -- Clipboard
 local clip_reg = vim.fn.has('mac') == 1 and "*" or "+"
 vim.keymap.set({ 'n', 'v' }, '<Leader>y', '"' .. clip_reg .. 'y') -- copy to system clipboard
-vim.keymap.set({ 'n', 'v' }, '<Leader>Y', '"' .. clip_reg .. 'Y') -- copy to end of line to system clipboard
+vim.keymap.set({ 'n', 'v' }, '<Leader>Y', '"' .. clip_reg .. 'y$') -- copy to end of line to system clipboard
 vim.keymap.set({ 'n', 'v' }, '<Leader>p', '"' .. clip_reg .. 'p') -- paste from system clipboard
 vim.keymap.set({ 'n', 'v' }, '<Leader>P', '"' .. clip_reg .. 'P') -- paste to end of line from system clipboard
+
+-- Commandline
+vim.keymap.set('c', ':', 'lua ')
+vim.keymap.set('c', ';', '! ')
 
 -- Refactoring
 vim.keymap.set('n', '<A-S-j>', ':m .+1<CR>==') -- move line down
