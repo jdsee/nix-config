@@ -6,7 +6,6 @@
     ./git
     ./tmux
     ./vim.nix
-    ./nnn.nix
     ./zsh
   ];
 
