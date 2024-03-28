@@ -15,7 +15,7 @@ return {
         enable = true,
       },
       highlight = {
-        enable = false, -- TODO: This creates errors atm. Revert at some point
+        enable = true,
       },
       textobjects = {
         select = {
