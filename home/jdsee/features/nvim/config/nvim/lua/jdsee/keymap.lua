@@ -48,8 +48,9 @@ vim.keymap.set({ 'n', 'v' }, '<Leader>p', '"' .. clip_reg .. 'p') -- paste from 
 vim.keymap.set({ 'n', 'v' }, '<Leader>P', '"' .. clip_reg .. 'P') -- paste to end of line from system clipboard
 
 -- Commandline
-vim.keymap.set('c', ':', 'lua ')
-vim.keymap.set('c', ';', '! ')
+-- TODO: Map these only if first character
+-- vim.keymap.set('c', ':', 'lua ')
+-- vim.keymap.set('c', ';', '! ')
 
 -- Refactoring
 vim.keymap.set('n', '<A-S-j>', ':m .+1<CR>==') -- move line down
