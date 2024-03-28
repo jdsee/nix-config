@@ -8,32 +8,39 @@ return {
   config = function()
     local oil = require('oil')
     local actions = require('oil.actions')
+
+    local function toggle_cwd_float()
+      oil.toggle_float(vim.fn.getcwd())
+    end
+
     oil.setup(
       {
+        cleanup_delay_ms = false, -- prevent removal of buffers from jumplist
         delete_to_trash = true,
         view_options = {
           show_hidden = true,
+        },
+        columns = {
+          'icon',
+          -- 'permissions',
         },
         win_options = {
           signcolumn = 'number',
         },
         preview = {
           max_width = 0.9,
-          min_width = 0.4,
+          min_width = 0.6,
         },
         keymaps = {
           ['H'] = actions.parent,
           ['L'] = actions.select,
           ['q'] = oil.close,
+          ['<leader>j'] = oil.close,
         },
       }
     )
 
-    local function toggle_cwd_float()
-      oil.toggle_float(vim.fn.getcwd())
-    end
-
-    vim.keymap.set('n', '-', oil.open)
+    vim.keymap.set('n', '<leader>j', oil.open)
     vim.keymap.set('n', '<Tab>', oil.toggle_float)
     vim.keymap.set('n', '<S-Tab>', toggle_cwd_float)
 
