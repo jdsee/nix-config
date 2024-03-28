@@ -24,17 +24,18 @@
     elmPackages.elm-language-server
     kotlin-language-server
     lua-language-server
-    ocamlPackages.ocaml-lsp
     marksman
-    nodePackages_latest.eslint
-    nodePackages_latest.pyright
-    nodePackages_latest.volar
-    nodePackages_latest.typescript-language-server
-    nodePackages_latest.bash-language-server
     nil
     nixpkgs-fmt
-    texlab
+    nodePackages_latest.bash-language-server
+    nodePackages_latest.eslint
+    nodePackages_latest.pyright
+    nodePackages_latest.typescript-language-server
+    nodePackages_latest.volar
+    ocamlPackages.ocaml-lsp
     phpactor
+    tailwindcss-language-server
+    texlab
     vscode-langservers-extracted # html/css/json/eslint
     yaml-language-server
   ];

@@ -30,10 +30,10 @@ local function setup_servers()
   lspconfig.elmls.setup({})
   lspconfig.gleam.setup({})
   lspconfig.jsonls.setup({})
+  lspconfig.phpactor.setup({})
+  lspconfig.tailwindcss.setup({})
   lspconfig.tsserver.setup({})
   lspconfig.volar.setup({})
-  lspconfig.phpactor.setup({})
-  lspconfig.ocamllsp.setup({})
   -- TODO, this is broken: lspconfig.kotlin_language_server.setup({})
 
   lspconfig.lua_ls.setup {
@@ -42,6 +42,10 @@ local function setup_servers()
       lspconfig.lua_ls.setup(lua_opts)
     end
   }
+
+  lspconfig.ocamllsp.setup({
+    inlay_hints = { enabled = true },
+  })
 
   lspconfig.nil_ls.setup {
     autostart = true,
@@ -72,25 +76,31 @@ local function setup_mason()
 end
 
 return {
-  'VonHeikemen/lsp-zero.nvim',
-  branch = 'v3.x',
-  dependencies = {
-    'neovim/nvim-lspconfig',
-    'williamboman/mason-lspconfig.nvim',
-    'williamboman/mason.nvim',
-    { 'j-hui/fidget.nvim', opts = {} },
-    {
-      "SmiteshP/nvim-navbuddy",
-      dependencies = {
-        "SmiteshP/nvim-navic",
-        "MunifTanjim/nui.nvim"
-      },
-      opts = { lsp = { auto_attach = true } }
-    }
-  },
-  config = function()
-    setup_zero()
-    setup_servers()
-    setup_mason()
-  end,
+  {
+    'VonHeikemen/lsp-zero.nvim',
+    branch = 'v3.x',
+    dependencies = {
+      'neovim/nvim-lspconfig',
+      'williamboman/mason-lspconfig.nvim',
+      'williamboman/mason.nvim',
+      { 'j-hui/fidget.nvim', opts = {} },
+      {
+        "SmiteshP/nvim-navbuddy",
+        dependencies = {
+          "SmiteshP/nvim-navic",
+          "MunifTanjim/nui.nvim"
+        },
+        opts = {
+          lsp = {
+            auto_attach = true,
+          }
+        }
+      }
+    },
+    config = function()
+      setup_zero()
+      setup_servers()
+      setup_mason()
+    end,
+  }
 }
