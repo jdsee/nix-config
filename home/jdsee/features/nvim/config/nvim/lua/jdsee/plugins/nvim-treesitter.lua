@@ -6,10 +6,14 @@ return {
   dependencies = {
     'nvim-treesitter/nvim-treesitter-textobjects',
     'nvim-treesitter/nvim-treesitter-context',
+    'windwp/nvim-ts-autotag',
   },
   build = ':TSUpdate',
   config = function()
     require('nvim-treesitter.configs').setup {
+      autotag = {
+        enable = true,
+      },
       highlight = {
         enable = false, -- TODO: This creates errors atm. Revert at some point
       },
