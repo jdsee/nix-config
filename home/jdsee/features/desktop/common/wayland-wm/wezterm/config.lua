@@ -1,10 +1,14 @@
+local action = wezterm.action
+
 local config = wezterm.config_builder()
 
 config.color_scheme = 'Tokyo Night'
 
 config.font = wezterm.font 'Fira Code'
-config.font_size = 17
+config.font_size = 17.4
 
+config.use_fancy_tab_bar = false
+config.tab_bar_at_bottom = true
 config.hide_tab_bar_if_only_one_tab = true
 config.window_background_opacity = 0.85
 config.text_background_opacity = 0.95
@@ -21,33 +25,86 @@ config.enable_scroll_bar = true
 config.window_close_confirmation = 'AlwaysPrompt'
 
 -- TODO: Much more to configure here
+--
+-- Show which key table is active in the status area
+wezterm.on('update-right-status', function(window, _)
+  local name = window:active_key_table()
+  if name then
+    name = 'TABLE: ' .. name
+  end
+  window:set_right_status(name or '')
+end)
+
+local activateResizeMode = action.ActivateKeyTable {
+  name = 'resize_pane',
+  one_shot = false,
+}
 
 config.leader = { key = 'f', mods = 'CTRL' }
 config.keys = {
   {
     key = config.leader.key,
     mods = 'LEADER|CTRL',
-    action = wezterm.action { SendString = '\x01' }
+    action = action { SendString = '\x01' }
+  },
+
+  {
+    key = 'h',
+    mods = 'LEADER|CTRL',
+    action = action.Multiple {
+      action.AdjustPaneSize { 'Left', 5 },
+      activateResizeMode,
+    },
+  },
+  {
+    key = 'j',
+    mods = 'LEADER|CTRL',
+    action = action.Multiple {
+      action.AdjustPaneSize { 'Down', 5 },
+      activateResizeMode,
+    },
+  },
+  {
+    key = 'k',
+    mods = 'LEADER|CTRL',
+    action = action.Multiple {
+      action.AdjustPaneSize { 'Up', 5 },
+      activateResizeMode,
+    },
+  },
+  {
+    key = 'l',
+    mods = 'LEADER|CTRL',
+    action = action.Multiple {
+      action.AdjustPaneSize { 'Right', 5 },
+      activateResizeMode,
+    },
+  },
+
+  {
+    key = config.leader.key, -- TODO: Consider choosing a different key to be able to pass leader through
+    mods = 'LEADER|CTRL',
+    action = action.ActivateLastTab,
   },
   {
     key = '%',
     mods = 'LEADER|SHIFT',
-    action = wezterm.action { SplitVertical = { domain = 'CurrentPaneDomain' } }
+    action = action { SplitVertical = { domain = 'CurrentPaneDomain' } }
   },
   {
     key = '"',
     mods = 'LEADER|SHIFT',
-    action = wezterm.action { SplitHorizontal = { domain = 'CurrentPaneDomain' } }
+    action = action { SplitHorizontal = { domain = 'CurrentPaneDomain' } }
   },
   {
     key = 's',
     mods = 'LEADER',
-    action = wezterm.action { SplitVertical = { domain = 'CurrentPaneDomain' } }
+    action = action { SplitVertical = { domain = 'CurrentPaneDomain' } }
   },
   {
     key = 'v',
     mods = 'LEADER',
-    action = wezterm.action { SplitHorizontal = { domain = 'CurrentPaneDomain' } }
+    action = action { SplitHorizontal = { domain = 'CurrentPaneDomain' } }
   },
   {
     key = 'o',
@@ -62,122 +119,145 @@ config.keys = {
   {
     key = 'c',
     mods = 'LEADER',
-    action = wezterm.action { SpawnTab = 'CurrentPaneDomain' }
+    action = action { SpawnTab = 'CurrentPaneDomain' }
   },
   {
     key = 'h',
     mods = 'LEADER',
-    action = wezterm.action { ActivatePaneDirection = 'Left' }
+    action = action { ActivatePaneDirection = 'Left' }
   },
   {
     key = 'j',
     mods = 'LEADER',
-    action = wezterm.action { ActivatePaneDirection = 'Down' }
+    action = action { ActivatePaneDirection = 'Down' }
   },
   {
     key = 'k',
     mods = 'LEADER',
-    action = wezterm.action { ActivatePaneDirection = 'Up' }
+    action = action { ActivatePaneDirection = 'Up' }
   },
   {
     key = 'l',
     mods = 'LEADER',
-    action = wezterm.action { ActivatePaneDirection = 'Right' }
-  },
-  {
-    key = 'H',
-    mods = 'LEADER|SHIFT',
-    action = wezterm.action { AdjustPaneSize = { 'Left', 5 } }
-  },
-  {
-    key = 'J',
-    mods = 'LEADER|SHIFT',
-    action = wezterm.action { AdjustPaneSize = { 'Down', 5 } }
-  },
-  {
-    key = 'K',
-    mods = 'LEADER|SHIFT',
-    action = wezterm.action { AdjustPaneSize = { 'Up', 5 } }
-  },
-  {
-    key = 'L',
-    mods = 'LEADER|SHIFT',
-    action = wezterm.action { AdjustPaneSize = { 'Right', 5 } }
+    action = action { ActivatePaneDirection = 'Right' }
   },
   {
     key = 'n',
     mods = 'LEADER',
-    action = wezterm.action { ActivateTabRelative = 1 }
+    action = action { ActivateTabRelative = 1 }
   },
   {
     key = 'p',
     mods = 'LEADER',
-    action = wezterm.action { ActivateTabRelative = -1 }
+    action = action { ActivateTabRelative = -1 }
   },
   {
     key = '1',
     mods = 'LEADER',
-    action = wezterm.action { ActivateTab = 0 }
+    action = action { ActivateTab = 0 }
   },
   {
     key = '2',
     mods = 'LEADER',
-    action = wezterm.action { ActivateTab = 1 }
+    action = action { ActivateTab = 1 }
   },
   {
     key = '3',
     mods = 'LEADER',
-    action = wezterm.action { ActivateTab = 2 }
+    action = action { ActivateTab = 2 }
   },
   {
     key = '4',
     mods = 'LEADER',
-    action = wezterm.action { ActivateTab = 3 }
+    action = action { ActivateTab = 3 }
   },
   {
     key = '5',
     mods = 'LEADER',
-    action = wezterm.action { ActivateTab = 4 }
+    action = action { ActivateTab = 4 }
   },
   {
     key = '6',
     mods = 'LEADER',
-    action = wezterm.action { ActivateTab = 5 }
+    action = action { ActivateTab = 5 }
   },
   {
     key = '7',
     mods = 'LEADER',
-    action = wezterm.action { ActivateTab = 6 }
+    action = action { ActivateTab = 6 }
   },
   {
     key = '8',
     mods = 'LEADER',
-    action = wezterm.action { ActivateTab = 7 }
+    action = action { ActivateTab = 7 }
   },
   {
     key = '9',
     mods = 'LEADER',
-    action = wezterm.action { ActivateTab = 8 }
+    action = action { ActivateTab = 8 }
   },
   {
     key = '&',
     mods = 'LEADER|SHIFT',
-    action = wezterm.action { CloseCurrentTab = { confirm = true } }
+    action = action { CloseCurrentTab = { confirm = true } }
   },
   {
     key = 'd',
     mods = 'LEADER',
-    action = wezterm.action { CloseCurrentPane = { confirm = true } }
+    action = action { CloseCurrentPane = { confirm = true } }
   },
   {
     key = 'x',
     mods = 'LEADER',
-    action = wezterm.action { CloseCurrentPane = { confirm = true } }
+    action = action { CloseCurrentPane = { confirm = true } }
   },
   {
     key = '[',
     mods = 'LEADER',
-    action = wezterm.action.ActivateCopyMode
+    action = action.ActivateCopyMode
+  },
+  {
+    key = ']',
+    mods = 'LEADER',
+    action = action { PasteFrom = "Clipboard" }
+  },
+  {
+    key = ',',
+    mods = 'LEADER',
+    action = action.PromptInputLine {
+      description = 'Enter new name for tab',
+      action = wezterm.action_callback(function(window, _, line)
+        if line then
+          window:active_tab():set_title(line)
+        end
+      end),
+    },
   },
 }
+
+config.key_tables = {
+  resize_pane = {
+    {
+      key = 'h',
+      mods = 'CTRL',
+      action = action.AdjustPaneSize { 'Left', 5 }
+    },
+    {
+      key = 'j',
+      mods = 'CTRL',
+      action = action.AdjustPaneSize { 'Down', 5 }
+    },
+    {
+      key = 'k',
+      mods = 'CTRL',
+      action = action.AdjustPaneSize { 'Up', 5 }
+    },
+    {
+      key = 'l',
+      mods = 'CTRL',
+      action = action.AdjustPaneSize { 'Right', 5 }
+    },
+  },
+}
+
 return config
