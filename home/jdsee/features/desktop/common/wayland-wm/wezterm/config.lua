@@ -37,7 +37,8 @@ end)
 
 local activateResizeMode = action.ActivateKeyTable {
   name = 'resize_pane',
-  one_shot = false,
+  one_shot = true,
+  timeout_milliseconds = 500,
 }
 
 config.disable_default_key_bindings = true -- TODO: Disable default keys as soon as setup
@@ -150,7 +151,17 @@ config.keys = {
   },
 
   {
-    key = config.leader.key, -- TODO: Consider choosing a different key to be able to pass leader through
+    key = '>',
+    mods = 'LEADER|SHIFT',
+    action = action.MoveTabRelative(1),
+  },
+  {
+    key = '<',
+    mods = 'LEADER|SHIFT',
+    action = action.MoveTabRelative(-1),
+  },
+  {
+    key = 'f', -- TODO: Consider choosing a different key to be able to pass leader through
     mods = 'LEADER|CTRL',
     action = action.ActivateLastTab,
   },
@@ -305,22 +316,34 @@ config.key_tables = {
     {
       key = 'h',
       mods = 'CTRL',
-      action = action.AdjustPaneSize { 'Left', 5 }
+      action = action.Multiple {
+        action.AdjustPaneSize { 'Left', 5 },
+        activateResizeMode
+      }
     },
     {
       key = 'j',
       mods = 'CTRL',
-      action = action.AdjustPaneSize { 'Down', 5 }
+      action = action.Multiple {
+        action.AdjustPaneSize { 'Down', 5 },
+        activateResizeMode
+      }
     },
     {
       key = 'k',
       mods = 'CTRL',
-      action = action.AdjustPaneSize { 'Up', 5 }
+      action = action.Multiple {
+        action.AdjustPaneSize { 'Up', 5 },
+        activateResizeMode
+      }
     },
     {
       key = 'l',
       mods = 'CTRL',
-      action = action.AdjustPaneSize { 'Right', 5 }
+      action = action.Multiple {
+        action.AdjustPaneSize { 'Right', 5 },
+        activateResizeMode
+      }
     },
   },
 }
