@@ -3,12 +3,13 @@
   imports = [
     ./foot.nix
     ./gammastep.nix
+    ./gtklock.nix
     ./mako.nix
     ./rofi.nix
     ./swayidle.nix
     ./swaylock.nix
-    ./gtklock.nix
     ./waybar
+    ./wezterm
     ./zathura.nix
   ];
 

@@ -8,9 +8,10 @@
       rofi-rbw
       rofi-power-menu
     ];
-    theme = "${config.xdg.configHome}/rofi/rofi-themes-collection/themes/squared-everforest.rasi";
+    # theme = "material by Tomaszal";
+    # theme = "${config.xdg.configHome}/rofi/rofi-themes-collection/themes/squared-everforest.rasi";
     font = "${config.fontProfiles.regular.family} 12";
-    terminal = "${pkgs.foot}";
+    terminal = "${pkgs.wezterm}";
     cycle = true;
   };
 
