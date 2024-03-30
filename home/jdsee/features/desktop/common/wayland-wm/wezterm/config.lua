@@ -41,8 +41,7 @@ local activateResizeMode = action.ActivateKeyTable {
   timeout_milliseconds = 500,
 }
 
-config.disable_default_key_bindings = true -- TODO: Disable default keys as soon as setup
-
+config.disable_default_key_bindings = true
 config.leader = { key = 'f', mods = 'CTRL', timeout_milliseconds = 1000 }
 config.keys = {
   {
@@ -293,12 +292,22 @@ config.keys = {
   {
     key = 'c',
     mods = 'CTRL|SHIFT',
-    action = action { Copyto = 'Clipboard' }
+    action = action { CopyTo = 'Clipboard' }
   },
   {
     key = 'v',
     mods = 'CTRL|SHIFT',
     action = action { PasteFrom = 'Clipboard' }
+  },
+  {
+    key = 'j',
+    mods = 'LEADER',
+    action = action.QuickSelect
+  },
+  {
+    key = '/',
+    mods = 'LEADER',
+    action = action.Search { CaseInSensitiveString = '' }
   },
   {
     key = ',',
