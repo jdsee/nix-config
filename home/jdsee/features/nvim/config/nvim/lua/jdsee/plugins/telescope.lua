@@ -135,7 +135,7 @@ return {
     vim.keymap.set('n', '<Leader>fd', builtin.diagnostics)                            -- search errors from lsp
     vim.keymap.set('n', '<Leader>a', lsp_code_actions)                                -- search code actions in telescope
     vim.keymap.set('n', '<Leader>fl', telescope.extensions.bibtex.bibtex)             -- search errors from lsp
-    vim.keymap.set('n', '<Leader><Tab>', buffers)                                     -- search buffers
+    vim.keymap.set('n', '<Tab>', buffers)                                             -- search buffers
     vim.keymap.set('n', '<Leader>n', buffers)                                         -- search buffers
     vim.keymap.set('n', 'z=', spell_suggestions)                                      -- search spell suggestions
     vim.keymap.set('n', 'gr', lsp_find_references)                                    -- find references with lsp
