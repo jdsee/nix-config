@@ -9,7 +9,7 @@ config.font_size = 17.4
 
 config.use_fancy_tab_bar = false
 config.tab_bar_at_bottom = true
-config.hide_tab_bar_if_only_one_tab = true
+config.hide_tab_bar_if_only_one_tab = false
 config.window_background_opacity = 0.85
 config.text_background_opacity = 0.95
 
@@ -24,15 +24,15 @@ config.scrollback_lines = 3500
 config.enable_scroll_bar = true
 config.window_close_confirmation = 'AlwaysPrompt'
 
--- TODO: Much more to configure here
---
--- Show which key table is active in the status area
 wezterm.on('update-right-status', function(window, _)
-  local name = window:active_key_table()
-  if name then
-    name = 'TABLE: ' .. name
+  local key_table = window:active_key_table()
+  if key_table then
+    key_table = 'TABLE: ' .. key_table
   end
-  window:set_right_status(name or '')
+
+  -- Always show active workspace
+  -- Show active key table only if present
+  window:set_right_status(window:active_workspace() .. ' | ' .. (key_table or ''))
 end)
 
 local activateResizeMode = action.ActivateKeyTable {
@@ -40,7 +40,9 @@ local activateResizeMode = action.ActivateKeyTable {
   one_shot = false,
 }
 
-config.leader = { key = 'f', mods = 'CTRL' }
+config.disable_default_key_bindings = true -- TODO: Disable default keys as soon as setup
+
+config.leader = { key = 'f', mods = 'CTRL', timeout_milliseconds = 1000 }
 config.keys = {
   {
     key = config.leader.key,
@@ -82,6 +84,72 @@ config.keys = {
   },
 
   {
+    key = ';', -- TODO: Find a good way to switch to last active pane
+    mods = 'LEADER',
+    action = action { EmitEvent = "activate-last-pane" },
+  },
+  {
+    key = 'o',
+    mods = 'LEADER|SHIFT',
+    action = action.Multiple {
+      action { EmitEvent = "activate-last-pane" },
+      action.TogglePaneZoomState,
+    }
+  },
+
+  {
+    key = "Space",
+    mods = "LEADER",
+    action = wezterm.action.RotatePanes "Clockwise"
+  },
+  {
+    key = '?',
+    mods = 'LEADER|SHIFT',
+    action = wezterm.action.PaneSelect {
+      mode = 'SwapWithActive',
+    },
+  },
+
+  {
+    key = 'a',
+    mods = 'LEADER',
+    action = wezterm.action.ShowLauncher,
+  },
+
+  {
+    key = 's',
+    mods = 'LEADER',
+    action = wezterm.action.ShowLauncherArgs { flags = "FUZZY|WORKSPACES" },
+  },
+  {
+    key = 'L',
+    mods = 'LEADER | SHIFT',
+    action = action.SwitchWorkspaceRelative(1) -- TODO: Is there a way to switch to last active ws?
+  },
+
+  {
+    key = 'S',
+    mods = 'LEADER|SHIFT',
+    action = action.PromptInputLine {
+      description = wezterm.format {
+        { Attribute = { Intensity = 'Bold' } },
+        { Foreground = { AnsiColor = 'Fuchsia' } },
+        { Text = 'Enter name for new workspace' },
+      },
+      action = wezterm.action_callback(function(window, pane, line)
+        if line then
+          window:perform_action(
+            action.SwitchToWorkspace {
+              name = line,
+            },
+            pane
+          )
+        end
+      end),
+    },
+  },
+
+  {
     key = config.leader.key, -- TODO: Consider choosing a different key to be able to pass leader through
     mods = 'LEADER|CTRL',
     action = action.ActivateLastTab,
@@ -94,16 +162,6 @@ config.keys = {
   {
     key = '"',
     mods = 'LEADER|SHIFT',
-    action = action { SplitHorizontal = { domain = 'CurrentPaneDomain' } }
-  },
-  {
-    key = 's',
-    mods = 'LEADER',
-    action = action { SplitVertical = { domain = 'CurrentPaneDomain' } }
-  },
-  {
-    key = 'v',
-    mods = 'LEADER',
     action = action { SplitHorizontal = { domain = 'CurrentPaneDomain' } }
   },
   {
@@ -219,13 +277,17 @@ config.keys = {
   {
     key = ']',
     mods = 'LEADER',
-    action = action { PasteFrom = "Clipboard" }
+    action = action { PasteFrom = 'Clipboard' }
   },
   {
     key = ',',
     mods = 'LEADER',
     action = action.PromptInputLine {
-      description = 'Enter new name for tab',
+      description = wezterm.format {
+        { Attribute = { Intensity = 'Bold' } },
+        { Foreground = { AnsiColor = 'Fuchsia' } },
+        { Text = 'Enter new name for tab' },
+      },
       action = wezterm.action_callback(function(window, _, line)
         if line then
           window:active_tab():set_title(line)
@@ -233,6 +295,9 @@ config.keys = {
       end),
     },
   },
+  { key = '=', mods = 'CTRL', action = action.IncreaseFontSize },
+  { key = '-', mods = 'CTRL', action = action.DecreaseFontSize },
+  { key = '0', mods = 'CTRL', action = action.ResetFontSize },
 }
 
 config.key_tables = {
