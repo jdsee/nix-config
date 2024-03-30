@@ -85,11 +85,6 @@ config.keys = {
   },
 
   {
-    key = ';', -- TODO: Find a good way to switch to last active pane
-    mods = 'LEADER',
-    action = action { EmitEvent = "activate-last-pane" },
-  },
-  {
     key = 'o',
     mods = 'LEADER|SHIFT',
     action = action.Multiple {
@@ -211,6 +206,11 @@ config.keys = {
     action = action { ActivatePaneDirection = 'Right' }
   },
   {
+    key = ';',
+    mods = 'LEADER',
+    action = action { ActivatePaneDirection = "Next" } -- TODO: Replace this with last active tab when possible
+  },
+  {
     key = 'n',
     mods = 'LEADER',
     action = action { ActivateTabRelative = 1 }
@@ -291,6 +291,16 @@ config.keys = {
     action = action { PasteFrom = 'Clipboard' }
   },
   {
+    key = 'c',
+    mods = 'CTRL|SHIFT',
+    action = action { Copyto = 'Clipboard' }
+  },
+  {
+    key = 'v',
+    mods = 'CTRL|SHIFT',
+    action = action { PasteFrom = 'Clipboard' }
+  },
+  {
     key = ',',
     mods = 'LEADER',
     action = action.PromptInputLine {
@@ -305,6 +315,11 @@ config.keys = {
         end
       end),
     },
+  },
+  {
+    key = ':',
+    mods = 'LEADER|SHIFT',
+    action = action.ActivateCommandPalette
   },
   { key = '=', mods = 'CTRL', action = action.IncreaseFontSize },
   { key = '-', mods = 'CTRL', action = action.DecreaseFontSize },
