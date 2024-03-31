@@ -1,7 +1,7 @@
-{ pkgs, ... }:
+{ ... }:
 {
   home.sessionVariables = {
-    TERMINAL = "foot";
+    # TERMINAL = "foot";
   };
 
   programs.foot = {
