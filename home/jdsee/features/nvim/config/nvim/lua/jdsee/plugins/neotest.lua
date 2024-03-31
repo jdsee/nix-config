@@ -61,6 +61,7 @@ return {
     'nvim-neotest/neotest-python',
     'nvim-neotest/neotest-plenary',
     'nvim-neotest/neotest-vim-test',
+    "nvim-neotest/nvim-nio",
   },
   config = setup,
 }
