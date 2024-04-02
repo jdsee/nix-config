@@ -18,7 +18,7 @@ return {
     vim.keymap.set('n', '<Leader>ha', mark.add_file)
     vim.keymap.set('n', '<Leader>hr', mark.rm_file)
     vim.keymap.set('n', '<Leader>hh', mark.toggle_file)
-    vim.keymap.set('n', '<C-h>', ui.nav_next)
+    vim.keymap.set('n', '<C-h>', ui.nav_prev)
     vim.keymap.set('n', '<C-l>', ui.nav_next)
     vim.keymap.set('n', '<C-m>', function() ui.nav_file(1) end)
     vim.keymap.set('n', '<C-,>', function() ui.nav_file(2) end)
