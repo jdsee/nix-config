@@ -300,7 +300,7 @@ config.keys = {
     action = action { PasteFrom = 'Clipboard' }
   },
   {
-    key = 'j',
+    key = 'q',
     mods = 'LEADER',
     action = action.QuickSelect
   },
