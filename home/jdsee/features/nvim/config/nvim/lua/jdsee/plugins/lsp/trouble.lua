@@ -2,6 +2,7 @@ return {
   'folke/trouble.nvim',
   branch = 'dev',
   opts = {
+    focus = true,
     auto_close = true,
   },
   keys = {
