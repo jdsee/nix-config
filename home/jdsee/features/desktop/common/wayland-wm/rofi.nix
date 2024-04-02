@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   programs.rofi = {
@@ -8,8 +8,7 @@
       rofi-rbw
       rofi-power-menu
     ];
-    # theme = "material by Tomaszal";
-    # theme = "${config.xdg.configHome}/rofi/rofi-themes-collection/themes/squared-everforest.rasi";
+    theme = "Arc-Dark";
     font = "${config.fontProfiles.regular.family} 12";
     terminal = "${pkgs.wezterm}";
     cycle = true;
