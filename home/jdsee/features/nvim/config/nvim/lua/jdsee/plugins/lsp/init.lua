@@ -5,4 +5,5 @@ return {
   require 'jdsee.plugins.lsp.trouble',
   require 'jdsee.plugins.lsp.typst',
   require 'jdsee.plugins.lsp.laravel-nvim',
+  require 'jdsee.plugins.lsp.tailwind-sorter',
 }
