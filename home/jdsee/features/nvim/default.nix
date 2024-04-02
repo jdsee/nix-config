@@ -8,7 +8,7 @@
 
     plugins = with pkgs; [
       rustaceanvim
-      vimPlugins.nvim-treesitter.withAllGrammars
+      # vimPlugins.nvim-treesitter.withAllGrammars
     ];
 
     viAlias = true;
