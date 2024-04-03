@@ -34,7 +34,6 @@ return {
         'scala',
         'typescript',
         'vim',
-        'vimdoc',
         'vue',
         'yaml',
       },
