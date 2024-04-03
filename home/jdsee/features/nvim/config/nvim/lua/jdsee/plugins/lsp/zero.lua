@@ -71,6 +71,24 @@ local function setup_mason()
         local lua_opts = lsp_zero.nvim_lua_ls()
         require('lspconfig').lua_ls.setup(lua_opts)
       end,
+      tsserver = function()
+        require 'lspconfig'.tsserver.setup {
+          init_options = {
+            plugins = {
+              {
+                name = "@vue/typescript-plugin",
+                location = "node_modules/@vue/typescript-plugin",
+                languages = { "javascript", "typescript", "vue" },
+              },
+            },
+          },
+          filetypes = {
+            "javascript",
+            "typescript",
+            "vue",
+          },
+        }
+      end
     },
   }
 end
@@ -83,17 +101,16 @@ return {
       'neovim/nvim-lspconfig',
       'williamboman/mason-lspconfig.nvim',
       'williamboman/mason.nvim',
+      'pmizio/typescript-tools.nvim',
       { 'j-hui/fidget.nvim', opts = {} },
       {
-        "SmiteshP/nvim-navbuddy",
+        'SmiteshP/nvim-navbuddy',
         dependencies = {
-          "SmiteshP/nvim-navic",
-          "MunifTanjim/nui.nvim"
+          'SmiteshP/nvim-navic',
+          'MunifTanjim/nui.nvim'
         },
         opts = {
-          lsp = {
-            auto_attach = true,
-          }
+          lsp = { auto_attach = true, }
         }
       }
     },
