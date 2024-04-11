@@ -1,4 +1,4 @@
-{ inputs, lib, pkgs, config, outputs, ... }:
+{  pkgs, ... }:
 {
   imports = [
     ./c.nix
@@ -7,6 +7,7 @@
     ./lua.nix
     ./java.nix
     ./js.nix
+    ./ocaml.nix
     ./python.nix
     ./rust.nix
   ];
