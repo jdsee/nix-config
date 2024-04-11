@@ -25,10 +25,7 @@
 
   security = {
     pam.services = {
-      swaylock = {
-        text = "auth include login";
-      };
-      gtklock = {
+      hyprlock = {
         text = "auth include login";
       };
     };

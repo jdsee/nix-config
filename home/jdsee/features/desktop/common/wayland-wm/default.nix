@@ -5,8 +5,6 @@
     ./gammastep.nix
     ./mako.nix
     ./rofi.nix
-    ./swayidle.nix
-    ./swaylock.nix
     ./waybar
     ./wezterm
     ./zathura.nix
