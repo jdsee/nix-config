@@ -67,6 +67,13 @@
         vi $1
       }
 
+      # generate gitignore file
+      # i.e.: `ignore ocaml linux macos`
+      function ignore() {
+        local IFS=,
+        curl "https://www.toptal.com/developers/gitignore/api/$*" >> .gitignore
+      }
+
       export PATH="$PATH:$HOME/bin:$HOME/.config/rofi/scripts:$HOME/.cargo/bin";
 
       # Script to open man-page in tmux popup
