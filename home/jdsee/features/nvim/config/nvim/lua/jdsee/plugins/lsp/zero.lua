@@ -34,7 +34,8 @@ local function setup_servers()
   lspconfig.tailwindcss.setup({})
   lspconfig.tsserver.setup({})
   lspconfig.volar.setup({})
-  -- TODO, this is broken: lspconfig.kotlin_language_server.setup({})
+  lspconfig.ocamllsp.setup({})
+  -- TODO: this is broken: lspconfig.kotlin_language_server.setup({})
 
   lspconfig.lua_ls.setup {
     on_attach = function()
@@ -42,10 +43,6 @@ local function setup_servers()
       lspconfig.lua_ls.setup(lua_opts)
     end
   }
-
-  lspconfig.ocamllsp.setup({
-    inlay_hints = { enabled = true },
-  })
 
   lspconfig.nil_ls.setup {
     autostart = true,
