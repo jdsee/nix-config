@@ -55,6 +55,7 @@
       tomato-c # Focus timer
       tldr # Abbreviated man pages
       dust # More intuitive alternative to du
+      rlwrap # Add history and easier navigation in line-reading programs
 
       # compression
       p7zip
