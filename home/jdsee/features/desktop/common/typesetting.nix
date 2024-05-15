@@ -1,7 +1,7 @@
-{ pkgs, lib, outputs, ... }:
+{ pkgs, ... }:
 {
   home.packages = with pkgs; [
-    texlive.combined.scheme-full
+    # texlive.combined.scheme-full
     typst
   ];
 }
