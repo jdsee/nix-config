@@ -22,6 +22,7 @@
     libreoffice
     xdg-utils
     bruno
+    zed-editor
 
     # communication
     thunderbird
