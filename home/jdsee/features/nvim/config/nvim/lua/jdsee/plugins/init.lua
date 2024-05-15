@@ -7,12 +7,10 @@ return {
   'tpope/vim-surround',         -- work on surrounding characters like [(
   'tpope/vim-unimpaired',       -- Pairs of hande bracket mappings
   'wellle/targets.vim',         -- inner style text objects
-  'dhruvasagar/vim-table-mode', -- markdown table support
-  'ThePrimeagen/vim-be-good',   -- game to practice vim movements
-  -- 'xiyaowong/transparent.nvim', -- Simple command to make bg transparent
-  'chentoast/marks.nvim',       -- View marks in sign column
   'gleam-lang/gleam.vim',       -- Syntax Highlighting and snippets for Gleam
-  'ChrisWellsWood/roc.vim',     -- Syntax Highlighting for Roc
+  -- 'dhruvasagar/vim-table-mode', -- markdown table support
+  -- 'ThePrimeagen/vim-be-good',   -- game to practice vim movements
+  -- 'xiyaowong/transparent.nvim', -- Simple command to make bg transparent
 
   {
     'jdsee/umlauts.nvim',
@@ -23,6 +21,12 @@ return {
   {
     'numToStr/Comment.nvim',
     config = function() require('Comment').setup() end,
+  },
+
+  --- Better UX for marks ---
+  {
+    'chentoast/marks.nvim',
+    config = function() require('marks').setup() end,
   },
 
   --- Visualize Colorcodes ---
@@ -42,15 +46,11 @@ return {
   },
 
   {
-    'nvim-telescope/telescope-fzf-native.nvim',
-    build = 'make'
-  },
-
-  {
     'stevearc/dressing.nvim',
     opts = {},
   },
 
+  --- Incremental LSP rename ---
   {
     'smjonas/inc-rename.nvim',
     config = function()

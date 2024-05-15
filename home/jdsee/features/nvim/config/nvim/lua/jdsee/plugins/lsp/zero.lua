@@ -31,11 +31,21 @@ local function setup_servers()
   lspconfig.gleam.setup({})
   lspconfig.jsonls.setup({})
   lspconfig.phpactor.setup({})
-  lspconfig.tailwindcss.setup({})
   lspconfig.tsserver.setup({})
   lspconfig.volar.setup({})
   lspconfig.ocamllsp.setup({})
+  lspconfig.roc_ls.setup({})
   -- TODO: this is broken: lspconfig.kotlin_language_server.setup({})
+
+  lspconfig.tailwindcss.setup({
+    filetypes = {
+      'aspnetcorerazor', 'astro', 'astro-markdown', 'blade', 'clojure', 'django-html', 'htmldjango', 'edge', 'eelixir',
+      'elixir', 'ejs', 'erb', 'eruby', 'gohtml', 'gohtmltmpl', 'haml', 'handlebars', 'hbs', 'html', 'html-eex', 'heex',
+      'jade', 'leaf', 'liquid', 'markdown', 'mdx', 'mustache', 'njk', 'nunjucks', 'php', 'razor', 'slim', 'twig', 'css',
+      'less', 'postcss', 'sass', 'scss', 'stylus', 'sugarss', 'javascript', 'javascriptreact', 'reason', 'rescript',
+      'typescript', 'typescriptreact', 'vue', 'svelte', 'templ', 'ocaml'
+    },
+  })
 
   lspconfig.lua_ls.setup {
     on_attach = function()

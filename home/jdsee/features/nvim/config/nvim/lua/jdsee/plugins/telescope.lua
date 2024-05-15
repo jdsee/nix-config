@@ -11,6 +11,10 @@ return {
     'tami5/sqlite.lua',
     'ThePrimeagen/git-worktree.nvim',
     'folke/trouble.nvim',
+    {
+      'nvim-telescope/telescope-fzf-native.nvim',
+      build = 'make'
+    }
   },
   config = function()
     local telescope = require 'telescope'
@@ -146,7 +150,7 @@ return {
     vim.keymap.set('n', '<Tab>', buffers)                                 -- search buffers
     vim.keymap.set('n', '<Leader>n', buffers)                             -- search buffers
     vim.keymap.set('n', 'z=', spell_suggestions)                          -- search spell suggestions
-    -- vim.keymap.set('n', 'gr', lsp_find_references)                        -- find references with lsp (using Trouble.nvim vor now)
+    vim.keymap.set('n', 'gr', lsp_find_references)                        -- find references with lsp (using Trouble.nvim vor now)
     vim.keymap.set('n', '<Leader>gw', telescope.extensions.git_worktree.git_worktrees)
     vim.keymap.set('n', '<Leader>gb', builtin.git_branches)               -- search git branches
     vim.keymap.set('n', '<Leader>gf', builtin.git_files)                  -- search git files
