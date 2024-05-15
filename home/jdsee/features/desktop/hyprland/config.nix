@@ -5,7 +5,7 @@ let
   rofi-power-menu = "${pkgs.rofi-power-menu}/bin/rofi-power-menu";
   powermenu = "${rofi} -show pm -modi pm:${rofi-power-menu}";
   fileBrowser = "nnn";
-  terminal = "${pkgs.wezterm}/bin/wezterm";
+  terminal = "${pkgs.foot}/bin/foot";
   grim = "${pkgs.grim}/bin/grim";
   slurp = "${pkgs.slurp}/bin/slurp";
   hyprlock = "${pkgs.hyprlock}/bin/hyprlock";
@@ -33,7 +33,7 @@ in
 
   # DEFAULT APPS
   exec-once = command -v signal-desktop && signal-desktop
-  exec-once = command -v wezterm && wezterm --app-id main-term -e tmuxinator me
+  exec-once = command -v foot && foot --app-id main-term -e tmuxinator me
   exec-once = command -v firefox && firefox
   exec-once = command -v thunderbird && thunderbird
 
