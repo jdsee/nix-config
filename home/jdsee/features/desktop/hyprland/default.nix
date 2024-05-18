@@ -21,6 +21,7 @@
     hyprpaper
     hyprlock
     hypridle
+    hyprpicker
     swayidle # TODO: drop this if hypridle is cool
   ];
 

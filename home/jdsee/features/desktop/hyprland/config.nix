@@ -1,5 +1,6 @@
 { pkgs, ... }:
 let
+  wofi = "${pkgs.wofi}/bin/wofi";
   rofi = "${pkgs.rofi}/bin/rofi";
   bemoji = "${pkgs.bemoji}/bin/bemoji";
   rofi-power-menu = "${pkgs.rofi-power-menu}/bin/rofi-power-menu";
@@ -14,14 +15,14 @@ let
   annotateScreenshot = "${pkgs.satty}/bin/satty --filename - --init-tool blur --output-filename ~/Screenshots/screenshot-$(date '+%Y%m%d-%H:%M:%S').png";
 in
 ''
-  monitor=eDP-1, preferred, auto, 1
+  #monitor=eDP-1, preferred, auto, 1
 
-  # Home Setup
-  monitor=DP-3, preferred, auto, 1, # mirror, eDP-1
-  monitor=DP-4, preferred, 0x0, 1
-  monitor=DP-4, transform, 1
+  ## Home Setup
+  #monitor=DP-3, preferred, auto, 1, # mirror, eDP-1
+  #monitor=DP-4, preferred, 0x0, 1
+  #monitor=DP-4, transform, 1
 
-  monitor=,preferred,auto,1
+  monitor=,preferred,auto,auto
 
   # STARTUP
   exec-once=waybar && waybar
@@ -106,14 +107,16 @@ in
   general {
     gaps_in=5
     gaps_out=10
-    border_size=3
-    col.active_border=0xFFEBDBB2
+    border_size=2
+    col.active_border = rgb(6d3e62) rgb(ec6e47) rgba(ee8c52ee) 60deg
+    col.inactive_border = rgba(595959aa)
     cursor_inactive_timeout=0
+    allow_tearing = false
   }
 
   decoration {
-    active_opacity=0.94
-    inactive_opacity=0.84
+    active_opacity=1
+    inactive_opacity=0.9
     fullscreen_opacity=1.0
     rounding=5
     drop_shadow=true
@@ -180,7 +183,7 @@ in
   bind=SUPERSHIFT,Return,exec,$BROWSER
   bind=SUPER,b,exec,$BROWSER
 
-  bind=SUPER,space,exec,${rofi} -show drun
+  bind=SUPER,space,exec,${wofi} --show drun
   bind=SUPER,escape,exec,${powermenu}
   bind=ALT CONTROL,space,exec,${rofi} -show combi
   bind=SUPER CONTROL,s,exec,${rofi} -show ssh
@@ -209,6 +212,7 @@ in
   bind=ALT,XF86AudioPrev,exec,playerctld unshift
   bind=ALT,XF86AudioPlay,exec,systemctl --user restart playerctld
   bind=SUPER,XF86AudioPlay,exec,$TERMINAL $SHELL -ic lyrics
+  bind=SHIFT SUPER,c,exec,hyprpicker | wl-copy
 
   bind=,XF86AudioRaiseVolume,exec,pactl set-sink-volume @DEFAULT_SINK@ +5%
   bind=,XF86AudioLowerVolume,exec,pactl set-sink-volume @DEFAULT_SINK@ -5%

@@ -57,6 +57,7 @@
       dust # More intuitive alternative to du
       rlwrap # Add history and easier navigation in line-reading programs
       nh # Reimplementation of common nix-commands
+      yazi # tui file manager
 
       # compression
       p7zip

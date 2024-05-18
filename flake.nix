@@ -56,6 +56,11 @@
 
       # home-manager switch --flake .#your-username@your-hostname
       homeConfigurations = {
+        "jdsee@connexum" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          extraSpecialArgs = { inherit inputs outputs; };
+          modules = [ ./home/jdsee/cogitare.nix ];
+        };
         "jdsee@cogitare" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = { inherit inputs outputs; };
