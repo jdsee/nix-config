@@ -1,0 +1,42 @@
+[
+  {
+    "include": "~/.config/waybar/modules",
+
+    "mod": "dock",
+    "layer": "top",
+    "position": "top",
+    "exclusive": true,
+    "height": 25,
+    "passthrough": false,
+    "gtk-layer-shell": true,
+    "ipc": true,
+    "margin-top": 0,
+    "margin-left": 0,
+    "margin-right": 0,
+
+    "modules-left": [
+      "custom/power",
+      "custom/separator#line",
+      "hyprland/workspaces#roman"
+    ],
+
+    "modules-center": [
+      "clock"
+    ],
+
+    "modules-right": [
+      "group/motherboard",
+      "custom/separator#dot-line",
+      "pulseaudio",
+      "custom/separator#dot-line",
+      "custom/swaync",
+      "custom/separator#dot-line",
+      "tray"
+    ],
+
+    "tray": {
+      "icon-size": 21,
+      "spacing": 5
+    }
+  }
+]

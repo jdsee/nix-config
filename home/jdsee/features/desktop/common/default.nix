@@ -23,6 +23,7 @@
     xdg-utils
     bruno
     zed-editor
+    bitwarden
 
     # communication
     thunderbird

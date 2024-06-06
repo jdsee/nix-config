@@ -1,7 +1,7 @@
 { ... }:
 {
   home.sessionVariables = {
-    # TERMINAL = "foot";
+    TERMINAL = "foot";
   };
 
   programs.foot = {
@@ -11,7 +11,7 @@
         title = "Foot";
         term = "foot";
 
-        font = "Hack Nerd Font Mono:size=10";
+        font = "Fira Code:size=11";
         dpi-aware = "yes";
       };
 

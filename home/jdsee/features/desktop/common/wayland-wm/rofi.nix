@@ -9,7 +9,7 @@
       rofi-power-menu
     ];
     theme = "Arc-Dark";
-    font = "${config.fontProfiles.regular.family} 12";
+    font = "Fira Code 12";
     terminal = "${pkgs.wezterm}";
     cycle = true;
   };
