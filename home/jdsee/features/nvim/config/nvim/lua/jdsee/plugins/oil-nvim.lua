@@ -34,8 +34,6 @@ return {
         keymaps = {
           ['H'] = actions.parent,
           ['L'] = actions.select,
-          ['<'] = actions.parent,
-          ['>'] = actions.select,
           ['gp'] = actions.preview,
           ['q'] = oil.close,
           ['-'] = oil.close,

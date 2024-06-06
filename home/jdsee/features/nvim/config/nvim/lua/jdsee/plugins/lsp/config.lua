@@ -1,5 +1,11 @@
 local M = {}
 
+local function toggle_virtual_text()
+  vim.diagnostic.config {
+    virtual_text = not vim.diagnostic.config().virtual_text
+  }
+end
+
 function M.on_attach(client, bufnr)
   vim.api.nvim_set_option_value('omnifunc', 'v:lua.vim.lsp.omnifunc', { buf = bufnr })
   vim.api.nvim_create_user_command("Format", vim.lsp.buf.format, {})
@@ -20,6 +26,7 @@ function M.on_attach(client, bufnr)
   vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
   vim.keymap.set('n', 'gh', vim.diagnostic.open_float, opts)
   vim.keymap.set('n', '<leader>s', require('nvim-navbuddy').open)
+  vim.keymap.set('n', '<leader>sdv', toggle_virtual_text)
 
   -- TODO: map function to gd that first tries to goto_definition
   -------- and uses find_references else.

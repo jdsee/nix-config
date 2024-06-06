@@ -14,13 +14,17 @@ return {
     {
       'nvim-telescope/telescope-fzf-native.nvim',
       build = 'make'
-    }
+    },
+    {
+      "nvim-telescope/telescope-live-grep-args.nvim",
+      version = "^1.0.0",
+    },
   },
   config = function()
     local telescope = require 'telescope'
     local builtin = require 'telescope.builtin'
     local themes = require 'telescope.themes'
-    local trouble = require("trouble.sources.telescope")
+    local lga_actions = require 'telescope-live-grep-args.actions'
 
     telescope.setup {
       defaults = {
@@ -29,12 +33,12 @@ return {
         mappings = {
           i = {
             ["<C-h>"] = "which_key",
-            ["<c-t>"] = trouble.open,
-            ["<c-a>"] = trouble.add,
+            ["<c-t>"] = function() require('trouble.sources.telescope').open() end,
+            ["<c-a>"] = function() require('trouble.sources.telescope').add() end,
           },
           n = {
-            ["<c-t>"] = trouble.open,
-            ["<c-a>"] = trouble.add,
+            ["<c-t>"] = function() require('trouble.sources.telescope').open() end,
+            ["<c-a>"] = function() require('trouble.sources.telescope').add() end,
           },
         },
       },
@@ -71,6 +75,15 @@ return {
             '~/.local/share/zotero/biblatex/bib/refs.bib',
           },
         },
+        live_grep_args = {
+          auto_quoting = true,
+          mappings = {
+            i = {
+              ['<C-k>'] = lga_actions.quote_prompt(),
+              ['<C-i>'] = lga_actions.quote_prompt { postfix = ' --iglob ' },
+            },
+          },
+        },
       }
     }
 
@@ -80,6 +93,7 @@ return {
       'zoxide',
       'bibtex',
       'git_worktree',
+      'live_grep_args',
     }
 
     for _, extension in pairs(extensions) do
@@ -155,5 +169,8 @@ return {
     vim.keymap.set('n', '<Leader>gb', builtin.git_branches)               -- search git branches
     vim.keymap.set('n', '<Leader>gf', builtin.git_files)                  -- search git files
     vim.keymap.set('n', '<Leader>gc', builtin.git_commits)                -- search git commits
+    vim.keymap.set('n', '<Leader>sft', builtin.filetypes)                 -- find and set filetype
   end,
 }
+
+

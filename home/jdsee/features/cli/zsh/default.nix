@@ -101,16 +101,14 @@
       "....." = "cd ../../../../";
       "......" = "cd ../../../../../";
 
-      lg = "lazygit";
+      lzg = "lazygit";
+      lzd = "lazydocker";
       rmgi = "git rm -r --cached . && git add . && git status";
-      conflicts = "grep -lr '<<<<<<<' .";
 
       _ = "sudo";
       cat = "bat -p";
       grep = "grep --color";
       hg = "history 0 | grep";
-      mycolors = "msgcat --color=test";
-      view = "zathura";
       diff = "colordiff";
       clip = "xclip -sel clip";
 

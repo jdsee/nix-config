@@ -1,5 +1,6 @@
 return {
   'epwalsh/obsidian.nvim',
+  enabled = false,
   -- version = '*',
   lazy = true,
   ft = 'markdown',
@@ -12,6 +13,11 @@ return {
   config = function()
     local obsidian = require('obsidian')
     obsidian.setup {
+      event = {
+        "BufReadPre /home/jdsee/mynotes/**.md",
+        "BufNewFile /home/jdsee/mynotes/**.md",
+      },
+
       workspaces = {
         {
           name = 'mynotes',

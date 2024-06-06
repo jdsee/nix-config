@@ -26,15 +26,16 @@ local function setup()
   dap.listeners.before.event_exited["dapui_config"] = function() dapui.close() end
 
   -- customize signs
-  vim.fn.sign_define('DapBreakpoint', { text = '', texthl = '', linehl = '', numhl = '' })
+  vim.fn.sign_define('DapBreakpoint', { text = '', texthl = '', linehl = '', numhl = '' })
   vim.fn.sign_define('DapBreakpointCondition', { text = '', texthl = '', linehl = '', numhl = '' })
-  vim.fn.sign_define('DapLogPoint', { text = '', texthl = '', linehl = '', numhl = '' })
+  vim.fn.sign_define('DapLogPoint', { text = '', texthl = '', linehl = '', numhl = '' })
   vim.fn.sign_define('DapStopped', { text = '', texthl = '', linehl = '', numhl = '' })
 
   Fn = {}
   function Fn.set_conditional_breakpoint()
     dap.set_breakpoint(vim.fn.input('Breakpoint condition: '))
   end
+
   function Fn.set_log_point()
     dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))
   end
@@ -46,9 +47,9 @@ local function setup()
   vim.keymap.set('n', '<Leader><leader>bd', dap.clear_breakpoints)
 
   vim.keymap.set('n', '<A-h>', dap.continue)
-  vim.keymap.set('n', '<A-j>', dap.step_over)
+  vim.keymap.set('n', '<A-j>', dap.step_into)
   vim.keymap.set('n', '<A-k>', dap.step_out)
-  vim.keymap.set('n', '<A-l>', dap.step_into)
+  vim.keymap.set('n', '<A-l>', dap.step_over)
 
   vim.keymap.set('n', '<Leader>dn', dap.continue)
   vim.keymap.set('n', '<Leader>dd', dap.run_last)
@@ -62,10 +63,11 @@ local function setup()
   vim.keymap.set('n', '<Leader>ds', dapui.toggle)
   -- vim.keymap.set('n', '<Leader>dv', dapui.float_element('scopes', {}))
 
-  -- Lua setup
+  -- Lua --
   dap.adapters.nlua = function(callback, config)
     callback({ type = 'server', host = config.host, port = config.port })
   end
+
   dap.configurations.lua = {
     {
       type = 'nlua',
@@ -85,16 +87,38 @@ local function setup()
       end,
     }
   }
+
+  require("mason-nvim-dap").setup {
+    ensure_installed = { 'php' },
+  }
+
+  -- PHP --
+  dap.adapters.php = {
+    type = 'executable',
+    command = 'node',
+    args = { os.getenv("HOME") .. '/.local/share/nvim/mason/bin/php-debug-adapter' }
+  }
+
+  dap.configurations.php = {
+    {
+      type = 'php',
+      request = 'launch',
+      name = 'Listen for Xdebug',
+      port = 9003
+    }
+  }
 end
 
 return {
   'mfussenegger/nvim-dap',
   config = setup,
   dependencies = {
-    { 'nvim-telescope/telescope-dap.nvim' },
-    { 'theHamsta/nvim-dap-virtual-text' },
-    { 'rcarriga/nvim-dap-ui' },
-    { 'jbyuki/one-small-step-for-vimkind' },
-    { 'mfussenegger/nvim-dap-python' },
+    'nvim-telescope/telescope-dap.nvim',
+    'theHamsta/nvim-dap-virtual-text',
+    'rcarriga/nvim-dap-ui',
+    'jbyuki/one-small-step-for-vimkind',
+    'mfussenegger/nvim-dap-python',
+    "williamboman/mason.nvim",
+    "jay-babu/mason-nvim-dap.nvim",
   }
 }

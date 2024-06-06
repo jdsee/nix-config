@@ -28,11 +28,17 @@
       amend = "commit --amend --reuse-message=HEAD"; # Amend the currently staged files to the latest commit;
       contributors = "shortlog --summary --numbered"; # List contributors with number of commits;
       alias = "!git config - l | grep ^alias | cut - c 7 - | sort";
+      ir = "rebase -i --autostash";
+      pwt = "push --atomic origin"; # Push branch and tag simultaneously: git pwt <branch> <tag>
+      ps = "pull --autostash";
+      conflicts = "!grep -lr '<<<<<<<' .";
     };
     extraConfig = {
       core.editor = "nvim";
       color.ui = true;
       init.defaultBranch = "main";
+      log.decorate = true;
+      push.autoSetupRemote = true;
       pull = {
         ff = "only";
         rebase = true;
