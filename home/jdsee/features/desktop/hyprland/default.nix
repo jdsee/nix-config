@@ -19,10 +19,10 @@
 
   home.packages = with pkgs; [
     hyprpaper
-    hyprlock
+    # hyprlock <- doesn't work on non-nixos-systems atm
     hypridle
     hyprpicker
-    swayidle # TODO: drop this if hypridle is cool
+    kanshi # dynamic monitor configuration
   ];
 
   wayland.windowManager.hyprland = {
@@ -45,18 +45,24 @@
     "hypr/hypridle.conf" = {
       text = builtins.readFile ./hypridle.conf;
     };
+    "hypr/clean_start_xdg_desktop_portal_hyprland.sh".source = ./clean_start_xdg_desktop_portal_hyprland.sh;
+    "xdg-desktop-portals/hyprland-portals.conf".text = ''
+      [preferred]
+      default=hyprland;gtk
+      org.freedesktop.impl.portal.FileChooser=gnome
+    '';
     "hypr/hyprpaper.conf" = {
       text = ''
         ipc = off
         preload = ~/.config/wallpapers/star-wars-broken-ship.jpg
         preload = ~/.config/wallpapers/Road-Trip_2560x1440.png
         wallpaper = eDP-1,~/.config/wallpapers/Road-Trip_2560x1440.png
-        wallpaper = DP-1,~/.config/wallpapers/star-wars-broken-ship.jpg
-        wallpaper = DP-2,~/.config/wallpapers/star-wars-broken-ship.jpg
-        wallpaper = DP-3,~/.config/wallpapers/star-wars-broken-ship.jpg
-        wallpaper = DP-4,~/.config/wallpapers/star-wars-broken-ship.jpg
-        wallpaper = DP-5,~/.config/wallpapers/star-wars-broken-ship.jpg
-        wallpaper = HDMI-A-1,~/.config/wallpapers/star-wars-broken-ship.jpg
+        wallpaper = DP-1,~/.config/wallpapers/Road-Trip_2560x1440.png
+        wallpaper = DP-2,~/.config/wallpapers/Road-Trip_2560x1440.png
+        wallpaper = DP-3,~/.config/wallpapers/Road-Trip_2560x1440.png
+        wallpaper = DP-4,~/.config/wallpapers/Road-Trip_2560x1440.png
+        wallpaper = DP-5,~/.config/wallpapers/Road-Trip_2560x1440.png
+        wallpaper = HDMI-A-1,~/.config/wallpapers/Road-Trip_2560x1440.png
       '';
     };
     "hypr/disable_internal_monitor.sh" = {

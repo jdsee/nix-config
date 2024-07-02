@@ -45,5 +45,6 @@ windows:
       panes:
         - nvim -c "Telescope git_files"
         - git status
-  - editor:
+  - project:
       root: ~/projects
+

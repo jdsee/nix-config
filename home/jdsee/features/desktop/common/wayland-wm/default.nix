@@ -3,7 +3,7 @@
   imports = [
     ./foot.nix
     ./gammastep.nix
-    ./mako.nix
+    # ./mako.nix
     ./rofi.nix
     ./waybar
     ./wezterm

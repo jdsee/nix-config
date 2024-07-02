@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   programs.rofi = {
@@ -12,6 +12,16 @@
     font = "Fira Code 12";
     terminal = "${pkgs.wezterm}";
     cycle = true;
+    pass = {
+      enable = true;
+      package = pkgs.rofi-pass-wayland;
+      stores = [
+        "/home/jdsee/.password-store"
+      ];
+      extraConfig = ''
+
+      '';
+    };
   };
 
   home.packages = with pkgs; [

@@ -39,9 +39,10 @@
     };
 
     sessionVariables = {
-      PATH = "$PATH:$HOME/bin:$HOME/.config/rofi/scripts";
+      PATH = "$PATH:$HOME/bin:$HOME/.local/bin:$HOME/.config/rofi/scripts";
       GPG_TTY = "$(tty)";
-      MANPAGER = "sh -c 'col -bx | bat -l man -p'";
+      SSH_AUTH_SOCK = "$(gpgconf --list-dirs agent-ssh-socket)";
+      MANPAGER = "nvim +Man!";
       PURE_NODE_ENABLED = 0;
       PURE_CMD_MAX_EXEC_TIME = 1;
       LAUNCHER = "launcher_t4";
@@ -56,7 +57,7 @@
     '';
 
     initExtra = ''
-      eval "$(ssh-agent)" >/dev/null
+      gpg-connect-agent updatestartuptty /bye > /dev/null
 
       # helper to make modifiable copy of immutable link to nix store
       function tinker() {
@@ -81,12 +82,25 @@
       zle -N popman
       bindkey  popman
       bindkey '^O' autosuggest-accept
+
+      # Helper functions for gpg en-/decryption
+      secret () {
+        output=~/"$1".$(date +%s).enc
+        gpg --encrypt --armor --output $output \
+          -r $KEYID "$1" && echo "$1 -> $output"
+      }
+
+      reveal () {
+        output=$(echo "$1" | rev | cut -c16- | rev)
+        gpg --decrypt --output $output "$1" && \
+          echo "$1 -> $output"
+      }
     '';
 
     shellAliases = {
       vind = "nvim -c 'Telescope zoxide list'";
       vile = "nvim -c 'Telescope find_files'";
-      oil= "nvim -c Oil";
+      oil = "nvim -c Oil";
 
       ls = "exa";
       ll = "ls -alh";

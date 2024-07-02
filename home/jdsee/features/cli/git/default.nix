@@ -30,7 +30,7 @@
       alias = "!git config - l | grep ^alias | cut - c 7 - | sort";
       ir = "rebase -i --autostash";
       pwt = "push --atomic origin"; # Push branch and tag simultaneously: git pwt <branch> <tag>
-      ps = "pull --autostash";
+        ps = "pull --autostash";
       conflicts = "!grep -lr '<<<<<<<' .";
     };
     extraConfig = {
@@ -46,6 +46,8 @@
       help = {
         autocorrect = true;
       };
+      commmit.gpgSign = true;
+      user.signingKey = "F15E366F8518E709";
     };
 
     ignores = [

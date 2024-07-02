@@ -5,7 +5,8 @@
     ./global
     ./features/desktop/common/wayland-wm/foot.nix
     ./features/desktop/common/wayland-wm/rofi.nix
-    # ./features/desktop/hyprland
+    ./features/desktop/common/kanata
+    ./features/desktop/hyprland
   ];
 
   nixpkgs = {
@@ -16,18 +17,19 @@
     };
   };
 
-  programs.firefox = {
-    enable = true;
-  };
+  # programs.firefox = {
+  #   enable = true;
+  # };
 
   home.packages = with pkgs; [
     signal-desktop
-    element-desktop-wayland
-    hyprpaper
-    hypridle
-    hyprpicker
-    wofi
+    # element-desktop-wayland
+    awscli2
     bitwarden
+    pass
+    zed-editor
   ];
+
+  xdg.configFile."ideavim/ideavimrc".source = ./features/cli/ideavimrc;
 
 }
