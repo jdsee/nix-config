@@ -26,26 +26,26 @@ vim.cmd [[
 -- TODO: Try to delay saving the file or otherwise typst recompiling to prevent zathura from crashing
 vim.api.nvim_create_autocmd(
   { 'InsertLeave', --[['TextChanged', 'TextChangedI']] }, {
-  pattern = {'*.typ'},
-  command = 'silent write',
-})
+    pattern = { '*.typ' },
+    command = 'silent write',
+  })
 
 local text_filetypes = { '*.md', '*.adoc', '*.tex', '*.txt', '*.typ' }
 
 -- Set insert mappings for German umlauts in text files
 vim.api.nvim_create_autocmd(
   { 'BufEnter' }, {
-  group = vim.api.nvim_create_augroup('TextFileSettings', { clear = true }),
-  pattern = text_filetypes,
-  command = "setlocal spell wrap",
-})
+    group = vim.api.nvim_create_augroup('TextFileSettings', { clear = true }),
+    pattern = text_filetypes,
+    command = "setlocal spell wrap",
+  })
 
 -- Set rustfmt as format expression in rust files. See ':help gq'
 vim.api.nvim_create_autocmd(
   { 'BufEnter' }, {
-  pattern  = { '*.rs' },
-  command = 'set fp=rustfmt',
-})
+    pattern = { '*.rs' },
+    command = 'set fp=rustfmt',
+  })
 
 -- Set mappings only for quickfix windows
 -- TODO: make this work
@@ -64,14 +64,14 @@ vim.cmd [[
 -- Make macro indicator visible with cmdheight=0
 vim.api.nvim_create_autocmd(
   'RecordingEnter', {
-  pattern = '*',
-  command = 'set cmdheight=1',
-})
+    pattern = '*',
+    command = 'set cmdheight=1',
+  })
 vim.api.nvim_create_autocmd(
   'RecordingLeave', {
-  pattern = '*',
-  command = 'set cmdheight=0',
-})
+    pattern = '*',
+    command = 'set cmdheight=0',
+  })
 
 -- Turn off cursorline on inactive buffers (stolen from TJ)
 local group = vim.api.nvim_create_augroup("CursorLineControl", { clear = true })
@@ -87,3 +87,13 @@ end
 set_cursorline('WinLeave', false)
 set_cursorline('WinEnter', true)
 set_cursorline('FileType', false, 'TelescopePrompt')
+
+-- HACK:
+-- nvim-ts-autotag doesn't work on rescript files for some reason.
+-- Setting the filetype again after opening the buffer seems to fix it.
+vim.api.nvim_create_autocmd(
+  { 'BufEnter' }, {
+    group = vim.api.nvim_create_augroup('RescriptFiletypeHack', { clear = true }),
+    pattern = "*.res",
+    command = "call timer_start(200, { tid -> execute('set filetype=rescript')})",
+  })

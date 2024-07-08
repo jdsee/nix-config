@@ -35,6 +35,7 @@ local function setup_servers()
   lspconfig.volar.setup({})
   lspconfig.ocamllsp.setup({})
   lspconfig.roc_ls.setup({})
+  lspconfig.rescriptls.setup({})
   -- TODO: this is broken: lspconfig.kotlin_language_server.setup({})
 
   lspconfig.tailwindcss.setup({

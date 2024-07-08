@@ -39,6 +39,7 @@
   };
 
   xdg.configFile = {
+    "kanshi/config".source = ./kanshi.conf;
     "hypr/hyprlock.conf" = {
       text = builtins.readFile ./hyprlock.conf;
     };

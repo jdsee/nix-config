@@ -12,7 +12,7 @@
     };
   };
 
-  neovim-nightly = inputs.neovim-nightly-overlay.overlay;
+  # neovim-nightly = inputs.neovim-nightly-overlay.overlay;
 
   rustaceanvim = inputs.rustaceanvim.overlays.default;
 

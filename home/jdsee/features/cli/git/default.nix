@@ -6,6 +6,7 @@
     package = pkgs.gitAndTools.gitFull;
     userName = "jdsee";
     userEmail = "jdsee@protonmail.com";
+    lfs.enable = true;
     aliases = {
       last = "log - 1 - -stat";
       aa = "add --all";
@@ -38,16 +39,20 @@
       color.ui = true;
       init.defaultBranch = "main";
       log.decorate = true;
-      push.autoSetupRemote = true;
+      push = {
+        autoSetupRemote = true;
+        gpgSign = "if-asked";
+      };
       pull = {
         ff = "only";
         rebase = true;
       };
       help = {
-        autocorrect = true;
+        autoCorrect = 0;
       };
-      commmit.gpgSign = true;
       user.signingKey = "F15E366F8518E709";
+      commit.gpgSign = true;
+      tag.gpgSign = true;
     };
 
     ignores = [

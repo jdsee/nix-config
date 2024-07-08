@@ -5,6 +5,6 @@ return {
   config = true,
   opts = {
     on_save_enabled = true,
-    on_save_pattern = { '*.html', '*.js', '*.jsx', '*.tsx', '*.twig', '*.hbs', '*.php', '*.heex', '*.astro', '*.vue' },
+    on_save_pattern = { '*.html', '*.js', '*.jsx', '*.tsx', '*.twig', '*.hbs', '*.php', '*.heex', '*.astro', '*.vue', '*.res' },
   },
 }

@@ -77,6 +77,10 @@
 
       export PATH="$PATH:$HOME/bin:$HOME/.config/rofi/scripts:$HOME/.cargo/bin";
 
+      export BUN_INSTALL="$HOME/.bun"
+      export PATH="$BUN_INSTALL/bin:$PATH"
+      [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
       # Script to open man-page in tmux popup
       source ~/.config/zsh/popman.sh
       zle -N popman
@@ -95,6 +99,9 @@
         gpg --decrypt --output $output "$1" && \
           echo "$1 -> $output"
       }
+
+      #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+      [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
     '';
 
     shellAliases = {

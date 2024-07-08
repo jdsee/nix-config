@@ -2,24 +2,19 @@
 -- https://github.com/nvim-treesitter/nvim-treesitter
 
 return {
-  'nvim-treesitter/nvim-treesitter',
+   'nvim-treesitter/nvim-treesitter',
   dependencies = {
     'nvim-treesitter/nvim-treesitter-textobjects',
     'nvim-treesitter/nvim-treesitter-context',
-    'windwp/nvim-ts-autotag',
+    'rescript-lang/tree-sitter-rescript',
   },
   build = ':TSUpdate',
+  lazy = false,
   config = function()
     require('nvim-treesitter.configs').setup {
-      ensure_installed = { },
-      autotag = {
-        enable = true,
-        enable_rename = true,
-        enable_close = true,
-        enable_close_on_slash = true,
-      },
+      ensure_installed = { 'vim', 'vimdoc' },
       highlight = {
-        enable = false,
+        enable = true,
       },
       textobjects = {
         select = {
@@ -64,6 +59,24 @@ return {
           -- You can use regex matching (i.e. lua pattern) and/or pass a list in a 'query' key to group multiple queires.
           [']o'] = '@loop.*',
         },
+      },
+    }
+  end,
+
+  opts = function(_, opts) -- this is needed so you won't override your default nvim-treesitter configuration
+    -- vim.list_extend(opts.ensure_installed, {
+    --   'rescript',
+    -- })
+
+    local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
+    parser_config.rescript = {
+      install_info = {
+        url = 'https://github.com/rescript-lang/tree-sitter-rescript',
+        branch = 'main',
+        files = { 'src/scanner.c' },
+        generate_requires_npm = false,
+        requires_generate_from_grammar = true,
+        use_makefile = true, -- macOS specific instruction
       },
     }
   end,

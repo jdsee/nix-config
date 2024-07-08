@@ -36,14 +36,12 @@ return {
           ['L'] = actions.select,
           ['gp'] = actions.preview,
           ['q'] = oil.close,
-          ['-'] = oil.close,
           ['<leader>j'] = oil.close,
         },
       }
     )
 
     vim.keymap.set('n', '<leader>j', oil.open)
-    vim.keymap.set('n', '-', oil.toggle_float)
     vim.keymap.set('n', '<S-->', toggle_cwd_float)
 
     local oil_vcs = require('oil-vcs-status')

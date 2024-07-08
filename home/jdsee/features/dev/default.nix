@@ -5,7 +5,7 @@
     ./go.nix
     ./gleam.nix
     ./lua.nix
-    ./java.nix
+    # ./java.nix
     ./js.nix
     ./ocaml.nix
     ./python.nix

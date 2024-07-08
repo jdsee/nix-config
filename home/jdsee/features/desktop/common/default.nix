@@ -7,7 +7,7 @@
     ./gtk.nix
     ./gtkgreet.nix
     ./imv.nix
-    ./intellij.nix
+    # ./intellij.nix
     ./obs.nix
     ./pavucontrol.nix
     ./pulsemixer.nix

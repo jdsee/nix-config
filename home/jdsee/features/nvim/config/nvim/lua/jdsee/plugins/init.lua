@@ -58,6 +58,8 @@ return {
         input_buffer_type = 'dressing',
       }
     end,
-  }
+  },
+
+  { 'aspeddro/rescript-tools.nvim' }
 
 }

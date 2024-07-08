@@ -25,7 +25,7 @@ in
   env = XDG_SESSION_TYPE, wayland
   env = __GLX_VENDOR_LIBRARY_NAME, nvidia
   env = WLR_NO_HARDWARE_CURSORS, 1
-  # env = GBM_BACKEND, nvidia-drm <<< this leads to crash on boot
+  env = GBM_BACKEND, nvidia-drm
 
   # Use this after Hyprland update
   # cursor {
@@ -40,8 +40,7 @@ in
 
 
   ## Home Setup
-  monitor = eDP-1, disabled
-  monitor = HDMI-A-1, preferred, auto, 1, transform, 1
+  # monitor = eDP-1, disabled
   # monitor = desc:Dell Inc. DELL P2719H J9T8193, preferred, auto, 1, transform, 1
   monitor = desc:Dell Inc. DELL U3219Q 8P7R413, preferred, auto, 1
 
@@ -50,7 +49,6 @@ in
   # STARTUP
   exec-once=/home/jdsee/.config/hypr/./clean_start_xdg_desktop_portal_hyprland.sh
   exec-once=${waybar} && ${waybar}
-  # exec-once = mako && mako
   exec-once=${hypridle} && ${hypridle}
   exec-once=${hyprpaper} && ${hyprpaper}
   exec-once=${kanshi} && ${kanshi}
@@ -70,32 +68,18 @@ in
   # TODO: Setup workspaces with https://github.com/emersion/kanshi
 
   # primary
-  workspace = 1, monitor:DP-3
-  workspace = 2, monitor:DP-3
-  workspace = 3, monitor:DP-3
-  workspace = 4, monitor:DP-3
-  workspace = 5, monitor:DP-3
-  workspace = 6, monitor:DP-3
-  workspace = 7, monitor:DP-3
+  workspace = 1, monitor:desc:Dell Inc. DELL U3219Q 8P7R413
+  workspace = 2, monitor:desc:Dell Inc. DELL U3219Q 8P7R413
+  workspace = 3, monitor:desc:Dell Inc. DELL U3219Q 8P7R413
+  workspace = 4, monitor:desc:Dell Inc. DELL U3219Q 8P7R413
+  workspace = 5, monitor:desc:Dell Inc. DELL U3219Q 8P7R413
+  workspace = 6, monitor:desc:Dell Inc. DELL U3219Q 8P7R413
+  workspace = 7, monitor:desc:Dell Inc. DELL U3219Q 8P7R413
 
   # secondary
-  workspace = 8, monitor:HDMI-A-1
-  workspace = 9, monitor:HDMI-A-1
-  workspace = 0, monitor:HDMI-A-1
-
-  # # primary
-  # workspace = 1, monitor:desc:Dell Inc. DELL U3219Q 8P7R413
-  # workspace = 2, monitor:desc:Dell Inc. DELL U3219Q 8P7R413
-  # workspace = 3, monitor:desc:Dell Inc. DELL U3219Q 8P7R413
-  # workspace = 4, monitor:desc:Dell Inc. DELL U3219Q 8P7R413
-  # workspace = 5, monitor:desc:Dell Inc. DELL U3219Q 8P7R413
-  # workspace = 6, monitor:desc:Dell Inc. DELL U3219Q 8P7R413
-  # workspace = 7, monitor:desc:Dell Inc. DELL U3219Q 8P7R413
-
-  # # secondary
-  # workspace = 8, monitor:desc:Dell Inc. DELL P2719H J9T8193
-  # workspace = 9, monitor:desc:Dell Inc. DELL P2719H J9T8193
-  # workspace = 0, monitor:desc:Dell Inc. DELL P2719H J9T8193
+  workspace = 8, monitor:desc:Dell Inc. DELL P2719H J9T8193
+  workspace = 9, monitor:desc:Dell Inc. DELL P2719H J9T8193
+  workspace = 0, monitor:desc:Dell Inc. DELL P2719H J9T8193
 
   workspace = w[0-9], persistent
 
@@ -222,6 +206,11 @@ in
   gestures {
     workspace_swipe = true
   }
+
+  binde = SUPER SHIFT ALT, h, resizeactive, -20 0
+  binde = SUPER SHIFT ALT, j, resizeactive, 0 20
+  binde = SUPER SHIFT ALT, k, resizeactive, 0 -20
+  binde = SUPER SHIFT ALT, l, resizeactive, 20 0
 
   # Mouse binding
   bindm = SUPER, mouse:272, movewindow

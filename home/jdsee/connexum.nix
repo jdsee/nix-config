@@ -17,11 +17,8 @@
     };
   };
 
-  # programs.firefox = {
-  #   enable = true;
-  # };
-
   home.packages = with pkgs; [
+    bun
     signal-desktop
     # element-desktop-wayland
     awscli2

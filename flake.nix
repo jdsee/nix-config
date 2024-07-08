@@ -5,7 +5,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-master.url = "github:nixos/nixpkgs/master";
     flake-utils.url = "github:numtide/flake-utils";
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    # neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     xremap-flake.url = "github:xremap/nix-flake";
     rustaceanvim.url = "github:mrcjkb/rustaceanvim";
     # nixvim-config.url = "github:jdsee/nixvim-config";
