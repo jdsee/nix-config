@@ -22,7 +22,7 @@
     # inputs.nixvim-config.packages.${system}.default
     dockerfile-language-server-nodejs
     elmPackages.elm-language-server
-    kotlin-language-server
+    # kotlin-language-server
     lua-language-server
     marksman
     nil

@@ -6,7 +6,7 @@
     # ./mako.nix
     ./rofi.nix
     ./waybar
-    ./wezterm
+    # ./wezterm
     ./zathura.nix
   ];
 

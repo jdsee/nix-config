@@ -5,10 +5,13 @@
     enable = true;
     package = pkgs.gitAndTools.gitFull;
     userName = "jdsee";
-    userEmail = "jdsee@protonmail.com";
+    userEmail = "joscha.seelig@.linked-planet.com";
     lfs.enable = true;
+    hooks = {
+      # prepare-commit-msg = ./hooks/prepare-commit-msg;
+    };
     aliases = {
-      last = "log - 1 - -stat";
+      last = "log -n 1 --stat";
       aa = "add --all";
       cp = "cherry-pick";
       co = "checkout";
@@ -16,6 +19,8 @@
       ci = "commit";
       cane = "commit --amend --no-edit";
       s = "status";
+      fp = "push --force";
+      fl = "push --force-with-lease";
       br = "branch";
       unstage = "reset HEAD - -";
       dc = "diff --cached";
@@ -31,8 +36,10 @@
       alias = "!git config - l | grep ^alias | cut - c 7 - | sort";
       ir = "rebase -i --autostash";
       pwt = "push --atomic origin"; # Push branch and tag simultaneously: git pwt <branch> <tag>
-        ps = "pull --autostash";
+      ps = "pull --autostash";
       conflicts = "!grep -lr '<<<<<<<' .";
+      clone-multibranch = "!sh ~/.config/git/clone_bare_for_worktrees.sh";
+      rebase-last = "!git rebase --interactive --autostash HEAD~$1";
     };
     extraConfig = {
       core.editor = "nvim";
@@ -41,7 +48,7 @@
       log.decorate = true;
       push = {
         autoSetupRemote = true;
-        gpgSign = "if-asked";
+        # gpgSign = "if-asked";
       };
       pull = {
         ff = "only";
@@ -53,6 +60,7 @@
       user.signingKey = "F15E366F8518E709";
       commit.gpgSign = true;
       tag.gpgSign = true;
+      rebase.autoStash = true;
     };
 
     ignores = [
@@ -95,6 +103,11 @@
     enable = true;
     keyConfig = builtins.readFile ./gitui_vim_keys.ron;
     theme = builtins.readFile ./gitui_theme.ron;
+  };
+
+  xdg.configFile."git/clone_bare_for_worktrees.sh" = {
+    source = ./clone_bare_for_worktrees.sh;
+    executable = true;
   };
 }
 

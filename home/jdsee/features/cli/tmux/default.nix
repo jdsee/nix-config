@@ -1,10 +1,6 @@
-{ config, lib, pkgs, user, ... }:
+{ pkgs, ... }:
 
 {
-  programs.tmate = {
-    enable = true;
-  };
-
   programs.tmux = {
     enable = true;
     tmuxinator.enable = true;
@@ -22,8 +18,18 @@
     ];
   };
 
-  xdg.configFile."tmuxinator" = {
-    source = ./tmuxinator;
-    recursive = true;
+  programs.tmate = {
+    enable = true;
+  };
+
+  xdg.configFile = {
+    "tmuxinator" = {
+      source = ./tmuxinator;
+      recursive = true;
+    };
+    "tmux/tmux-sessionizer.sh" = {
+      source = ./tmux-sessionizer.sh;
+      executable = true;
+    };
   };
 }

@@ -1,5 +1,6 @@
 return {
   'hrsh7th/nvim-cmp',
+  enabled = true,
   dependencies = {
     'L3MON4D3/LuaSnip',
     'VonHeikemen/lsp-zero.nvim',

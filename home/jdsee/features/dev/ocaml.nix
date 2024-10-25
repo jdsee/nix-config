@@ -11,7 +11,7 @@
     ] ++ (with pkgs;[
       opam
       libev
-      pkg-config
-      openssl
+      # pkg-config
+      # openssl
     ]);
 }

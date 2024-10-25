@@ -8,7 +8,7 @@ local function setup_zero()
       timeout_ms = 10000,
     },
     servers = {
-      ['tsserver'] = { 'javascript', 'typescript' },
+      -- ['ts_ls'] = { 'javascript', 'typescript' },
       ['rust_analyzer'] = { 'rust' },
       ['lua-ls'] = { 'lua' },
     }
@@ -31,12 +31,20 @@ local function setup_servers()
   lspconfig.gleam.setup({})
   lspconfig.jsonls.setup({})
   lspconfig.phpactor.setup({})
-  lspconfig.tsserver.setup({})
+  lspconfig.ts_ls.setup({})
   lspconfig.volar.setup({})
   lspconfig.ocamllsp.setup({})
   lspconfig.roc_ls.setup({})
   lspconfig.rescriptls.setup({})
-  -- TODO: this is broken: lspconfig.kotlin_language_server.setup({})
+  lspconfig.biome.setup({
+    filetypes = {
+      "javascript", "javascriptreact", "json", "jsonc",
+      "typescript", "typescript.tsx", "typescriptreact",
+      "astro", "svelte", "vue", "css",
+      "rescript",
+    },
+  })
+  -- lspconfig.kotlin_language_server.setup({}) -- still buggy AF :(
 
   lspconfig.tailwindcss.setup({
     filetypes = {
@@ -79,8 +87,8 @@ local function setup_mason()
         local lua_opts = lsp_zero.nvim_lua_ls()
         require('lspconfig').lua_ls.setup(lua_opts)
       end,
-      tsserver = function()
-        require 'lspconfig'.tsserver.setup {
+      ts_ls = function()
+        require 'lspconfig'.ts_ls.setup {
           init_options = {
             plugins = {
               {

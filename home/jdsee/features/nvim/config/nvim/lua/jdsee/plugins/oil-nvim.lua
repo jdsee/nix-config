@@ -1,3 +1,12 @@
+function _G.get_oil_winbar()
+  local dir = require("oil").get_current_dir()
+  if dir then
+    return vim.fn.fnamemodify(dir, ":~")
+  else
+    return vim.api.nvim_buf_get_name(0)
+  end
+end
+
 return {
   'stevearc/oil.nvim',
   opts = {},
@@ -13,6 +22,8 @@ return {
       oil.toggle_float(vim.fn.getcwd())
     end
 
+    local detailsVisible = false
+
     oil.setup(
       {
         cleanup_delay_ms = false, -- prevent removal of buffers from jumplist
@@ -26,6 +37,7 @@ return {
         },
         win_options = {
           signcolumn = 'number',
+          winbar = "%#@attribute.builtin#%{v:lua.get_oil_winbar()}",
         },
         preview = {
           max_width = 0.9,
@@ -37,6 +49,17 @@ return {
           ['gp'] = actions.preview,
           ['q'] = oil.close,
           ['<leader>j'] = oil.close,
+          ["gd"] = {
+            desc = "Toggle file detail view",
+            callback = function()
+              detailsVisible = not detailsVisible
+              if detailsVisible then
+                oil.set_columns({ "icon", "permissions", "size", "mtime" })
+              else
+                oil.set_columns({ "icon" })
+              end
+            end,
+          },
         },
       }
     )

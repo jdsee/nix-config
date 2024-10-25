@@ -17,7 +17,7 @@ return {
       desc = 'Buffer Diagnostics (Trouble)',
     },
     {
-      'gR',
+      'gr',
       function() require('trouble').toggle('lsp_references') end,
       desc = 'Buffer Diagnostics (Trouble)',
     },

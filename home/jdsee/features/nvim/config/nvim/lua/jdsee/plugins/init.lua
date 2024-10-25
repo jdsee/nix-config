@@ -3,11 +3,11 @@ return {
   -- - 'nvim-pack/nvim-spectre'
   -- - Nvim ChatGpt
 
-  'tpope/vim-repeat',           -- repeat plugin commands with .
-  'tpope/vim-surround',         -- work on surrounding characters like [(
-  'tpope/vim-unimpaired',       -- Pairs of hande bracket mappings
-  'wellle/targets.vim',         -- inner style text objects
-  'gleam-lang/gleam.vim',       -- Syntax Highlighting and snippets for Gleam
+  'tpope/vim-repeat',     -- repeat plugin commands with .
+  'tpope/vim-surround',   -- work on surrounding characters like [(
+  'tpope/vim-unimpaired', -- Pairs of hande bracket mappings
+  'wellle/targets.vim',   -- inner style text objects
+  'gleam-lang/gleam.vim', -- Syntax Highlighting and snippets for Gleam
   -- 'dhruvasagar/vim-table-mode', -- markdown table support
   -- 'ThePrimeagen/vim-be-good',   -- game to practice vim movements
   -- 'xiyaowong/transparent.nvim', -- Simple command to make bg transparent
@@ -60,6 +60,10 @@ return {
     end,
   },
 
-  { 'aspeddro/rescript-tools.nvim' }
+  { 'aspeddro/rescript-tools.nvim' },
+
+  { 'lepture/vim-velocity' },
+
+  { 'ocaml-mlx/ocaml_mlx.nvim' },
 
 }

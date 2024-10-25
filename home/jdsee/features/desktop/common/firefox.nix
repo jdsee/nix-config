@@ -6,6 +6,8 @@
 {
   programs.firefox = {
     enable = true;
+
+    # TODO: Enable extensions by default
     # profiles.jdsee = {
     #   extensions = with addons; [
     #     ublock-origin

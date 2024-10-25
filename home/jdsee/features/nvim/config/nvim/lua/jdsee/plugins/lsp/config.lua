@@ -26,24 +26,39 @@ function M.on_attach(client, bufnr)
   vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
   vim.keymap.set('n', 'gh', vim.diagnostic.open_float, opts)
   vim.keymap.set('n', '<leader>s', require('nvim-navbuddy').open)
-  vim.keymap.set('n', '<leader>sdv', toggle_virtual_text)
+  vim.keymap.set('n', '<leader>ovt', toggle_virtual_text)
 
   -- TODO: map function to gd that first tries to goto_definition
   -------- and uses find_references else.
 
+  -- if client.server_capabilities.documentHighlightProvider and client.name ~= 'kotlin_language_server' then
   if client.server_capabilities.documentHighlightProvider then
-    local group = vim.api.nvim_create_augroup("LSPDocumentHighlight", {})
-
-    vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
-      buffer = bufnr,
-      group = group,
+    vim.api.nvim_create_augroup('LspDocumentHighlight', { clear = true })
+    vim.api.nvim_clear_autocmds { buffer = bufnr, group = 'LspDocumentHighlight' }
+    vim.api.nvim_create_autocmd('CursorHold', {
       callback = vim.lsp.buf.document_highlight,
-    })
-    vim.api.nvim_create_autocmd({ "CursorMoved" }, {
       buffer = bufnr,
-      group = group,
-      callback = vim.lsp.buf.clear_references,
+      group = 'LspDocumentHighlight',
+      desc = 'Document Highlight',
     })
+    vim.api.nvim_create_autocmd('CursorMoved', {
+      callback = vim.lsp.buf.clear_references,
+      buffer = bufnr,
+      group = 'LspDocumentHighlight',
+      desc = 'Clear All the References',
+    })
+
+    -- local group = vim.api.nvim_create_augroup("LSPDocumentHighlight", {})
+    -- vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+    --   buffer = bufnr,
+    --   group = group,
+    --   callback = vim.lsp.buf.document_highlight,
+    -- })
+    -- vim.api.nvim_create_autocmd({ "CursorMoved" }, {
+    --   buffer = bufnr,
+    --   group = group,
+    --   callback = vim.lsp.buf.clear_references,
+    -- })
   end
 end
 

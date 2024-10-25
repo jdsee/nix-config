@@ -5,8 +5,9 @@
     ./global
     ./features/desktop/common/wayland-wm/foot.nix
     ./features/desktop/common/wayland-wm/rofi.nix
+    ./features/desktop/common/firefox.nix
     ./features/desktop/common/kanata
-    ./features/desktop/hyprland
+    # ./features/desktop/hyprland
   ];
 
   nixpkgs = {
@@ -18,13 +19,16 @@
   };
 
   home.packages = with pkgs; [
-    bun
-    signal-desktop
     # element-desktop-wayland
     awscli2
-    bitwarden
-    pass
-    zed-editor
+    # bitwarden
+    bun
+    entr
+    flameshot
+    gopass
+    signal-desktop
+    thunderbird
+    # zed-editor
   ];
 
   xdg.configFile."ideavim/ideavimrc".source = ./features/cli/ideavimrc;

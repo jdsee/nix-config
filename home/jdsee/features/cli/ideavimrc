@@ -27,13 +27,15 @@ set NERDTree
 set ReplaceWithRegister
 
 "" **** HarpoonIJ *****
-nmap <C-m> <Action>(GotoHarpoon1)
-nmap <C-,> <Action>(GotoHarpoon2)
-nmap <C-.> <Action>(GotoHarpoon3)
-nmap <C-/> <Action>(GotoHarpoon4)
+" nmap <A-j> <Action>(GotoHarpoon1)
+" nmap <A-k> <Action>(GotoHarpoon2)
+" nmap <A-l> <Action>(GotoHarpoon3)
+" nmap <A-;> <Action>(GotoHarpoon4)
 
 nmap <leader>hl <Action>(ShowHarpoon)
 nmap <leader>hh <Action>(ShowHarpoon)
+" nmap <A-y> <Action>(ShowHarpoon)
+" nmap <A-h> <Action>(AddToHarpoon)
 nmap <leader>ha <Action>(AddToHarpoon)
 
 "" ***** Idea specific *****
@@ -109,6 +111,9 @@ map <leader>zi <Action>(EditorIncreaseFontSizeGlobal)
 map <leader>zo <Action>(EditorDecreaseFontSizeGlobal)
 map <leader>z= <Action>(EditorResetFontSize)
 
+inoremap <expr> <c-n> ((pumvisible())?("\<C-n>"):("<c-n>"))
+inoremap <expr> <c-p> ((pumvisible())?("\<C-p>"):("<c-p>"))
+
 "" Diff
 map <leader>od <Action>(BlankDiffViewerEditorPopupMenu)
 
@@ -149,6 +154,7 @@ map <leader>fu <Action>(FindUsages)
 map <leader>fs <Action>(Switcher)
 map <leader>fe <Action>(RecentFiles)
 map <leader>fr <Action>(RecentLocations)
+map <leader>fg <Action>(FindInPath)
 
 "" GIT
 map <leader>gp <Action>(Git.Pull)
@@ -159,7 +165,7 @@ map <leader>gg <Action>(Git.Menu)
 map <leader>gr <Action>(Git.ResolveConflicts)
 map <leader>gd <Action>(Diff.ShowDiff)
 
-map <leader>gc <Action>(ChangesView.ToggleCommitUi)
+map <leader>gs <Action>(ChangesView.ToggleCommitUi)
 map <leader>gu <Action>(ChangesView.Revert)
 map <leader>g? <Action>(Annotate)
 map ]c <Action>(VcsShowNextChangeMarker)

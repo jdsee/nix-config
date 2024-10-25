@@ -27,6 +27,7 @@
       plugins = [
         { name = "mafredri/zsh-async"; }
         { name = "sindresorhus/pure"; }
+        { name = "jdsee/popman"; }
       ];
     };
 
@@ -81,11 +82,14 @@
       export PATH="$BUN_INSTALL/bin:$PATH"
       [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
-      # Script to open man-page in tmux popup
-      source ~/.config/zsh/popman.sh
-      zle -N popman
-      bindkey  popman
       bindkey '^O' autosuggest-accept
+
+      # Tmux Sessionizer
+      run_tmux_sessionizer() {
+        ~/.config/tmux/tmux-sessionizer.sh
+      }
+      zle -N run_tmux_sessionizer
+      bindkey '^G' run_tmux_sessionizer
 
       # Helper functions for gpg en-/decryption
       secret () {
@@ -100,6 +104,25 @@
           echo "$1 -> $output"
       }
 
+      pw () {
+        gopass ls -f | fzf | xargs gopass -c
+      }
+
+      source "$HOME/.cargo/env"
+
+      ###-begin-index.js-completions-###
+      _index.js_yargs_completions()
+      {
+        local reply
+        local si=$IFS
+        IFS=$'
+      ' reply=($(COMP_CWORD="$((CURRENT-1))" COMP_LINE="$BUFFER" COMP_POINT="$CURSOR" .//nix/store/gyy4m0g1hvz4nvi4jn27hjz54zfnqfyj-gitlab-ci-local-4.52.0/lib/node_modules/gitlab-ci-local/src/index.js --get-yargs-completions "''${words[@]}"))
+        IFS=$si
+        _describe 'values' reply
+      }
+      compdef _index.js_yargs_completions index.js
+      ###-end-index.js-completions-###
+
       #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
       [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
     '';
@@ -107,6 +130,7 @@
     shellAliases = {
       vind = "nvim -c 'Telescope zoxide list'";
       vile = "nvim -c 'Telescope find_files'";
+      fls = "nvim -c Oil";
       oil = "nvim -c Oil";
 
       ls = "exa";
@@ -131,7 +155,9 @@
       grep = "grep --color";
       hg = "history 0 | grep";
       diff = "colordiff";
-      clip = "xclip -sel clip";
+
+      cbc = "xclip -sel clip";
+      cbp = "xclip -o -sel clip";
 
       mux = "tmuxinator";
 
@@ -156,6 +182,10 @@
       "--cmd j"
     ];
   };
+
+  home.packages = with pkgs; [
+    gitlab-ci-local
+  ];
 
   xdg.configFile.zsh = {
     source = ./config/zsh;

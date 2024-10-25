@@ -161,10 +161,10 @@ return {
     vim.keymap.set('n', '<Leader>fd', builtin.diagnostics)                -- search errors from lsp
     vim.keymap.set('n', '<Leader>a', lsp_code_actions)                    -- search code actions in telescope
     vim.keymap.set('n', '<Leader>fl', telescope.extensions.bibtex.bibtex) -- search errors from lsp
-    vim.keymap.set('n', '<Tab>', buffers)                                 -- search buffers
+    -- vim.keymap.set('n', '<Tab>', buffers)                                 -- search buffers << disabled since mapping tab in newer tmux versions is still a pain
     vim.keymap.set('n', '<Leader>n', buffers)                             -- search buffers
     vim.keymap.set('n', 'z=', spell_suggestions)                          -- search spell suggestions
-    vim.keymap.set('n', 'gr', lsp_find_references)                        -- find references with lsp (using Trouble.nvim vor now)
+    vim.keymap.set('n', 'gR', lsp_find_references)                        -- find references with lsp (using Trouble.nvim vor now)
     vim.keymap.set('n', '<Leader>gw', telescope.extensions.git_worktree.git_worktrees)
     vim.keymap.set('n', '<Leader>gb', builtin.git_branches)               -- search git branches
     vim.keymap.set('n', '<Leader>gf', builtin.git_files)                  -- search git files

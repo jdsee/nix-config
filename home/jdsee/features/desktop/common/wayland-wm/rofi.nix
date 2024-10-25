@@ -3,10 +3,11 @@
 {
   programs.rofi = {
     enable = true;
-    package = pkgs.rofi-wayland;
+    # package = pkgs.rofi-wayland; TODO: Use wayland package when moving away from X again
     plugins = with pkgs; [
       rofi-rbw
       rofi-power-menu
+      rofi-emoji
     ];
     theme = "Arc-Dark";
     font = "Fira Code 12";
@@ -14,7 +15,7 @@
     cycle = true;
     pass = {
       enable = true;
-      package = pkgs.rofi-pass-wayland;
+      # package = pkgs.rofi-pass-wayland;  TODO: Use wayland package when moving away from X again
       stores = [
         "/home/jdsee/.password-store"
       ];

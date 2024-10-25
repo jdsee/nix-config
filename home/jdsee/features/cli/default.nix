@@ -36,7 +36,7 @@
     packages = with pkgs; [
       file
       lsof
-      networkmanagerapplet
+      # networkmanagerapplet
 
       fd # Better find
       httpie # Better curl

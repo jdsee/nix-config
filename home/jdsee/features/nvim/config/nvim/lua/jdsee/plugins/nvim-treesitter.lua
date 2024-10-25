@@ -32,11 +32,11 @@ return {
         swap = {
           enable = true,
           swap_next = {
-            ['g>a'] = '@parameter.inner',
+            ['g>>'] = '@parameter.inner',
             ['g>f'] = '@function.inner',
           },
           swap_previous = {
-            ['g<a'] = '@parameter.inner',
+            ['g<<'] = '@parameter.inner',
             ['g<f'] = '@function.outer',
           },
         },
