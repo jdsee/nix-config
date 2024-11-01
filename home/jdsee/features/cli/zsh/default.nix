@@ -3,7 +3,7 @@
 {
   programs.zsh = {
     enable = true;
-    enableCompletion = false; # leads to bugs when enabled - zplug already calls compinit
+    enableCompletion = false; # slows down session start when enabled
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
 
@@ -11,25 +11,32 @@
 
     plugins = [
       {
-        name = "zsh-nix-shell";
-        file = "nix-shell.plugin.zsh";
+        name = pkgs.zsh-nix-shell.pname;
+        src = pkgs.zsh-nix-shell.src;
+      }
+      {
+        name = pkgs.pure-prompt.pname;
+        src = pkgs.pure-prompt.src;
+      }
+      {
+        name = pkgs.zsh-vi-mode.pname;
+        src = pkgs.zsh-vi-mode.src;
+      }
+      {
+        name = "popman";
+        file = "popman.plugin.zsh";
         src = pkgs.fetchFromGitHub {
-          owner = "chisui";
-          repo = "zsh-nix-shell";
-          rev = "v0.8.0";
+          owner = "jdsee";
+          repo = "popman";
+          rev = "v0.1.0";
           sha256 = "1lzrn0n4fxfcgg65v0qhnj7wnybybqzs4adz7xsrkgmcsr0ii8b7";
         };
       }
+      {
+        name = "custom-functions";
+        src = ./functions/init.zsh;
+      }
     ];
-
-    zplug = {
-      enable = true;
-      plugins = [
-        { name = "mafredri/zsh-async"; }
-        { name = "sindresorhus/pure"; }
-        { name = "jdsee/popman"; }
-      ];
-    };
 
     history = {
       size = 100000;
@@ -53,62 +60,32 @@
       if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then
         . $HOME/.nix-profile/etc/profile.d/nix.sh
       fi
-
-      export LAUNCHER=launcher_t4
     '';
 
     initExtra = ''
+      autoload -U promptinit; promptinit
+      prompt pure
+
       gpg-connect-agent updatestartuptty /bye > /dev/null
 
-      # helper to make modifiable copy of immutable link to nix store
-      function tinker() {
-        FILE=$1
-        mv $1 $1.bak
-        cp $1.bak $1
-        chmod +w $1
-        vi $1
-      }
-
-      # generate gitignore file
-      # i.e.: `ignore ocaml linux macos`
-      function ignore() {
-        local IFS=,
-        curl "https://www.toptal.com/developers/gitignore/api/$*" >> .gitignore
-      }
-
       export PATH="$PATH:$HOME/bin:$HOME/.config/rofi/scripts:$HOME/.cargo/bin";
+      source "$HOME/.cargo/env"
 
       export BUN_INSTALL="$HOME/.bun"
       export PATH="$BUN_INSTALL/bin:$PATH"
       [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
-
-      bindkey '^O' autosuggest-accept
 
       # Tmux Sessionizer
       run_tmux_sessionizer() {
         ~/.config/tmux/tmux-sessionizer.sh
       }
       zle -N run_tmux_sessionizer
-      bindkey '^G' run_tmux_sessionizer
+      bindkey -M emacs ^G' run_tmux_sessionizer
+      bindkey -M viins ^G' run_tmux_sessionizer
 
-      # Helper functions for gpg en-/decryption
-      secret () {
-        output=~/"$1".$(date +%s).enc
-        gpg --encrypt --armor --output $output \
-          -r $KEYID "$1" && echo "$1 -> $output"
-      }
-
-      reveal () {
-        output=$(echo "$1" | rev | cut -c16- | rev)
-        gpg --decrypt --output $output "$1" && \
-          echo "$1 -> $output"
-      }
-
-      pw () {
-        gopass ls -f | fzf | xargs gopass -c
-      }
-
-      source "$HOME/.cargo/env"
+      bindkey -M emacs '^O' autosuggest-accept
+      bindkey -M viins '^O' autosuggest-accept
+      bindkey -M vicmd '^O' autosuggest-accept
 
       ###-begin-index.js-completions-###
       _index.js_yargs_completions()
@@ -124,7 +101,7 @@
       ###-end-index.js-completions-###
 
       #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-      [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+      # [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
     '';
 
     shellAliases = {
@@ -150,7 +127,6 @@
       lzd = "lazydocker";
       rmgi = "git rm -r --cached . && git add . && git status";
 
-      _ = "sudo";
       cat = "bat -p";
       grep = "grep --color";
       hg = "history 0 | grep";
@@ -181,14 +157,5 @@
     options = [
       "--cmd j"
     ];
-  };
-
-  home.packages = with pkgs; [
-    gitlab-ci-local
-  ];
-
-  xdg.configFile.zsh = {
-    source = ./config/zsh;
-    recursive = true;
   };
 }

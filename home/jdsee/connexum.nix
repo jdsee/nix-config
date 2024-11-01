@@ -28,6 +28,7 @@
     gopass
     signal-desktop
     thunderbird
+    rofi-vpn
     # zed-editor
   ];
 
