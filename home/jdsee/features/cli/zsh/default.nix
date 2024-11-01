@@ -23,6 +23,10 @@
         src = pkgs.zsh-vi-mode.src;
       }
       {
+        name = pkgs.zsh-autopair.pname;
+        src = pkgs.zsh-autopair.src;
+      }
+      {
         name = "popman";
         file = "popman.plugin.zsh";
         src = pkgs.fetchFromGitHub {
