@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   programs.zsh = {
@@ -7,7 +7,7 @@
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
 
-    defaultKeymap = "emacs";
+    defaultKeymap = "viins";
 
     plugins = [
       {
@@ -71,10 +71,6 @@
       export PATH="$PATH:$HOME/bin:$HOME/.config/rofi/scripts:$HOME/.cargo/bin";
       source "$HOME/.cargo/env"
 
-      export BUN_INSTALL="$HOME/.bun"
-      export PATH="$BUN_INSTALL/bin:$PATH"
-      [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
-
       # Tmux Sessionizer
       run_tmux_sessionizer() {
         ~/.config/tmux/tmux-sessionizer.sh
@@ -83,25 +79,25 @@
       bindkey -M emacs ^G' run_tmux_sessionizer
       bindkey -M viins ^G' run_tmux_sessionizer
 
+      # Autosuggest
       bindkey -M emacs '^O' autosuggest-accept
       bindkey -M viins '^O' autosuggest-accept
       bindkey -M vicmd '^O' autosuggest-accept
 
-      ###-begin-index.js-completions-###
-      _index.js_yargs_completions()
-      {
-        local reply
-        local si=$IFS
-        IFS=$'
-      ' reply=($(COMP_CWORD="$((CURRENT-1))" COMP_LINE="$BUFFER" COMP_POINT="$CURSOR" .//nix/store/gyy4m0g1hvz4nvi4jn27hjz54zfnqfyj-gitlab-ci-local-4.52.0/lib/node_modules/gitlab-ci-local/src/index.js --get-yargs-completions "''${words[@]}"))
-        IFS=$si
-        _describe 'values' reply
-      }
-      compdef _index.js_yargs_completions index.js
-      ###-end-index.js-completions-###
+      # Atuin
+      if command -v atuin &> /dev/null; then
+        # Delay Atuin init until after zsh-vi-mode init to prevent overwriting of keybinds
+        zvm_after_init_commands+=(eval "$(${lib.getExe pkgs.atuin} init zsh --disable-up-arrow)")
+      fi
 
-      #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-      # [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+      # -------------------------------------
+      # ↓ Generated ↓
+      # -------------------------------------
+
+      # BUN
+      export BUN_INSTALL="$HOME/.bun"
+      export PATH="$BUN_INSTALL/bin:$PATH"
+      [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
     '';
 
     shellAliases = {
